@@ -89,6 +89,9 @@ namespace GradingProject
         [Column(Order = 3)]
         public int TestCaseID { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string Output { get; set; }
+
         public int? Mark { get; set; }
 
         [Column(TypeName = "ntext")]

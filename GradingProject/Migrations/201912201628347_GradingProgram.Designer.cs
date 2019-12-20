@@ -13,7 +13,7 @@ namespace GradingProject.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201912200619013_GradingProgram"; }
+            get { return "201912201628347_GradingProgram"; }
         }
         
         string IMigrationMetadata.Source

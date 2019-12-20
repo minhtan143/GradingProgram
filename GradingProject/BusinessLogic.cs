@@ -139,7 +139,7 @@ namespace GradingProject
             return GetQuestion().SingleOrDefault(x => x.ID == questionId);
         }
 
-        public static TKey GetPropertyValue<TKey>(int examId, int questionId, Func<Question, TKey> keySelector)
+        public static TKey GetPropertyValue<TKey>(int questionId, Func<Question, TKey> keySelector)
         {
             return keySelector(GetQuestionByID(questionId));
         }
