@@ -38,6 +38,8 @@ namespace GradingProject
 
         public string Name { get; set; }
 
+        public string CandidatesFolder { get; set; }
+
         public DateTime? CreateDate { get; set; }
 
         public bool? Status { get; set; }
@@ -65,7 +67,7 @@ namespace GradingProject
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 
-        public string CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public bool? Status { get; set; }
     }
@@ -144,10 +146,6 @@ namespace GradingProject
 
             modelBuilder.Entity<CandidateDetail>()
                 .Property(e => e.CandidateID)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Question>()
-                .Property(e => e.CreateDate)
                 .IsFixedLength();
 
             modelBuilder.Entity<Result>()

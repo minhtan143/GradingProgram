@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,55 @@ namespace GradingProject
         {
             return GetPropertyValue(GetCandidate(), keySelector);
         }
+
+        public static bool AddOrUpdate(Candidate candidate)
+        {
+            try
+            {
+                candidate.Status = true;
+                db.Candidates.AddOrUpdate(x => x.ID, candidate);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Add(string candidateId)
+        {
+            try
+            {
+                Candidate candidate = new Candidate();
+                candidate.ID = candidateId;
+                candidate.Status = true;
+                db.Candidates.Add(candidate);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(string candidateId)
+        {
+            try
+            {
+                var oldCandidate = GetCandidateByID(candidateId);
+                if (oldCandidate == null)
+                    return false;
+                oldCandidate.Status = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     class BLCandidateDetail : BusinessLogic
@@ -79,18 +129,52 @@ namespace GradingProject
         {
             return GetCandidateDetail().Where(x => x.CandidateID == candidateId).Select(x => x.ExamID);
         }
+
+        public static bool Add(string candidateId, int examId)
+        {
+            try
+            {
+                CandidateDetail candidateDetail = new CandidateDetail();
+                candidateDetail.CandidateID = candidateId;
+                candidateDetail.ExamID = examId;
+                db.CandidateDetails.Add(candidateDetail);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(string candidateId, int examId)
+        {
+            try
+            {
+                var oldCandidateDetail = GetCandidateDetailByID(candidateId, examId);
+                if (oldCandidateDetail == null)
+                    return false;
+                db.CandidateDetails.Remove(oldCandidateDetail);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     class BLExam : BusinessLogic
     {
-        public static IEnumerable<Exam> GetDataExam()
+        public static IEnumerable<Exam> GetExam()
         {
             return db.Exams.Where(x => x.Status == true);
         }
 
         public static Exam GetExamByID(int examId)
         {
-            return GetDataExam().SingleOrDefault(x => x.ID == examId);
+            return GetExam().SingleOrDefault(x => x.ID == examId);
         }
 
         public static TKey GetPropertyValue<TKey>(int examId, Func<Exam, TKey> keySelector)
@@ -100,7 +184,40 @@ namespace GradingProject
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Exam, TKey> keySelector)
         {
-            return GetPropertyValue(GetDataExam(), keySelector);
+            return GetPropertyValue(GetExam(), keySelector);
+        }
+
+        public static bool AddOrUpdate(Exam exam)
+        {
+            try
+            {
+                exam.CreateDate = DateTime.Now;
+                exam.Status = true;
+                db.Exams.AddOrUpdate(x => x.ID, exam);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(int examId)
+        {
+            try
+            {
+                var oldExam = GetExamByID(examId);
+                if (oldExam == null)
+                    return false;
+                oldExam.Status = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
@@ -125,6 +242,40 @@ namespace GradingProject
         {
             return GetExamDetail().Where(x => x.QuestionID == questionId).Select(x => x.ExamID);
         }
+
+        public static bool Add(int examId, int questionId)
+        {
+            try
+            {
+                ExamDetail examDetail = new ExamDetail();
+                examDetail.ExamID = examId;
+                examDetail.QuestionID = questionId;
+                db.ExamDetails.Add(examDetail);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(int examId, int questionId)
+        {
+            try
+            {
+                var oldExamDetail = GetExamDetailByID(examId, questionId);
+                if (oldExamDetail == null)
+                    return false;
+                db.ExamDetails.Remove(oldExamDetail);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     class BLQuestion : BusinessLogic
@@ -147,6 +298,39 @@ namespace GradingProject
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Question, TKey> keySelector)
         {
             return GetPropertyValue(GetQuestion(), keySelector);
+        }
+
+        public static bool AddOrUpdate(Question question)
+        {
+            try
+            { 
+                question.CreateDate = DateTime.Now;
+                question.Status = true;
+                db.Questions.AddOrUpdate(x => x.ID, question);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(int questionId)
+        {
+            try
+            {
+                var oldQuestion = GetQuestionByID(questionId);
+                if (oldQuestion == null)
+                    return false;
+                oldQuestion.Status = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
@@ -171,6 +355,37 @@ namespace GradingProject
         {
             return GetPropertyValue(GetResult(), keySelector);
         }
+
+        public static bool AddOrUpdate(Result result)
+        {
+            try
+            {
+                db.Results.AddOrUpdate(x => new { x.CandidateID, x.ExamID, x.TestCaseID }, result);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(string candidateId, int examId, int testCaseId)
+        {
+            try
+            {
+                var oldResult = GetResultByID(candidateId, examId, testCaseId);
+                if (oldResult == null)
+                    return false;
+                db.Results.Remove(oldResult);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     class BLTestcase : BusinessLogic
@@ -193,6 +408,37 @@ namespace GradingProject
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<TestCase, TKey> keySelector)
         {
             return GetPropertyValue(GetTestcase(), keySelector);
+        }
+
+        public static bool AddOrUpdate(TestCase testCase)
+        {
+            try
+            {
+                db.TestCases.AddOrUpdate(x => x.ID, testCase);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete(int testCaseId)
+        {
+            try
+            {
+                var oldTestCase = GetTestcaseByID(testCaseId);
+                if (oldTestCase == null)
+                    return false;
+                db.TestCases.Remove(oldTestCase);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
