@@ -157,14 +157,14 @@ namespace GradingProject
             return db.Results;
         }
 
-        public static Result GetResultByID(string candidateId, int examId, int questionId, int testCaseId)
+        public static Result GetResultByID(string candidateId, int examId, int testCaseId)
         {
-            return GetResult().SingleOrDefault(x => x.CandidateID == candidateId && x.ExamID == examId && x.QuestionID == questionId && x.TestCaseID == testCaseId);
+            return GetResult().SingleOrDefault(x => x.CandidateID == candidateId && x.ExamID == examId && x.TestCaseID == testCaseId);
         }
 
-        public static TKey GetPropertyValue<TKey>(string candidateId, int examId, int questionId, int testCaseId, Func<Result, TKey> keySelector)
+        public static TKey GetPropertyValue<TKey>(string candidateId, int examId, int testCaseId, Func<Result, TKey> keySelector)
         {
-            return keySelector(GetResultByID(candidateId, examId, questionId, testCaseId));
+            return keySelector(GetResultByID(candidateId, examId, testCaseId));
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Result, TKey> keySelector)

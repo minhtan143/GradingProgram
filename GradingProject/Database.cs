@@ -83,10 +83,6 @@ namespace GradingProject
 
         [Key]
         [Column(Order = 2)]
-        public int QuestionID { get; set; }
-
-        [Key]
-        [Column(Order = 3)]
         public int TestCaseID { get; set; }
 
         [Column(TypeName = "ntext")]
