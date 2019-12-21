@@ -17,10 +17,10 @@ namespace GradingProject
             ProcessStartInfo StartInfo = new ProcessStartInfo();
             RunResult runResult = new RunResult();
 
-            runResult.ExeFile = cppFile.FullName.Substring(0, cppFile.FullName.LastIndexOf('.')) + ".exe";
+            runResult.OutputFile = cppFile.FullName.Substring(0, cppFile.FullName.LastIndexOf('.')) + ".exe";
 
             StartInfo.FileName = @"Utility\MinGW64\bin\g++.exe";
-            StartInfo.Arguments = cppFile.FullName + " -o " + runResult.ExeFile;
+            StartInfo.Arguments = cppFile.FullName + " -o " + runResult.OutputFile;
             StartInfo.UseShellExecute = false;
             StartInfo.CreateNoWindow = true;
             StartInfo.ErrorDialog = false;
@@ -35,7 +35,6 @@ namespace GradingProject
                 {
                     runResult.Result = RunResultEnum.Successful;
                     runResult.RunTime = (process.ExitTime - process.StartTime).Milliseconds;
-                    runResult.UsedMemory = process.PeakWorkingSet64;
                     runResult.ExitCode = process.ExitCode;
                 }
                 else
@@ -44,6 +43,7 @@ namespace GradingProject
                         process.Kill();
                     else
                         runResult.ExitCode = process.ExitCode;
+                    runResult.Result = RunResultEnum.BuildTimeError;
                 }
 
                 if (process.StandardError != null)
@@ -114,6 +114,7 @@ namespace GradingProject
                         process.Kill();
                     else
                         runResult.ExitCode = process.ExitCode;
+                    runResult.Result = RunResultEnum.RunTimeError;
                 }
 
                 if (process.StandardOutput != null)
@@ -137,7 +138,7 @@ namespace GradingProject
         }
     }
 
-    public enum RunResultEnum { Successful, BuildError, RunError, TimeOut, MemoryLimit }
+    public enum RunResultEnum { Successful, BuildError, RunError, BuildTimeError, RunTimeError, MemoryLimit, CorrectAnswer, WrongAnswer }
 
     public class RunResult
     {
@@ -153,6 +154,6 @@ namespace GradingProject
 
         public string Error { get; set; }
 
-        public string ExeFile { get; set; }
+        public string OutputFile { get; set; }
     }
 }
