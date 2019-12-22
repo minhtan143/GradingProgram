@@ -90,6 +90,10 @@ namespace GradingProject
         [Column(TypeName = "ntext")]
         public string Output { get; set; }
 
+        public int? RunTime { get; set; }
+
+        public int? UsedMemory { get; set; }
+
         public int? Mark { get; set; }
 
         [Column(TypeName = "ntext")]
@@ -129,32 +133,5 @@ namespace GradingProject
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<TestCase> TestCases { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Candidate>()
-                .Property(e => e.ID)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Candidate>()
-                .Property(e => e.Phone)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Candidate>()
-                .Property(e => e.Email)
-                .IsFixedLength();
-
-            modelBuilder.Entity<CandidateDetail>()
-                .Property(e => e.CandidateID)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Result>()
-                .Property(e => e.CandidateID)
-                .IsFixedLength();
-
-            modelBuilder.Entity<TestCase>()
-                .Property(e => e.Name)
-                .IsFixedLength();
-        }
     }
 }

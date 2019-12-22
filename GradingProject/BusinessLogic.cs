@@ -1,8 +1,10 @@
-﻿using System;
+﻿using FastMember;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,16 +14,17 @@ namespace GradingProject
     {
         protected static GradingProgramDbContext db = new GradingProgramDbContext();
 
-        public static DataTable ToDataTable<T>(T item) where T : class
+        public static DataTable ToDataTable<T>(IEnumerable<T> item)
         {
-            var properties = typeof(T).GetProperties();
             DataTable table = new DataTable();
-
-            foreach (var property in properties)
-                table.Columns.Add(property.Name, property.PropertyType);
-
-            table.Rows.Add(properties.Select(p => p.GetValue(item, null)).ToArray());
+            using (var reader = ObjectReader.Create(item))
+                table.Load(reader);
             return table;
+        }
+
+        public static DataTable ToDataTable<T, TKey>(IEnumerable<T> item, Func<T, TKey> keySelector)
+        {
+            return ToDataTable(item.Select(keySelector));
         }
 
         protected static IEnumerable<TKey> GetPropertyValue<T, TKey>(IEnumerable<T> item, Func<T, TKey> keySelector)
@@ -35,6 +38,11 @@ namespace GradingProject
         public static IEnumerable<Candidate> GetCandidate()
         {
             return db.Candidates.Where(x => x.Status == true);
+        }
+
+        public static IEnumerable<TKey> GetCandidate<TKey>(Func<Candidate, TKey> keySelector)
+        {
+            return GetCandidate().Select(keySelector);
         }
 
         public static IEnumerable<Candidate> GetCandidate(int examId)
@@ -172,6 +180,11 @@ namespace GradingProject
             return db.Exams.Where(x => x.Status == true);
         }
 
+        public static IEnumerable<TKey> GetExam<TKey>(Func<Exam, TKey> keySelector)
+        {
+            return GetExam().Select(keySelector);
+        }
+
         public static Exam GetExamByID(int examId)
         {
             return GetExam().SingleOrDefault(x => x.ID == examId);
@@ -285,6 +298,11 @@ namespace GradingProject
             return db.Questions.Where(x => x.Status == true);
         }
 
+        public static IEnumerable<TKey> GetQuestion<TKey>(Func<Question, TKey> keySelector)
+        {
+            return GetQuestion().Select(keySelector);
+        }
+
         public static Question GetQuestionByID(int questionId)
         {
             return GetQuestion().SingleOrDefault(x => x.ID == questionId);
@@ -341,6 +359,11 @@ namespace GradingProject
             return db.Results;
         }
 
+        public static IEnumerable<TKey> GetResult<TKey>(Func<Result, TKey> keySelector)
+        {
+            return GetResult().Select(keySelector);
+        }
+
         public static Result GetResultByID(string candidateId, int examId, int testCaseId)
         {
             return GetResult().SingleOrDefault(x => x.CandidateID == candidateId && x.ExamID == examId && x.TestCaseID == testCaseId);
@@ -393,6 +416,11 @@ namespace GradingProject
         public static IEnumerable<TestCase> GetTestcase()
         {
             return db.TestCases;
+        }
+
+        public static IEnumerable<TKey> GetTestcase<TKey>(Func<TestCase, TKey> keySelector)
+        {
+            return GetTestcase().Select(keySelector);
         }
 
         public static TestCase GetTestcaseByID(int testCaseId)
