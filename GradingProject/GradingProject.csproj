@@ -63,6 +63,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuestions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuestions.Designer.cs">
+      <DependentUpon>frmQuestions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201912201628347_GradingProgram.cs" />
     <Compile Include="Migrations\201912201628347_GradingProgram.Designer.cs">
       <DependentUpon>201912201628347_GradingProgram.cs</DependentUpon>
@@ -73,6 +79,9 @@
     <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuestions.resx">
+      <DependentUpon>frmQuestions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912201628347_GradingProgram.resx">
       <DependentUpon>201912201628347_GradingProgram.cs</DependentUpon>
