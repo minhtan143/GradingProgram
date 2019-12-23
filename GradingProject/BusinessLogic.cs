@@ -47,8 +47,8 @@ namespace GradingProject
 
         public static IEnumerable<Candidate> GetCandidate(int examId)
         {
-            var candidatesId = BLCandidateDetail.GetCandidatesOf(examId);
-            return GetCandidate().Where(x => candidatesId.Contains(x.ID));
+            var candidatesIds = BLCandidateDetail.GetCandidatesOf(examId);
+            return GetCandidate().Where(x => candidatesIds.Contains(x.ID));
         }
 
         public static Candidate GetCandidateByID(string candidateId)
@@ -70,7 +70,6 @@ namespace GradingProject
         {
             try
             {
-                candidate.Status = true;
                 db.Candidates.AddOrUpdate(x => x.ID, candidate);
                 db.SaveChanges();
                 return true;
@@ -204,8 +203,6 @@ namespace GradingProject
         {
             try
             {
-                exam.CreateDate = DateTime.Now;
-                exam.Status = true;
                 db.Exams.AddOrUpdate(x => x.ID, exam);
                 db.SaveChanges();
                 return true;
@@ -303,6 +300,17 @@ namespace GradingProject
             return GetQuestion().Select(keySelector);
         }
 
+        public static IEnumerable<Question> GetQuestion(int examId)
+        {
+            var questionIds = BLExamDetail.GetQuestionOf(examId);
+            return GetQuestion().Where(x => questionIds.Contains(x.ID));
+        }
+
+        public static IEnumerable<int> GetTestCaseOf(int questionId)
+        {
+            return BLTestcase.GetTestcase().Where(x => x.QuestionID == questionId).Select(x => x.ID);
+        }
+
         public static Question GetQuestionByID(int questionId)
         {
             return GetQuestion().SingleOrDefault(x => x.ID == questionId);
@@ -321,9 +329,7 @@ namespace GradingProject
         public static bool AddOrUpdate(Question question)
         {
             try
-            { 
-                question.CreateDate = DateTime.Now;
-                question.Status = true;
+            {
                 db.Questions.AddOrUpdate(x => x.ID, question);
                 db.SaveChanges();
                 return true;
@@ -362,6 +368,23 @@ namespace GradingProject
         public static IEnumerable<TKey> GetResult<TKey>(Func<Result, TKey> keySelector)
         {
             return GetResult().Select(keySelector);
+        }
+
+        public static int SumOf(string candidateId, int examId)
+        {
+            var sum = GetResult().Where(x => x.CandidateID == candidateId && x.ExamID == examId).Sum(x => x.Mark);
+            if (sum.HasValue)
+                return sum.Value;
+            return 0;
+        }
+
+        public static int SumOf(string candidateId, int examId, int questionId)
+        {
+            var testCaseIds = BLQuestion.GetTestCaseOf(questionId);
+            var sum = GetResult().Where(x => x.CandidateID == candidateId && x.ExamID == examId && testCaseIds.Contains(x.TestCaseID)).Sum(x => x.Mark);
+            if (sum.HasValue)
+                return sum.Value;
+            return 0;
         }
 
         public static Result GetResultByID(string candidateId, int examId, int testCaseId)
