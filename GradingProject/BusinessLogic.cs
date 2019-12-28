@@ -1,5 +1,4 @@
-﻿using FastMember;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Migrations;
@@ -13,19 +12,6 @@ namespace GradingProject
     class BusinessLogic
     {
         protected static GradingProgramDbContext db = new GradingProgramDbContext();
-
-        public static DataTable ToDataTable<T>(IEnumerable<T> item)
-        {
-            DataTable table = new DataTable();
-            using (var reader = ObjectReader.Create(item))
-                table.Load(reader);
-            return table;
-        }
-
-        public static DataTable ToDataTable<T, TKey>(IEnumerable<T> item, Func<T, TKey> keySelector)
-        {
-            return ToDataTable(item.Select(keySelector));
-        }
 
         protected static IEnumerable<TKey> GetPropertyValue<T, TKey>(IEnumerable<T> item, Func<T, TKey> keySelector)
         {
@@ -71,6 +57,20 @@ namespace GradingProject
             try
             {
                 db.Candidates.AddOrUpdate(x => x.ID, candidate);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddRange(IEnumerable<Candidate> candidates)
+        {
+            try
+            {
+                db.Candidates.AddRange(candidates);
                 db.SaveChanges();
                 return true;
             }
@@ -466,6 +466,20 @@ namespace GradingProject
             try
             {
                 db.TestCases.AddOrUpdate(x => x.ID, testCase);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddRange(IEnumerable<TestCase> testCases)
+        {
+            try
+            {
+                db.TestCases.AddRange(testCases);
                 db.SaveChanges();
                 return true;
             }

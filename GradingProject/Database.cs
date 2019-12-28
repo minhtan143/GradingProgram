@@ -2,6 +2,7 @@ using System;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace GradingProject
 {
@@ -16,6 +17,7 @@ namespace GradingProject
 
         public string Email { get; set; }
 
+        [DefaultValue(true)]
         public bool? Status { get; set; }
     }
 
@@ -42,6 +44,7 @@ namespace GradingProject
 
         public DateTime? CreateDate { get; set; }
 
+        [DefaultValue(true)]
         public bool? Status { get; set; }
     }
 
@@ -69,6 +72,7 @@ namespace GradingProject
 
         public DateTime? CreateDate { get; set; }
 
+        [DefaultValue(true)]
         public bool? Status { get; set; }
     }
 
@@ -113,8 +117,10 @@ namespace GradingProject
         [Column(TypeName = "ntext")]
         public string Output { get; set; }
 
+        [DefaultValue(1000)]
         public int? TimeOut { get; set; }
 
+        [DefaultValue(250000)]
         public int? MemoryLimit { get; set; }
 
         public int? Mark { get; set; }
