@@ -137,6 +137,11 @@ namespace GradingProject
                 {
                     runResult.Result = RunResultEnum.Successful;
                     runResult.RunTime = (process.ExitTime - process.StartTime).Milliseconds;
+
+                    //Calculate memory usage
+                    string pro = Process.GetCurrentProcess().ProcessName;
+                    var counter = new PerformanceCounter("Process", "Working Set - Private", pro);
+                    runResult.UsedMemory =counter.NextValue()/1024;
                     //runResult.UsedMemory = process.PeakWorkingSet64;
                     runResult.ExitCode = process.ExitCode;
                 }
