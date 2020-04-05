@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradingProject_old", "GradingProject\GradingProject_old.csproj", "{E3E96291-9F57-4491-8756-04A66541B628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradingProgram", "..\GradingProgram_new\GradingProgram\GradingProgram.csproj", "{86AFBFFE-44AB-4B0E-8D7C-2FEC06CA2788}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradingProgram", "GradingProgram\GradingProgram.csproj", "{86AFBFFE-44AB-4B0E-8D7C-2FEC06CA2788}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
