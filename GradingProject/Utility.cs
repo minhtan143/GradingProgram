@@ -129,7 +129,7 @@ namespace GradingProject
             try
             {
                 process = Process.Start(StartInfo);
-                //process.MaxWorkingSet = new IntPtr(memoryLimit);
+
                 if (!String.IsNullOrEmpty(input))
                     process.StandardInput.Write(input);
 
@@ -138,11 +138,11 @@ namespace GradingProject
                     runResult.Result = RunResultEnum.Successful;
                     runResult.RunTime = (process.ExitTime - process.StartTime).Milliseconds;
 
+                    runResult.UsedMemory = GC.GetTotalMemory(false);
                     //Calculate memory usage
                     string pro = Process.GetCurrentProcess().ProcessName;
                     var counter = new PerformanceCounter("Process", "Working Set - Private", pro);
-                    runResult.UsedMemory =counter.NextValue()/1024;
-                    //runResult.UsedMemory = process.PeakWorkingSet64;
+                    //runResult.UsedMemory = counter.NextValue() / 1024;
                     runResult.ExitCode = process.ExitCode;
                 }
                 else
@@ -185,7 +185,7 @@ namespace GradingProject
 
         public int RunTime { get; set; }
 
-        public long UsedMemory { get; set; }
+        public float UsedMemory { get; set; }
 
         public string Output { get; set; }
 
