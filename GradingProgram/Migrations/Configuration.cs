@@ -9,7 +9,8 @@ namespace GradingProgram.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "GradingProgram.DatabaseContext";
         }
 
