@@ -12,6 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\BLCandidate.cs" />
+    <Compile Include="BusinessLogic\BusinessLogic.cs" />
+    <Compile Include="Database\Candidate.cs" />
+    <Compile Include="Database\CandidateDetail.cs" />
+    <Compile Include="Database\DatabaseContext.cs" />
+    <Compile Include="Database\Exam.cs" />
+    <Compile Include="Database\ExamDetail.cs" />
+    <Compile Include="Database\Question.cs" />
+    <Compile Include="Database\Result.cs" />
+    <Compile Include="Database\TestCase.cs" />
     <Compile Include="frmCandidateView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +120,15 @@
     <Compile Include="frmResultDetail.Designer.cs">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004080812588_InitialCreate.cs" />
+    <Compile Include="Migrations\202004080812588_InitialCreate.Designer.cs">
+      <DependentUpon>202004080812588_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004080833588_DatabaseMagration.cs" />
+    <Compile Include="Migrations\202004080833588_DatabaseMagration.Designer.cs">
+      <DependentUpon>202004080833588_DatabaseMagration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCandidateView.resx">
@@ -129,6 +158,12 @@
     <EmbeddedResource Include="frmResultDetail.resx">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080812588_InitialCreate.resx">
+      <DependentUpon>202004080812588_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080833588_DatabaseMagration.resx">
+      <DependentUpon>202004080833588_DatabaseMagration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -137,7 +172,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
