@@ -1,21 +1,21 @@
 ﻿using System;
-using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GradingProgram
 {
     [Table("Exam")]
-    class Exam
+    public partial class Exam
     {
-        public int ID { get; set; }
+        [Key]
+        public string ID { get; set; }
 
         public string Name { get; set; }
 
         public string CandidatesFolder { get; set; }
 
-        public DateTime? CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
-        [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }

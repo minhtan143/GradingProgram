@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GradingProgram
 {
     [Table("Result")]
-    class Result
+    public partial class Result
     {
         [Key]
         [Column(Order = 0)]
@@ -12,11 +12,11 @@ namespace GradingProgram
 
         [Key]
         [Column(Order = 1)]
-        public int ExamID { get; set; }
+        public string ExamID { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public int TestCaseID { get; set; }
+        public string TestCaseID { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Output { get; set; }

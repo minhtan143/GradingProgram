@@ -1,11 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GradingProgram
 {
     [Table("Candidate")]
-    class Candidate
+    public partial class Candidate
     {
+        [Key]
         public string ID { get; set; }
 
         public string Name { get; set; }
@@ -14,7 +15,6 @@ namespace GradingProgram
 
         public string Email { get; set; }
 
-        [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; } = true;
     }
 }

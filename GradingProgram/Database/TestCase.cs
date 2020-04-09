@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GradingProgram
 {
     [Table("TestCase")]
-    class TestCase
+    public partial class TestCase
     {
-        public int ID { get; set; }
+        [Key]
+        public string ID { get; set; }
 
         public string Name { get; set; }
 
@@ -16,14 +18,12 @@ namespace GradingProgram
         [Column(TypeName = "ntext")]
         public string Output { get; set; }
 
-        [DefaultValue(1000)]
-        public int? TimeOut { get; set; }
+        public int? TimeOut { get; set; } = 1000;
 
-        [DefaultValue(250000)]
-        public int? MemoryLimit { get; set; }
+        public int? MemoryLimit { get; set; } = 250000;
 
         public int? Mark { get; set; }
 
-        public int? QuestionID { get; set; }
+        public string QuestionID { get; set; }
     }
 }
