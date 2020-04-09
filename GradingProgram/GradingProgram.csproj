@@ -137,6 +137,10 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Compiler.cs" />
+    <Compile Include="Utility\Run.cs" />
+    <Compile Include="Utility\RunResult.cs" />
+    <Compile Include="Utility\Utility.cs" />
     <EmbeddedResource Include="frmCandidateView.resx">
       <DependentUpon>frmCandidateView.cs</DependentUpon>
     </EmbeddedResource>
