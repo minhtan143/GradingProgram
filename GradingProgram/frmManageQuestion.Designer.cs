@@ -31,18 +31,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblSum = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dgvQuestions = new System.Windows.Forms.DataGridView();
             this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TestcaseNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSum = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 27);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
@@ -50,8 +52,9 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(508, 27);
+            this.label2.Location = new System.Drawing.Point(571, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 1;
@@ -59,10 +62,31 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 20);
+            this.textBox1.Location = new System.Drawing.Point(70, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(277, 20);
+            this.textBox1.Size = new System.Drawing.Size(301, 20);
             this.textBox1.TabIndex = 2;
+            // 
+            // lblSum
+            // 
+            this.lblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSum.AutoSize = true;
+            this.lblSum.Location = new System.Drawing.Point(620, 19);
+            this.lblSum.Name = "lblSum";
+            this.lblSum.Size = new System.Drawing.Size(0, 13);
+            this.lblSum.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblSum);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(785, 55);
+            this.panel1.TabIndex = 5;
             // 
             // dgvQuestions
             // 
@@ -75,15 +99,15 @@
             this.QuestionID,
             this.Content,
             this.TestcaseNumber});
-            this.dgvQuestions.Location = new System.Drawing.Point(12, 61);
+            this.dgvQuestions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvQuestions.Location = new System.Drawing.Point(0, 55);
             this.dgvQuestions.MultiSelect = false;
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(761, 370);
-            this.dgvQuestions.TabIndex = 3;
-            this.dgvQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellDoubleClick);
+            this.dgvQuestions.Size = new System.Drawing.Size(785, 388);
+            this.dgvQuestions.TabIndex = 6;
             // 
             // QuestionID
             // 
@@ -104,29 +128,19 @@
             this.TestcaseNumber.Name = "TestcaseNumber";
             this.TestcaseNumber.ReadOnly = true;
             // 
-            // lblSum
-            // 
-            this.lblSum.AutoSize = true;
-            this.lblSum.Location = new System.Drawing.Point(563, 27);
-            this.lblSum.Name = "lblSum";
-            this.lblSum.Size = new System.Drawing.Size(0, 13);
-            this.lblSum.TabIndex = 4;
-            // 
             // frmManageQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 443);
-            this.Controls.Add(this.lblSum);
             this.Controls.Add(this.dgvQuestions);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Name = "frmManageQuestion";
             this.Text = "frmManageQuestion";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -135,10 +149,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblSum;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvQuestions;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuestionID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn TestcaseNumber;
-        private System.Windows.Forms.Label lblSum;
     }
 }

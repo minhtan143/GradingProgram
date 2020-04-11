@@ -48,12 +48,13 @@
             this.ExamName,
             this.CreateDate,
             this.Folder});
-            this.dgvExams.Location = new System.Drawing.Point(12, 12);
+            this.dgvExams.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvExams.Location = new System.Drawing.Point(0, 0);
             this.dgvExams.Name = "dgvExams";
             this.dgvExams.ReadOnly = true;
             this.dgvExams.RowHeadersVisible = false;
             this.dgvExams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExams.Size = new System.Drawing.Size(759, 422);
+            this.dgvExams.Size = new System.Drawing.Size(783, 446);
             this.dgvExams.TabIndex = 0;
             this.dgvExams.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExams_CellDoubleClick);
             // 

@@ -28,22 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtContent = new System.Windows.Forms.RichTextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtContent = new System.Windows.Forms.RichTextBox();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtContent
-            // 
-            this.txtContent.Location = new System.Drawing.Point(12, 12);
-            this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(501, 424);
-            this.txtContent.TabIndex = 0;
-            this.txtContent.Text = "";
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(438, 442);
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Location = new System.Drawing.Point(438, 12);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 1;
@@ -53,7 +48,8 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(357, 442);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(357, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -61,24 +57,43 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnOK);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 430);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(525, 47);
+            this.panel1.TabIndex = 3;
+            // 
+            // txtContent
+            // 
+            this.txtContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtContent.Location = new System.Drawing.Point(0, 0);
+            this.txtContent.Name = "txtContent";
+            this.txtContent.Size = new System.Drawing.Size(525, 430);
+            this.txtContent.TabIndex = 4;
+            this.txtContent.Text = "";
+            // 
             // frmEditText
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(525, 477);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtContent);
+            this.Controls.Add(this.panel1);
             this.Name = "frmEditText";
             this.Text = "frmEditText";
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox txtContent;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox txtContent;
     }
 }

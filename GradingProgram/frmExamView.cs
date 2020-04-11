@@ -71,5 +71,11 @@ namespace GradingProgram
             frmQuestionView frmQuestionView = new frmQuestionView(""/*questionId*/);
             frmQuestionView.ShowDialog();
         }
+
+        private void dgvQuestions_Resize(object sender, EventArgs e)
+        {
+            dgvQuestions.Width = (this.Width - panel5.Width) / 2;
+            dgvSelected.Width = this.Width - panel5.Width - dgvQuestions.Width;
+        }
     }
 }

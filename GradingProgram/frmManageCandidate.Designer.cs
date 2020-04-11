@@ -30,17 +30,19 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dgvCandidate = new System.Windows.Forms.DataGridView();
             this.CandidateID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CandidateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandidate)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 29);
+            this.label1.Location = new System.Drawing.Point(18, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
@@ -48,10 +50,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 26);
+            this.textBox1.Location = new System.Drawing.Point(76, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(343, 20);
             this.textBox1.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(724, 48);
+            this.panel1.TabIndex = 3;
             // 
             // dgvCandidate
             // 
@@ -64,14 +76,14 @@
             this.CandidateID,
             this.CandidateName,
             this.Email});
-            this.dgvCandidate.Location = new System.Drawing.Point(12, 71);
+            this.dgvCandidate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCandidate.Location = new System.Drawing.Point(0, 48);
             this.dgvCandidate.Name = "dgvCandidate";
             this.dgvCandidate.ReadOnly = true;
             this.dgvCandidate.RowHeadersVisible = false;
             this.dgvCandidate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCandidate.Size = new System.Drawing.Size(700, 359);
-            this.dgvCandidate.TabIndex = 2;
-            this.dgvCandidate.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCandidate_CellDoubleClick);
+            this.dgvCandidate.Size = new System.Drawing.Size(724, 394);
+            this.dgvCandidate.TabIndex = 4;
             // 
             // CandidateID
             // 
@@ -100,13 +112,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 442);
             this.Controls.Add(this.dgvCandidate);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Name = "frmManageCandidate";
             this.Text = "frmManageCandidate";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandidate)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -114,6 +126,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvCandidate;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateName;

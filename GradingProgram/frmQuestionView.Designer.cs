@@ -32,21 +32,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtContent = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dgvTestCase = new System.Windows.Forms.DataGridView();
-            this.TestID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Input = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Output = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEdit = new System.Windows.Forms.Button();
             this.txtQuestionID = new System.Windows.Forms.TextBox();
             this.btnSetup = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvTestCase = new System.Windows.Forms.DataGridView();
+            this.TestID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Input = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Output = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestCase)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(12, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -55,7 +61,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 59);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 1;
@@ -63,21 +70,96 @@
             // 
             // txtContent
             // 
-            this.txtContent.Location = new System.Drawing.Point(55, 59);
+            this.txtContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtContent.Location = new System.Drawing.Point(37, 0);
             this.txtContent.Name = "txtContent";
             this.txtContent.ReadOnly = true;
-            this.txtContent.Size = new System.Drawing.Size(719, 61);
+            this.txtContent.Size = new System.Drawing.Size(749, 92);
             this.txtContent.TabIndex = 2;
             this.txtContent.Text = "";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 132);
+            this.label3.Location = new System.Drawing.Point(12, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Testcase";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Location = new System.Drawing.Point(716, 14);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(58, 23);
+            this.btnEdit.TabIndex = 5;
+            this.btnEdit.Text = "Sửa";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // txtQuestionID
+            // 
+            this.txtQuestionID.Location = new System.Drawing.Point(81, 14);
+            this.txtQuestionID.Name = "txtQuestionID";
+            this.txtQuestionID.ReadOnly = true;
+            this.txtQuestionID.Size = new System.Drawing.Size(143, 20);
+            this.txtQuestionID.TabIndex = 6;
+            // 
+            // btnSetup
+            // 
+            this.btnSetup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSetup.Location = new System.Drawing.Point(716, 6);
+            this.btnSetup.Name = "btnSetup";
+            this.btnSetup.Size = new System.Drawing.Size(58, 23);
+            this.btnSetup.TabIndex = 7;
+            this.btnSetup.Text = "Cài đặt";
+            this.btnSetup.UseVisualStyleBackColor = true;
+            this.btnSetup.Visible = false;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(652, 14);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(58, 23);
+            this.btnSave.TabIndex = 8;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Visible = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnEdit);
+            this.panel1.Controls.Add(this.btnSave);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.txtQuestionID);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(786, 46);
+            this.panel1.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.txtContent);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 46);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(786, 92);
+            this.panel2.TabIndex = 10;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnSetup);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 138);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(786, 33);
+            this.panel3.TabIndex = 11;
             // 
             // dgvTestCase
             // 
@@ -90,14 +172,14 @@
             this.TestID,
             this.Input,
             this.Output});
-            this.dgvTestCase.Location = new System.Drawing.Point(15, 158);
+            this.dgvTestCase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTestCase.Location = new System.Drawing.Point(0, 171);
             this.dgvTestCase.Name = "dgvTestCase";
             this.dgvTestCase.ReadOnly = true;
             this.dgvTestCase.RowHeadersVisible = false;
             this.dgvTestCase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTestCase.Size = new System.Drawing.Size(759, 297);
-            this.dgvTestCase.TabIndex = 4;
-            this.dgvTestCase.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTestCase_CellDoubleClick);
+            this.dgvTestCase.Size = new System.Drawing.Size(786, 296);
+            this.dgvTestCase.TabIndex = 12;
             // 
             // TestID
             // 
@@ -119,64 +201,25 @@
             this.Output.Name = "Output";
             this.Output.ReadOnly = true;
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(716, 26);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(58, 23);
-            this.btnEdit.TabIndex = 5;
-            this.btnEdit.Text = "Sửa";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // txtQuestionID
-            // 
-            this.txtQuestionID.Location = new System.Drawing.Point(81, 28);
-            this.txtQuestionID.Name = "txtQuestionID";
-            this.txtQuestionID.ReadOnly = true;
-            this.txtQuestionID.Size = new System.Drawing.Size(143, 20);
-            this.txtQuestionID.TabIndex = 6;
-            // 
-            // btnSetup
-            // 
-            this.btnSetup.Location = new System.Drawing.Point(716, 129);
-            this.btnSetup.Name = "btnSetup";
-            this.btnSetup.Size = new System.Drawing.Size(58, 23);
-            this.btnSetup.TabIndex = 7;
-            this.btnSetup.Text = "Cài đặt";
-            this.btnSetup.UseVisualStyleBackColor = true;
-            this.btnSetup.Visible = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(652, 26);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(58, 23);
-            this.btnSave.TabIndex = 8;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Visible = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // frmQuestionView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 467);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnSetup);
-            this.Controls.Add(this.txtQuestionID);
-            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.dgvTestCase);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtContent);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Name = "frmQuestionView";
             this.Text = "frmQuestionView";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTestCase)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -186,13 +229,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox txtContent;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dgvTestCase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TestID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Input;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Output;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.TextBox txtQuestionID;
         private System.Windows.Forms.Button btnSetup;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgvTestCase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TestID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Input;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Output;
     }
 }
