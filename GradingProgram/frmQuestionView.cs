@@ -20,6 +20,8 @@ namespace GradingProgram
         {
             InitializeComponent();
             btnEdit_Click(null, null);
+            Event evt = new Event();
+            evt.SetUpForm(this);
         }
 
         public frmQuestionView(string questionId)

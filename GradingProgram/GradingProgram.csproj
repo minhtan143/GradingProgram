@@ -72,6 +72,7 @@
     <Compile Include="Database\Question.cs" />
     <Compile Include="Database\Result.cs" />
     <Compile Include="Database\TestCase.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="frmCandidateView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +198,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgrBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgrDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgrOver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgrPnl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
