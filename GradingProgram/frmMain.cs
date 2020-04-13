@@ -16,14 +16,24 @@ namespace GradingProgram
         {
             InitializeComponent();
             ExampleData();
+            Event evt = new Event();
+            evt.SetUpForm(this);
         }
 
         private void ExampleData()
         {
             cbExamId.Text = "KHITHI01";
             dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
+            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
             lblExamName.Text = "Thi cuối kỳ";
             lblDate.Text = "14/2/2020";
+
         }
 
         private void dgvResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
