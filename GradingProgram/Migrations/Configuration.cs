@@ -11,7 +11,6 @@ namespace GradingProgram.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "GradingProgram.DatabaseContext";
         }
 
         protected override void Seed(GradingProgram.DatabaseContext context)

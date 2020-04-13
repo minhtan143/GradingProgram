@@ -12,11 +12,11 @@ namespace GradingProgram
 
         [Key]
         [Column(Order = 1)]
-        public string ExamID { get; set; }
+        public int ExamID { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public string TestCaseID { get; set; }
+        public int TestCaseID { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Output { get; set; }

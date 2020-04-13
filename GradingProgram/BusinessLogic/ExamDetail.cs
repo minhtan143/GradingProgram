@@ -8,7 +8,7 @@ namespace GradingProgram
 {
     public partial class ExamDetail : BusinessLogic
     {
-        public ExamDetail(string examId, string questionId)
+        public ExamDetail(int examId, int questionId)
         {
             ExamID = examId;
             QuestionID = questionId;

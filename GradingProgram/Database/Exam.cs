@@ -8,7 +8,7 @@ namespace GradingProgram
     public partial class Exam
     {
         [Key]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 

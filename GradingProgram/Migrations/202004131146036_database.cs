@@ -3,7 +3,7 @@ namespace GradingProgram.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class DatabaseMagration : DbMigration
+    public partial class database : DbMigration
     {
         public override void Up()
         {

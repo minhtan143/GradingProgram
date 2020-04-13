@@ -127,13 +127,9 @@
     <Compile Include="frmResultDetail.Designer.cs">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004080812588_InitialCreate.cs" />
-    <Compile Include="Migrations\202004080812588_InitialCreate.Designer.cs">
-      <DependentUpon>202004080812588_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004080833588_DatabaseMagration.cs" />
-    <Compile Include="Migrations\202004080833588_DatabaseMagration.Designer.cs">
-      <DependentUpon>202004080833588_DatabaseMagration.cs</DependentUpon>
+    <Compile Include="Migrations\202004131146036_database.cs" />
+    <Compile Include="Migrations\202004131146036_database.Designer.cs">
+      <DependentUpon>202004131146036_database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -169,11 +165,8 @@
     <EmbeddedResource Include="frmResultDetail.resx">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004080812588_InitialCreate.resx">
-      <DependentUpon>202004080812588_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004080833588_DatabaseMagration.resx">
-      <DependentUpon>202004080833588_DatabaseMagration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004131146036_database.resx">
+      <DependentUpon>202004131146036_database.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

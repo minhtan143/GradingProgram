@@ -8,10 +8,10 @@ namespace GradingProgram
     {
         [Key]
         [Column(Order = 0)]
-        public string ExamID { get; set; }
+        public int ExamID { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        public string QuestionID { get; set; }
+        public int QuestionID { get; set; }
     }
 }

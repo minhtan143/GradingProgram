@@ -13,7 +13,7 @@ namespace GradingProgram
             return db.Results;
         }
 
-        public static int SumOf(string candidateId, string examId)
+        public static int SumOf(string candidateId, int examId)
         {
             var sum = GetResult().Where(x => x.CandidateID == candidateId && x.ExamID == examId).Sum(x => x.Mark);
             if (sum.HasValue)
@@ -21,7 +21,7 @@ namespace GradingProgram
             return 0;
         }
 
-        public static int SumOf(string candidateId, string examId, string questionId)
+        public static int SumOf(string candidateId, int examId, int questionId)
         {
             var testCases = Question.GetTestCases(questionId);
             var sum = GetResult().Where(x => x.CandidateID == candidateId && x.ExamID == examId/*error*/).Sum(x => x.Mark);

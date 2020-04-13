@@ -12,7 +12,7 @@ namespace GradingProgram
             List<TestCase> testCases = new List<TestCase>();
             foreach (DirectoryInfo dir in directoryInfo.GetDirectories())
             {
-                TestCase testCase = new TestCase("string"/*string example*/);
+                TestCase testCase = new TestCase(0/*string example*/);
                 testCase.Name = dir.Name;
 
                 FileInfo[] fileInps = dir.GetFiles("*.inp");

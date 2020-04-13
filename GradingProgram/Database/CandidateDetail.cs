@@ -12,6 +12,6 @@ namespace GradingProgram
 
         [Key]
         [Column(Order = 1)]
-        public string ExamID { get; set; }
+        public int ExamID { get; set; }
     }
 }

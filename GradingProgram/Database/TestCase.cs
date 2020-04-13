@@ -8,7 +8,7 @@ namespace GradingProgram
     public partial class TestCase
     {
         [Key]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 
@@ -24,6 +24,6 @@ namespace GradingProgram
 
         public int? Mark { get; set; }
 
-        public string QuestionID { get; set; }
+        public int QuestionID { get; set; }
     }
 }

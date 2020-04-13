@@ -8,7 +8,7 @@ namespace GradingProgram
 {
     public partial class Question : BusinessLogic
     {
-        public Question(string questionId)
+        public Question(int questionId)
         {
             ID = questionId;
         }
@@ -18,7 +18,7 @@ namespace GradingProgram
             return db.Questions.Where(x => x.Status == true);
         }
 
-        public static IEnumerable<TestCase> GetTestCases(string questionId)
+        public static IEnumerable<TestCase> GetTestCases(int questionId)
         {
             //lamda code
             return TestCase.GetTestCases();

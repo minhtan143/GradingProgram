@@ -8,7 +8,7 @@ namespace GradingProgram
 {
     public partial class TestCase : BusinessLogic
     {
-        public TestCase(string testCaseId)
+        public TestCase(int testCaseId)
         {
             ID = testCaseId;
         }
