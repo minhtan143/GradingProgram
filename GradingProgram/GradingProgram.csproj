@@ -72,7 +72,7 @@
     <Compile Include="Database\Question.cs" />
     <Compile Include="Database\Result.cs" />
     <Compile Include="Database\TestCase.cs" />
-    <Compile Include="Event.cs" />
+    <Compile Include="Initialize.cs" />
     <Compile Include="frmCandidateView.cs">
       <SubType>Form</SubType>
     </Compile>

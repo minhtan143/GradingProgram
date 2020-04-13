@@ -24,8 +24,7 @@ namespace GradingProgram
             InitializeComponent();
             txtContent.Text = content;
 
-            Event evt = new Event();
-            evt.SetUpForm(this);
+            Initialize.SetUpForm(this);
         }
 
         private void btnOK_Click(object sender, EventArgs e)

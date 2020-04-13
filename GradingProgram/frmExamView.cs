@@ -19,8 +19,7 @@ namespace GradingProgram
         public frmExamView()
         {
             InitializeComponent();
-            Event evt = new Event();
-            evt.SetUpForm(this);
+            Initialize.SetUpForm(this);
         }
 
         public frmExamView(string examId)

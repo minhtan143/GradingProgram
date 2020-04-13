@@ -21,8 +21,7 @@ namespace GradingProgram
         public frmResultDetail()
         {
             InitializeComponent();
-            Event evt = new Event();
-            evt.SetUpForm(this);
+            Initialize.SetUpForm(this);
         }
 
         public frmResultDetail(string examId, string candidateId)

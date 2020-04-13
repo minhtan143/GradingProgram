@@ -16,8 +16,7 @@ namespace GradingProgram
         {
             InitializeComponent();
             ExampleData();
-            Event evt = new Event();
-            evt.SetUpForm(this);
+            Initialize.SetUpForm(this);
         }
 
         private void ExampleData()

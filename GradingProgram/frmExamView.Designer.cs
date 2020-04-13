@@ -53,6 +53,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvQuestions = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rtbContentQuestion = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -251,7 +252,7 @@
             this.dgvSelected.ReadOnly = true;
             this.dgvSelected.RowHeadersVisible = false;
             this.dgvSelected.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSelected.Size = new System.Drawing.Size(459, 305);
+            this.dgvSelected.Size = new System.Drawing.Size(130, 305);
             this.dgvSelected.TabIndex = 20;
             // 
             // QuestionID
@@ -266,7 +267,7 @@
             this.panel5.Controls.Add(this.btnAdd);
             this.panel5.Controls.Add(this.btnSub);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(459, 116);
+            this.panel5.Location = new System.Drawing.Point(130, 116);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(83, 305);
             this.panel5.TabIndex = 21;
@@ -293,13 +294,12 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvQuestions.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvQuestions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvQuestions.Location = new System.Drawing.Point(542, 116);
+            this.dgvQuestions.Location = new System.Drawing.Point(214, 116);
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(442, 305);
+            this.dgvQuestions.Size = new System.Drawing.Size(130, 305);
             this.dgvQuestions.TabIndex = 23;
             this.dgvQuestions.Resize += new System.EventHandler(this.dgvQuestions_Resize);
             // 
@@ -310,11 +310,21 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
+            // rtbContentQuestion
+            // 
+            this.rtbContentQuestion.Location = new System.Drawing.Point(350, 116);
+            this.rtbContentQuestion.Name = "rtbContentQuestion";
+            this.rtbContentQuestion.ReadOnly = true;
+            this.rtbContentQuestion.Size = new System.Drawing.Size(631, 303);
+            this.rtbContentQuestion.TabIndex = 24;
+            this.rtbContentQuestion.Text = "";
+            // 
             // frmExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.rtbContentQuestion);
             this.Controls.Add(this.dgvQuestions);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.dgvSelected);
@@ -363,5 +373,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView dgvQuestions;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.RichTextBox rtbContentQuestion;
     }
 }
