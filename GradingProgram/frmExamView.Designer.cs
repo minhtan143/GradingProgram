@@ -294,14 +294,14 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvQuestions.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvQuestions.Location = new System.Drawing.Point(214, 116);
+            this.dgvQuestions.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvQuestions.Location = new System.Drawing.Point(213, 116);
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuestions.Size = new System.Drawing.Size(130, 305);
             this.dgvQuestions.TabIndex = 23;
-            this.dgvQuestions.Resize += new System.EventHandler(this.dgvQuestions_Resize);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -312,10 +312,11 @@
             // 
             // rtbContentQuestion
             // 
-            this.rtbContentQuestion.Location = new System.Drawing.Point(350, 116);
+            this.rtbContentQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbContentQuestion.Location = new System.Drawing.Point(343, 116);
             this.rtbContentQuestion.Name = "rtbContentQuestion";
             this.rtbContentQuestion.ReadOnly = true;
-            this.rtbContentQuestion.Size = new System.Drawing.Size(631, 303);
+            this.rtbContentQuestion.Size = new System.Drawing.Size(641, 305);
             this.rtbContentQuestion.TabIndex = 24;
             this.rtbContentQuestion.Text = "";
             // 
@@ -335,7 +336,6 @@
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmExamView";
             this.Text = "frmExamView";
-            this.Resize += new System.EventHandler(this.dgvQuestions_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

@@ -111,7 +111,7 @@
             // 
             this.btnRegrade.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnRegrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegrade.Location = new System.Drawing.Point(0, 340);
+            this.btnRegrade.Location = new System.Drawing.Point(0, 440);
             this.btnRegrade.Name = "btnRegrade";
             this.btnRegrade.Size = new System.Drawing.Size(149, 39);
             this.btnRegrade.TabIndex = 5;
@@ -123,7 +123,7 @@
             // 
             this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(0, 379);
+            this.btnOpenFolder.Location = new System.Drawing.Point(0, 479);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(149, 39);
             this.btnOpenFolder.TabIndex = 6;
@@ -228,7 +228,7 @@
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(149, 113);
+            this.dgvQuestions.Size = new System.Drawing.Size(149, 200);
             this.dgvQuestions.TabIndex = 13;
             this.dgvQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellDoubleClick);
             // 
@@ -263,7 +263,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(984, 418);
+            this.panel2.Size = new System.Drawing.Size(984, 518);
             this.panel2.TabIndex = 16;
             // 
             // dgvQuestionsDetail
@@ -303,7 +303,7 @@
             this.dgvQuestionsDetail.ReadOnly = true;
             this.dgvQuestionsDetail.RowHeadersVisible = false;
             this.dgvQuestionsDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestionsDetail.Size = new System.Drawing.Size(819, 418);
+            this.dgvQuestionsDetail.Size = new System.Drawing.Size(819, 518);
             this.dgvQuestionsDetail.TabIndex = 17;
             // 
             // Test
@@ -331,7 +331,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(149, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(16, 418);
+            this.panel4.Size = new System.Drawing.Size(16, 518);
             this.panel4.TabIndex = 16;
             // 
             // panel3
@@ -344,7 +344,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(149, 418);
+            this.panel3.Size = new System.Drawing.Size(149, 518);
             this.panel3.TabIndex = 15;
             // 
             // dgvTask
@@ -378,12 +378,12 @@
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvTask.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTask.Location = new System.Drawing.Point(0, 127);
+            this.dgvTask.Location = new System.Drawing.Point(0, 210);
             this.dgvTask.Name = "dgvTask";
             this.dgvTask.ReadOnly = true;
             this.dgvTask.RowHeadersVisible = false;
             this.dgvTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTask.Size = new System.Drawing.Size(149, 213);
+            this.dgvTask.Size = new System.Drawing.Size(149, 230);
             this.dgvTask.TabIndex = 16;
             // 
             // Task
@@ -396,19 +396,19 @@
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 113);
+            this.panel5.Location = new System.Drawing.Point(0, 200);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(149, 14);
+            this.panel5.Size = new System.Drawing.Size(149, 10);
             this.panel5.TabIndex = 14;
             // 
             // frmResultDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 461);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.MinimumSize = new System.Drawing.Size(1000, 500);
+            this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmResultDetail";
             this.Text = "frmResultDetail";
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
