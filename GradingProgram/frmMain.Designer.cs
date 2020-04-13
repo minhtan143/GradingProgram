@@ -72,7 +72,7 @@
             // trangChủToolStripMenuItem
             // 
             this.trangChủToolStripMenuItem.Name = "trangChủToolStripMenuItem";
-            this.trangChủToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.trangChủToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.trangChủToolStripMenuItem.Text = "Trang chủ";
             // 
             // kỳThiToolStripMenuItem
@@ -87,14 +87,14 @@
             // createExamTSMI
             // 
             this.createExamTSMI.Name = "createExamTSMI";
-            this.createExamTSMI.Size = new System.Drawing.Size(150, 22);
+            this.createExamTSMI.Size = new System.Drawing.Size(149, 22);
             this.createExamTSMI.Text = "Tạo kỳ thi mới";
             this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
             // 
             // manageExamTSMI
             // 
             this.manageExamTSMI.Name = "manageExamTSMI";
-            this.manageExamTSMI.Size = new System.Drawing.Size(150, 22);
+            this.manageExamTSMI.Size = new System.Drawing.Size(149, 22);
             this.manageExamTSMI.Text = "Quản lý kỳ thi";
             this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
             // 
@@ -126,7 +126,7 @@
             this.thíSinhToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageCandidateTSMI});
             this.thíSinhToolStripMenuItem.Name = "thíSinhToolStripMenuItem";
-            this.thíSinhToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.thíSinhToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.thíSinhToolStripMenuItem.Text = "Thí sinh";
             // 
             // manageCandidateTSMI
@@ -139,7 +139,7 @@
             // thôngTinToolStripMenuItem
             // 
             this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.thôngTinToolStripMenuItem.Text = "Thông tin";
             // 
             // label1
@@ -259,6 +259,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
