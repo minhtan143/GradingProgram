@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public partial class Result : BusinessLogic
+    public class BLResult : BusinessLogic
     {
-        public static IEnumerable<Result> GetResult()
-        {
-            return db.Results;
-        }
-
         public static int SumOf(string candidateId, int examId)
         {
             var sum = GetResult().Where(x => x.CandidateID == candidateId && x.ExamID == examId).Sum(x => x.Mark);

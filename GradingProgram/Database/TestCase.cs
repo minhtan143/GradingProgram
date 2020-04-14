@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GradingProgram
 {
     [Table("TestCase")]
-    public partial class TestCase
+    public class TestCase
     {
         [Key]
         public int ID { get; set; }

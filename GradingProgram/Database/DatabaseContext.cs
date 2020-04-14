@@ -2,7 +2,7 @@
 
 namespace GradingProgram
 {
-    public partial class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public static string connectionString = "Data source=(local);initial catalog=GradingProgram;integrated security=True;MultipleActiveResultSets=True";
         

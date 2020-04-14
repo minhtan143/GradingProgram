@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public partial class Candidate : BusinessLogic
+    public class BLCandidate : BusinessLogic
     {
-        public Candidate(string candidateId)
-        {
-            ID = candidateId;
-        }
-
         public static IEnumerable<Candidate> GetCandidate()
         {
             return db.Candidates.Where(x => x.Status == true);
+        }
+
+        public static IEnumerable<TKey> GetCandidate<TKey>(Func<Candidate, TKey> keySelector)
+        {
+            return GetPropertyValue(GetCandidate(), keySelector);
         }
 
         public static bool Update(Candidate candidate)

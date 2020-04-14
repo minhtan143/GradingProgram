@@ -6,24 +6,18 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public partial class ExamDetail : BusinessLogic
+    public class BLCandidateDetail : BusinessLogic
     {
-        public ExamDetail(int examId, int questionId)
-        {
-            ExamID = examId;
-            QuestionID = questionId;
-        }
-
-        public static IEnumerable<CandidateDetail> GetExamDetail()
+        public static IEnumerable<CandidateDetail> GetCandidateDetail()
         {
             return db.CandidateDetails;
         }
 
-        public static bool Add(ExamDetail examDetail)
+        public static bool Add(CandidateDetail candidateDetail)
         {
             try
             {
-                db.ExamDetails.Add(examDetail);
+                db.CandidateDetails.Add(candidateDetail);
                 db.SaveChanges();
                 return true;
             }
@@ -33,11 +27,11 @@ namespace GradingProgram
             }
         }
 
-        public static bool Add(IEnumerable<ExamDetail> examDetails)
+        public static bool Add(IEnumerable<CandidateDetail> candidateDetails)
         {
             try
             {
-                db.ExamDetails.AddRange(examDetails);
+                db.CandidateDetails.AddRange(candidateDetails);
                 db.SaveChanges();
                 return true;
             }
@@ -47,11 +41,11 @@ namespace GradingProgram
             }
         }
 
-        public static bool Delete(ExamDetail examDetail)
+        public static bool Delete(CandidateDetail candidateDetail)
         {
             try
             {
-                db.Entry(examDetail).State = System.Data.Entity.EntityState.Deleted;
+                db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
                 db.SaveChanges();
                 return true;
             }

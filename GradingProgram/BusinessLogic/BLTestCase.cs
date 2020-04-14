@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public partial class TestCase : BusinessLogic
+    public class BLTestCase : BusinessLogic
     {
-        public TestCase(int testCaseId)
-        {
-            ID = testCaseId;
-        }
-
         public static IEnumerable<TestCase> GetTestCases()
         {
             return db.TestCases;

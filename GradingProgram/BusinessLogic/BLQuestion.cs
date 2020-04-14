@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public partial class Question : BusinessLogic
+    public class BLQuestion : BusinessLogic
     {
-        public Question(int questionId)
-        {
-            ID = questionId;
-        }
-
         public static IEnumerable<Question> GetQuestion()
         {
             return db.Questions.Where(x => x.Status == true);

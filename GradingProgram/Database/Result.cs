@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GradingProgram
 {
     [Table("Result")]
-    public partial class Result
+    public class Result
     {
         [Key]
         [Column(Order = 0)]

@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GradingProgram
 {
-    public partial class Exam : BusinessLogic
+    public class BLExam : BusinessLogic
     {
-        public Exam(int examId)
-        {
-            ID = examId;
-        }
-
         public static IEnumerable<Exam> GetExam()
         {
             return db.Exams.Where(x => x.Status == true);
+        }
+
+        public static IEnumerable<TKey> GetExam<TKey>(Func<Exam, TKey> keySelector)
+        {
+            return GetPropertyValue(GetExam(), keySelector);
         }
 
         public static bool Add(Exam exam)

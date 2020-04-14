@@ -56,14 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\Candidate.cs" />
+    <Compile Include="BusinessLogic\BLCandidate.cs" />
     <Compile Include="BusinessLogic\BusinessLogic.cs" />
-    <Compile Include="BusinessLogic\CandidateDetail.cs" />
-    <Compile Include="BusinessLogic\Exam.cs" />
-    <Compile Include="BusinessLogic\ExamDetail.cs" />
-    <Compile Include="BusinessLogic\Question.cs" />
-    <Compile Include="BusinessLogic\Result.cs" />
-    <Compile Include="BusinessLogic\TestCase.cs" />
+    <Compile Include="BusinessLogic\BLCandidateDetail.cs" />
+    <Compile Include="BusinessLogic\BLExam.cs" />
+    <Compile Include="BusinessLogic\BLExamDetail.cs" />
+    <Compile Include="BusinessLogic\BLQuestion.cs" />
+    <Compile Include="BusinessLogic\BLResult.cs" />
+    <Compile Include="BusinessLogic\BLTestCase.cs" />
     <Compile Include="Database\Candidate.cs" />
     <Compile Include="Database\CandidateDetail.cs" />
     <Compile Include="Database\DatabaseContext.cs" />

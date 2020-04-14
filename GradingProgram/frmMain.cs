@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -15,24 +9,13 @@ namespace GradingProgram
         public frmMain()
         {
             InitializeComponent();
-            ExampleData();
             Initialize.SetUpForm(this);
+            LoadData();
         }
 
-        private void ExampleData()
+        private void LoadData()
         {
-            cbExamId.Text = "KHITHI01";
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            dgvResult.Rows.Add(new object[] { "17110000", "Nguyễn Văn A", 10 });
-            lblExamName.Text = "Thi cuối kỳ";
-            lblDate.Text = "14/2/2020";
-
+            BLExam.GetExam().ToList();
         }
 
         private void dgvResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
