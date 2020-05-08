@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace GradingProgram
 {
-    public partial class frmSetUpGrading : Form
+    public partial class frmSettingGrading : Form
     {
         private string path;
 
-        public frmSetUpGrading(string path)
+        public frmSettingGrading(string path)
         {
             this.path = path + "\\SetUp.txt";
             InitializeComponent();

@@ -1,6 +1,6 @@
 ﻿namespace GradingProgram
 {
-    partial class frmSetUpGrading
+    partial class frmSettingGrading
     {
         /// <summary>
         /// Required designer variable.

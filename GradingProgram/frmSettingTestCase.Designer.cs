@@ -1,6 +1,6 @@
 ﻿namespace GradingProgram
 {
-    partial class frmSetUpTestCase
+    partial class frmSettingTestCase
     {
         /// <summary>
         /// Required designer variable.

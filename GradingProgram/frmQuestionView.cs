@@ -72,7 +72,7 @@ namespace GradingProgram
 
         private void btnSetup_Click(object sender, EventArgs e)
         {
-            frmSetUpTestCase frmSetUpTestCase = new frmSetUpTestCase();
+            frmSettingTestCase frmSetUpTestCase = new frmSettingTestCase();
             if (frmSetUpTestCase.ShowDialog() == DialogResult.OK)
             {
                 var testCases = BLTestCase.GetTestCases(questionId).ToList();

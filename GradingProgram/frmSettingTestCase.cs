@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GradingProgram
 {
-    public partial class frmSetUpTestCase : Form
+    public partial class frmSettingTestCase : Form
     {
-        public frmSetUpTestCase()
+        public frmSettingTestCase()
         {
             InitializeComponent();
             Initialize.SetUpForm(this);

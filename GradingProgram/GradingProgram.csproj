@@ -96,17 +96,17 @@
     <Compile Include="frmExaminationProcess.Designer.cs">
       <DependentUpon>frmExaminationProcess.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSetUpGrading.cs">
+    <Compile Include="frmSettingGrading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSetUpGrading.Designer.cs">
-      <DependentUpon>frmSetUpGrading.cs</DependentUpon>
+    <Compile Include="frmSettingGrading.Designer.cs">
+      <DependentUpon>frmSettingGrading.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSetUpTestCase.cs">
+    <Compile Include="frmSettingTestCase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSetUpTestCase.Designer.cs">
-      <DependentUpon>frmSetUpTestCase.cs</DependentUpon>
+    <Compile Include="frmSettingTestCase.Designer.cs">
+      <DependentUpon>frmSettingTestCase.cs</DependentUpon>
     </Compile>
     <Compile Include="Initialize.cs" />
     <Compile Include="frmCandidateView.cs">
@@ -208,11 +208,11 @@
     <EmbeddedResource Include="frmResultDetail.resx">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSetUpGrading.resx">
-      <DependentUpon>frmSetUpGrading.cs</DependentUpon>
+    <EmbeddedResource Include="frmSettingGrading.resx">
+      <DependentUpon>frmSettingGrading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSetUpTestCase.resx">
-      <DependentUpon>frmSetUpTestCase.cs</DependentUpon>
+    <EmbeddedResource Include="frmSettingTestCase.resx">
+      <DependentUpon>frmSettingTestCase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

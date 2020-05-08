@@ -98,7 +98,7 @@ namespace GradingProgram
 
         private void setupGradingTSMI_Click(object sender, EventArgs e)
         {
-            new frmSetUpGrading(BLExam.GetExam(examId).Folder).ShowDialog();
+            new frmSettingGrading(BLExam.GetExam(examId).Folder).ShowDialog();
         }
 
         private void gradingThisExamTSMI_Click(object sender, EventArgs e)
