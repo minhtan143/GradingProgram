@@ -6,56 +6,52 @@ namespace GradingProgram
 {
     public class BLExam : BusinessLogic
     {
-        public static IEnumerable<Exam> GetExam()
+        public static IEnumerable<Exam> GetExams()
         {
             return db.Exams.Where(x => x.Status == true);
         }
 
-        public static IEnumerable<TKey> GetExam<TKey>(Func<Exam, TKey> keySelector)
+        public static Exam GetExam(int examId)
         {
-            return GetPropertyValue(GetExam(), keySelector);
+            return GetExams().SingleOrDefault(x => x.ID == examId);
         }
 
-        public static bool Add(Exam exam)
+        public static bool Exists(string examName)
         {
-            try
-            {
-                db.Exams.Add(exam);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetExams().Count(x => x.Name == examName) > 0;
         }
 
-        public static bool Update(Exam exam)
+        public static IEnumerable<TKey> GetExams<TKey>(Func<Exam, TKey> keySelector)
         {
-            try
-            {
-                db.Entry(exam).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetPropertyValues(GetExams(), keySelector);
         }
 
-        public static bool Delete(Exam exam)
+        public static int SumMark(int examId)
         {
-            try
-            {
-                exam.Status = false;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return BLExamDetail.GetQuestions(examId).Sum(x => BLQuestion.SumMark(x.ID));
+        }
+
+        public static TKey GetPropertyValue<TKey>(Func<Exam, bool> predicate, Func<Exam, TKey> keySelector)
+        {
+            return GetExams().Where(predicate).Select(keySelector).SingleOrDefault();
+        }
+
+        public static void Add(Exam exam)
+        {
+            db.Exams.Add(exam);
+            db.SaveChanges();
+        }
+
+        public static void Update(Exam exam)
+        {
+            db.Entry(exam).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public static void Delete(Exam exam)
+        {
+            exam.Status = false;
+            db.SaveChanges();
         }
     }
 }

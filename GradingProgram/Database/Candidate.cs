@@ -7,8 +7,9 @@ namespace GradingProgram
     public class Candidate
     {
         [Key]
-        [StringLength(20)]
-        public string ID { get; set; }
+        public int ID { get; set; }
+
+        public string Code { get; set; }
 
         public string Name { get; set; }
 

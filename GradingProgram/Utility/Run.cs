@@ -5,9 +5,8 @@ namespace GradingProgram
 {
     public class Run
     {
-        public static RunResult RunExeFile(string exeFile, string input, int timeOut, int memoryLimit)
+        public static RunResult RunExeFile(string exeFile, string input, int timeLimit, int memoryLimit)
         {
-            Process process = new Process();
             ProcessStartInfo StartInfo = new ProcessStartInfo();
 
             StartInfo.FileName = exeFile;
@@ -22,36 +21,41 @@ namespace GradingProgram
             RunResult runResult = new RunResult();
             try
             {
-                process = Process.Start(StartInfo);
-
-                if (!String.IsNullOrEmpty(input))
-                    process.StandardInput.Write(input);
-
-                if (process.WaitForExit(timeOut))
+                memoryLimit = memoryLimit * 1024 * 1024;
+                using (Process process = Process.Start(StartInfo))
                 {
-                    runResult.Result = RunResultEnum.Successful;
-                    runResult.RunTime = (process.ExitTime - process.StartTime).Milliseconds;
+                    if (!String.IsNullOrEmpty(input))
+                        process.StandardInput.Write(input);
 
-                    runResult.UsedMemory = GC.GetTotalMemory(false);
-                    //Calculate memory usage
-                    string pro = Process.GetCurrentProcess().ProcessName;
-                    var counter = new PerformanceCounter("Process", "Working Set - Private", pro);
-                    //runResult.UsedMemory = counter.NextValue() / 1024;
+                    long peakWorkingSet = 0;
+
+                    do
+                    {
+                        process.Refresh();
+                        peakWorkingSet = process.PeakWorkingSet64;
+                        if (peakWorkingSet > memoryLimit)
+                        {
+                            process.Kill();
+                            runResult.Result = RunResultEnum.MemoryLimit;
+                        }
+
+                        if (process.TotalProcessorTime.TotalMilliseconds > timeLimit)
+                        {
+                            process.Kill();
+                            runResult.Result = RunResultEnum.TimeLimit;
+                        }
+                    }
+                    while (!process.HasExited);
+
                     runResult.ExitCode = process.ExitCode;
-                }
-                else
-                {
-                    if (!process.HasExited)
-                        process.Kill();
-                    else
-                        runResult.ExitCode = process.ExitCode;
-                    runResult.Result = RunResultEnum.RunTimeError;
-                }
+                    runResult.RunTime = (int)process.TotalProcessorTime.TotalMilliseconds;
+                    runResult.UsedMemory = (int)(peakWorkingSet / (1024 * 1024));
 
-                if (process.StandardOutput != null)
-                    runResult.Output = process.StandardOutput.ReadToEnd();
-                if (process.StandardError != null)
-                    runResult.Error = process.StandardError.ReadToEnd();
+                    if (process.StandardOutput != null)
+                        runResult.Output = process.StandardOutput.ReadToEnd();
+                    if (process.StandardError != null)
+                        runResult.Error = process.StandardError.ReadToEnd();
+                }
             }
             catch (Exception ex)
             {

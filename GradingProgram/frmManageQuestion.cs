@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -15,20 +8,47 @@ namespace GradingProgram
         public frmManageQuestion()
         {
             InitializeComponent();
-            ExampleData();
             Initialize.SetUpForm(this);
+            LoadData();
         }
 
-        private void ExampleData()
+        private void LoadData()
         {
-            lblSum.Text = "1";
-            dgvQuestions.Rows.Add(new object[] { "CAUHOI01", "Tìm tổng a và b...", 10 });
+            dgvQuestions.DataSource = BusinessLogic.ToDataTable(BusinessLogic.Search(BLQuestion.GetQuestions(x => new { x.ID, x.Name, x.Detail }), txtSearch.Text));
+            dgvQuestions.Columns["ID"].Visible = false;
+            lblSum.Text = dgvQuestions.RowCount.ToString();
         }
 
         private void dgvQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmQuestionView frmQuestionView = new frmQuestionView(""/*questionId*/);
-            frmQuestionView.ShowDialog();
+            string columnName = dgvQuestions.Columns[e.ColumnIndex].Name;
+            if (e.RowIndex >= 0 && columnName != "Delete")
+            {
+                frmQuestionView frmQuestionView = new frmQuestionView(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
+                if (!Initialize.CheckOpened(frmQuestionView))
+                    frmQuestionView.Show();
+                LoadData();
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void dgvQuestions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvQuestions.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa câu hỏi này?\nBạn không thể xem nội dung hay sửa câu hỏi này sau khi xóa." +
+                    "\nThông tin kết quả của các bài kiểm tra liên quan đến câu hỏi vẫn được giữ lại!", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Question question = BLQuestion.GetQuestion(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
+                    BLQuestion.Delete(question);
+                    LoadData();
+                }
+            }
         }
     }
 }

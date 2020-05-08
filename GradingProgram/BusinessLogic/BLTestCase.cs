@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,88 +14,58 @@ namespace GradingProgram
             return db.TestCases;
         }
 
-        public static bool Update(TestCase testCase)
+        public static TestCase GetTestCase(int testcaseId)
         {
-            try
-            {
-                db.Entry(testCase).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().SingleOrDefault(x => x.ID == testcaseId);
         }
 
-        public static bool Update(IEnumerable<TestCase> testCases)
+        public static IEnumerable<TestCase> GetTestCases(int questionId)
         {
-            try
-            {
-                db.Entry(testCases).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().Where(x => x.QuestionID == questionId);
         }
 
-        public static bool Add(TestCase testCase)
+        public static bool Exists(int questionId, string testName)
         {
-            try
-            {
-                db.TestCases.Add(testCase);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().Count(x => x.QuestionID == questionId && x.Name == testName) > 0;
         }
 
-        public static bool Add(IEnumerable<TestCase> testCases)
+        public static IEnumerable<TKey> GetTestCases<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
         {
-            try
-            {
-                db.TestCases.AddRange(testCases);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().Where(predicate).Select(keySelector);
         }
 
-        public static bool Delete(TestCase testCase)
+        public static TKey GetPropertyValue<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
         {
-            try
-            {
-                db.TestCases.Remove(testCase);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().Where(predicate).Select(keySelector).SingleOrDefault();
         }
 
-        public static bool Delete(IEnumerable<TestCase> testCases)
+        public static int SumMark(int questionId)
         {
-            try
-            {
-                db.TestCases.RemoveRange(testCases);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetTestCases().Where(x => x.QuestionID == questionId).Sum(y => y.Mark).Value;
+        }
+
+        public static void AddOrUpdate(TestCase testCase)
+        {
+            db.TestCases.AddOrUpdate(testCase);
+            db.SaveChanges();
+        }
+
+        public static void AddOrUpdate(IEnumerable<TestCase> testCases)
+        {
+            db.TestCases.AddOrUpdate(testCases.ToArray());
+            db.SaveChanges();
+        }
+
+        public static void Delete(TestCase testCase)
+        {
+            db.TestCases.Remove(testCase);
+            db.SaveChanges();
+        }
+
+        public static void Delete(IEnumerable<TestCase> testCases)
+        {
+            db.TestCases.RemoveRange(testCases);
+            db.SaveChanges();
         }
     }
 }

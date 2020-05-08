@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -15,19 +8,39 @@ namespace GradingProgram
         public frmManageExam()
         {
             InitializeComponent();
-            ExampleData();
             Initialize.SetUpForm(this);
+            Text = "Quản lý kì thi";
+            LoadData();
         }
 
-        private void ExampleData()
+        private void LoadData()
         {
-            dgvExams.Rows.Add(new object[] { "KITHI01", "Thi cuối kì", "14/2/2020", "C\\kithi01" });
+            dgvExams.DataSource = BusinessLogic.ToDataTable(BLExam.GetExams(x => new { x.ID, x.Name, x.Folder, x.CreateDate }));
+            dgvExams.Columns["ID"].Visible = false;
         }
 
         private void dgvExams_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmExamView frmExamView = new frmExamView("");
-            frmExamView.ShowDialog();
+            if (e.RowIndex >= 0)
+            {
+                frmExamView frmExamView = new frmExamView(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
+                if (!Initialize.CheckOpened(frmExamView))
+                    frmExamView.Show();
+            }
+        }
+
+        private void dgvExams_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvExams.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa kì thi này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Exam exam = BLExam.GetExam(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
+                    BLExam.Delete(exam);
+                    LoadData();
+                }
+            }
         }
     }
 }

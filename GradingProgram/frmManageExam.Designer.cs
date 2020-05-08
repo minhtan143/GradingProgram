@@ -32,10 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvExams = new System.Windows.Forms.DataGridView();
-            this.ExamID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExams)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,6 +48,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.dgvExams.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvExams.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvExams.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -58,10 +59,10 @@
             this.dgvExams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ExamID,
             this.ExamName,
+            this.Folder,
             this.CreateDate,
-            this.Folder});
+            this.Delete});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -78,33 +79,41 @@
             this.dgvExams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvExams.Size = new System.Drawing.Size(984, 461);
             this.dgvExams.TabIndex = 0;
+            this.dgvExams.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExams_CellClick);
             this.dgvExams.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExams_CellDoubleClick);
-            // 
-            // ExamID
-            // 
-            this.ExamID.HeaderText = "Mã kỳ thi";
-            this.ExamID.Name = "ExamID";
-            this.ExamID.ReadOnly = true;
             // 
             // ExamName
             // 
             this.ExamName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ExamName.DataPropertyName = "Name";
             this.ExamName.HeaderText = "Tên kỳ thi";
             this.ExamName.Name = "ExamName";
             this.ExamName.ReadOnly = true;
             // 
+            // Folder
+            // 
+            this.Folder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Folder.DataPropertyName = "Folder";
+            this.Folder.HeaderText = "Thư mục chứa bài thi";
+            this.Folder.Name = "Folder";
+            this.Folder.ReadOnly = true;
+            // 
             // CreateDate
             // 
+            this.CreateDate.DataPropertyName = "CreateDate";
             this.CreateDate.HeaderText = "Ngày tạo";
             this.CreateDate.Name = "CreateDate";
             this.CreateDate.ReadOnly = true;
+            this.CreateDate.Width = 150;
             // 
-            // Folder
+            // Delete
             // 
-            this.Folder.HeaderText = "Thư mục thí sinh";
-            this.Folder.Name = "Folder";
-            this.Folder.ReadOnly = true;
-            this.Folder.Width = 258;
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Xóa";
+            this.Delete.UseColumnTextForButtonValue = true;
+            this.Delete.Width = 50;
             // 
             // frmManageExam
             // 
@@ -123,9 +132,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvExams;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExamID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExamName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
+        private System.Windows.Forms.DataGridViewButtonColumn Delete;
     }
 }

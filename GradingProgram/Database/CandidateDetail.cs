@@ -8,10 +8,16 @@ namespace GradingProgram
     {
         [Key]
         [Column(Order = 0)]
-        public string CandidateID { get; set; }
+        [ForeignKey("Candidate")]
+        public int CandidateID { get; set; }
 
         [Key]
         [Column(Order = 1)]
+        [ForeignKey("Exam")]
         public int ExamID { get; set; }
+
+        public Candidate Candidate { get; set; }
+
+        public Exam Exam { get; set; }
     }
 }

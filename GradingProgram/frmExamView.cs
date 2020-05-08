@@ -1,55 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
 {
     public partial class frmExamView : Form
     {
-        private string examId;
+        private int examId;
+        private bool modify;
 
-        public string ExamID { get => examId; set => examId = value; }
-
-        public frmExamView()
+        public frmExamView(int examId)
         {
+            this.examId = examId;
             InitializeComponent();
             Initialize.SetUpForm(this);
+            LoadData();
         }
 
-        public frmExamView(string examId)
+        private void LoadData()
         {
-            ExamID = examId;
-            InitializeComponent();
-            ExampleData();
-        }
-
-        private void ExampleData()
-        {
-            txtExamID.Text = "KITHI01";
-            txtExamName.Text = "Thi cuối kì";
-            txtPathFolder.Text = "C\\kithi01";
-            dgvSelected.Rows.Add("Bai01");
-            dgvSelected.Rows.Add("Bai02");
-            dgvQuestions.Rows.Add("Bai03");
-            dgvQuestions.Rows.Add("Bai04");
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            //messageBox
-            Hide();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            //create
-            Hide();
+            txtExamName.Text = BLExam.GetExam(examId).Name;
+            txtPathFolder.Text = BLExam.GetExam(examId).Folder;
+            dgvSelected.DataSource = BusinessLogic.ToDataTable(BLExamDetail.GetQuestions(examId).Select(x => new { x.ID, x.Name }).OrderBy(x => x.Name));
+            dgvSelected.Columns["ID"].Visible = false;
+            modify = false;
+            btnCancel.Visible = false;
+            btnSave.Visible = false;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -69,8 +46,41 @@ namespace GradingProgram
         private void dgvSelected_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //string questionId = (sender as ListView).SelectedItems[0].SubItems[0].Text;
-            frmQuestionView frmQuestionView = new frmQuestionView(""/*questionId*/);
+            frmQuestionView frmQuestionView = new frmQuestionView(0/*questionId*/);
             frmQuestionView.ShowDialog();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmExamView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void btnFolder_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                txtPathFolder.Text = dialog.FileName;
+            }
+            Focus();
+        }
+
+        private void txt_TextChanged(object sender, EventArgs e)
+        {
+            modify = true;
+            btnCancel.Visible = true;
+            btnSave.Visible = true;
         }
     }
 }

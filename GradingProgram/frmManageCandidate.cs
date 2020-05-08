@@ -15,19 +15,40 @@ namespace GradingProgram
         public frmManageCandidate()
         {
             InitializeComponent();
-            ExampleData();
             Initialize.SetUpForm(this);
+            LoadData();
         }
 
-        private void ExampleData()
+        private void LoadData()
         {
-            dgvCandidate.Rows.Add(new object[] { "17110300", "Nguyễn Văn A", "17110300@student.hcmute.edu.vn" });
+            List<string> lstItems = new List<string>();
+            lstItems.Add("All");
+            lstItems.AddRange(BLExam.GetExams(x => x.Name).ToList());
+            cbExamID.DataSource = lstItems;
+            RefreshCandidates();
+        }
+
+        private void RefreshCandidates(int examId = -1)
+        {
+            if (examId == -1)
+                dgvCandidates.DataSource = BusinessLogic.Search(BLCandidate.GetCandidates().Select(x => new { x.ID, x.Name, x.Phone, x.Email }), txtSearch.Text).ToList();
+            else dgvCandidates.DataSource = BusinessLogic.Search(BLCandidateDetail.GetCandidates(examId).Select(x => new { x.ID, x.Name, x.Phone, x.Email }), txtSearch.Text).ToList();
         }
 
         private void dgvCandidate_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmCandidateView frmCandidateView = new frmCandidateView();
+            frmCandidateView frmCandidateView = new frmCandidateView((int)dgvCandidates.Rows[e.RowIndex].Cells["ID"].Value);
             frmCandidateView.ShowDialog();
+        }
+
+        private void cbExamID_SelectedValueChanged(object sender, EventArgs e)
+        {
+            RefreshCandidates();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            RefreshCandidates();
         }
     }
 }

@@ -28,34 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.trangChủToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guideTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.kỳThiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.chấmĐiểmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gradingThisExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupGradingTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.câuHỏiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.thíSinhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCandidateTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvResult = new System.Windows.Forms.DataGridView();
-            this.CandidateID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CandidateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExportExcel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblExamName = new System.Windows.Forms.Label();
-            this.cbExamId = new System.Windows.Forms.ComboBox();
+            this.cbExamName = new System.Windows.Forms.ComboBox();
+            this.dgvResults = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CandidateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -63,6 +68,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.trangChủToolStripMenuItem,
             this.kỳThiToolStripMenuItem,
+            this.chấmĐiểmToolStripMenuItem,
             this.câuHỏiToolStripMenuItem,
             this.thíSinhToolStripMenuItem,
             this.thôngTinToolStripMenuItem});
@@ -74,9 +80,27 @@
             // 
             // trangChủToolStripMenuItem
             // 
+            this.trangChủToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guideTSMI,
+            this.refreshTSMI});
             this.trangChủToolStripMenuItem.Name = "trangChủToolStripMenuItem";
             this.trangChủToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.trangChủToolStripMenuItem.Text = "Trang chủ";
+            // 
+            // guideTSMI
+            // 
+            this.guideTSMI.Name = "guideTSMI";
+            this.guideTSMI.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.guideTSMI.Size = new System.Drawing.Size(156, 22);
+            this.guideTSMI.Text = "Hướng dẫn";
+            // 
+            // refreshTSMI
+            // 
+            this.refreshTSMI.Name = "refreshTSMI";
+            this.refreshTSMI.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.refreshTSMI.Size = new System.Drawing.Size(156, 22);
+            this.refreshTSMI.Text = "Cập nhật lại";
+            this.refreshTSMI.Click += new System.EventHandler(this.refreshTSMI_Click);
             // 
             // kỳThiToolStripMenuItem
             // 
@@ -90,16 +114,43 @@
             // createExamTSMI
             // 
             this.createExamTSMI.Name = "createExamTSMI";
-            this.createExamTSMI.Size = new System.Drawing.Size(149, 22);
+            this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.createExamTSMI.Size = new System.Drawing.Size(192, 22);
             this.createExamTSMI.Text = "Tạo kỳ thi mới";
             this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
             // 
             // manageExamTSMI
             // 
             this.manageExamTSMI.Name = "manageExamTSMI";
-            this.manageExamTSMI.Size = new System.Drawing.Size(149, 22);
+            this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.manageExamTSMI.Size = new System.Drawing.Size(192, 22);
             this.manageExamTSMI.Text = "Quản lý kỳ thi";
             this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
+            // 
+            // chấmĐiểmToolStripMenuItem
+            // 
+            this.chấmĐiểmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gradingThisExamTSMI,
+            this.setupGradingTSMI});
+            this.chấmĐiểmToolStripMenuItem.Name = "chấmĐiểmToolStripMenuItem";
+            this.chấmĐiểmToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.chấmĐiểmToolStripMenuItem.Text = "Chấm điểm";
+            // 
+            // gradingThisExamTSMI
+            // 
+            this.gradingThisExamTSMI.Name = "gradingThisExamTSMI";
+            this.gradingThisExamTSMI.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.gradingThisExamTSMI.Size = new System.Drawing.Size(180, 22);
+            this.gradingThisExamTSMI.Text = "Chấm kì thi này";
+            this.gradingThisExamTSMI.Click += new System.EventHandler(this.gradingThisExamTSMI_Click);
+            // 
+            // setupGradingTSMI
+            // 
+            this.setupGradingTSMI.Name = "setupGradingTSMI";
+            this.setupGradingTSMI.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.setupGradingTSMI.Size = new System.Drawing.Size(180, 22);
+            this.setupGradingTSMI.Text = "Cài đặt chấm";
+            this.setupGradingTSMI.Click += new System.EventHandler(this.setupGradingTSMI_Click);
             // 
             // câuHỏiToolStripMenuItem
             // 
@@ -113,14 +164,17 @@
             // createQuestionTSMI
             // 
             this.createQuestionTSMI.Name = "createQuestionTSMI";
-            this.createQuestionTSMI.Size = new System.Drawing.Size(154, 22);
+            this.createQuestionTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.createQuestionTSMI.Size = new System.Drawing.Size(210, 22);
             this.createQuestionTSMI.Text = "Tạo câu hỏi";
             this.createQuestionTSMI.Click += new System.EventHandler(this.createQuestionTSMI_Click);
             // 
             // manageQuestionTSMI
             // 
             this.manageQuestionTSMI.Name = "manageQuestionTSMI";
-            this.manageQuestionTSMI.Size = new System.Drawing.Size(154, 22);
+            this.manageQuestionTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.manageQuestionTSMI.Size = new System.Drawing.Size(210, 22);
             this.manageQuestionTSMI.Text = "Quản lí câu hỏi";
             this.manageQuestionTSMI.Click += new System.EventHandler(this.manageQuestionTSMI_Click);
             // 
@@ -135,7 +189,8 @@
             // manageCandidateTSMI
             // 
             this.manageCandidateTSMI.Name = "manageCandidateTSMI";
-            this.manageCandidateTSMI.Size = new System.Drawing.Size(157, 22);
+            this.manageCandidateTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.manageCandidateTSMI.Size = new System.Drawing.Size(197, 22);
             this.manageCandidateTSMI.Text = "Quản lý thí sinh";
             this.manageCandidateTSMI.Click += new System.EventHandler(this.manageCandidateTSMI_Click);
             // 
@@ -145,83 +200,33 @@
             this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.thôngTinToolStripMenuItem.Text = "Thông tin";
             // 
-            // dgvResult
-            // 
-            this.dgvResult.AllowUserToAddRows = false;
-            this.dgvResult.AllowUserToDeleteRows = false;
-            this.dgvResult.AllowUserToResizeColumns = false;
-            this.dgvResult.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvResult.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvResult.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvResult.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvResult.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CandidateID,
-            this.CandidateName,
-            this.Mark});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResult.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.dgvResult.GridColor = System.Drawing.Color.Gray;
-            this.dgvResult.Location = new System.Drawing.Point(0, 67);
-            this.dgvResult.MultiSelect = false;
-            this.dgvResult.Name = "dgvResult";
-            this.dgvResult.ReadOnly = true;
-            this.dgvResult.RowHeadersVisible = false;
-            this.dgvResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResult.Size = new System.Drawing.Size(984, 394);
-            this.dgvResult.TabIndex = 10;
-            // 
-            // CandidateID
-            // 
-            this.CandidateID.HeaderText = "MSSV";
-            this.CandidateID.Name = "CandidateID";
-            this.CandidateID.ReadOnly = true;
-            // 
-            // CandidateName
-            // 
-            this.CandidateName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CandidateName.HeaderText = "Tên sinh viên";
-            this.CandidateName.Name = "CandidateName";
-            this.CandidateName.ReadOnly = true;
-            // 
-            // Mark
-            // 
-            this.Mark.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Mark.HeaderText = "Điểm";
-            this.Mark.Name = "Mark";
-            this.Mark.ReadOnly = true;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.btnExportExcel);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.lblExamName);
-            this.panel1.Controls.Add(this.cbExamId);
+            this.panel1.Controls.Add(this.cbExamName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 43);
             this.panel1.TabIndex = 9;
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportExcel.Location = new System.Drawing.Point(882, 7);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Size = new System.Drawing.Size(90, 30);
+            this.btnExportExcel.TabIndex = 9;
+            this.btnExportExcel.Text = "Xuất file Excel";
+            this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
             // label1
             // 
@@ -270,33 +275,94 @@
             this.lblExamName.Size = new System.Drawing.Size(0, 13);
             this.lblExamName.TabIndex = 6;
             // 
-            // cbExamId
+            // cbExamName
             // 
-            this.cbExamId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbExamId.FormattingEnabled = true;
-            this.cbExamId.Location = new System.Drawing.Point(79, 9);
-            this.cbExamId.Name = "cbExamId";
-            this.cbExamId.Size = new System.Drawing.Size(173, 23);
-            this.cbExamId.TabIndex = 5;
+            this.cbExamName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbExamName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbExamName.FormattingEnabled = true;
+            this.cbExamName.Location = new System.Drawing.Point(79, 9);
+            this.cbExamName.Name = "cbExamName";
+            this.cbExamName.Size = new System.Drawing.Size(173, 23);
+            this.cbExamName.TabIndex = 5;
+            this.cbExamName.SelectedValueChanged += new System.EventHandler(this.cbExamName_SelectedValueChanged);
+            // 
+            // dgvResults
+            // 
+            this.dgvResults.AllowUserToAddRows = false;
+            this.dgvResults.AllowUserToDeleteRows = false;
+            this.dgvResults.AllowUserToResizeColumns = false;
+            this.dgvResults.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvResults.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvResults.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.CandidateName});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResults.GridColor = System.Drawing.Color.Gray;
+            this.dgvResults.Location = new System.Drawing.Point(0, 67);
+            this.dgvResults.MultiSelect = false;
+            this.dgvResults.Name = "dgvResults";
+            this.dgvResults.ReadOnly = true;
+            this.dgvResults.RowHeadersVisible = false;
+            this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvResults.Size = new System.Drawing.Size(984, 394);
+            this.dgvResults.TabIndex = 10;
+            this.dgvResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellDoubleClick);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "Code";
+            this.ID.HeaderText = "Mã thí sinh";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 110;
+            // 
+            // CandidateName
+            // 
+            this.CandidateName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CandidateName.DataPropertyName = "Name";
+            this.CandidateName.HeaderText = "Tên sinh viên";
+            this.CandidateName.Name = "CandidateName";
+            this.CandidateName.ReadOnly = true;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
-            this.Controls.Add(this.dgvResult);
+            this.Controls.Add(this.dgvResults);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmMain";
-            this.Text = "Form1";
+            this.Text = "Chấm thi tự động";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,16 +382,21 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem manageExamTSMI;
-        private System.Windows.Forms.ComboBox cbExamId;
+        private System.Windows.Forms.ComboBox cbExamName;
         private System.Windows.Forms.ToolStripMenuItem thíSinhToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageCandidateTSMI;
         private System.Windows.Forms.Label lblExamName;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgvResult;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CandidateID;
+        private System.Windows.Forms.DataGridView dgvResults;
+        private System.Windows.Forms.ToolStripMenuItem chấmĐiểmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gradingThisExamTSMI;
+        private System.Windows.Forms.ToolStripMenuItem setupGradingTSMI;
+        private System.Windows.Forms.Button btnExportExcel;
+        private System.Windows.Forms.ToolStripMenuItem guideTSMI;
+        private System.Windows.Forms.ToolStripMenuItem refreshTSMI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mark;
     }
 }
 

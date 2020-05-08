@@ -42,6 +42,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -72,6 +78,36 @@
     <Compile Include="Database\Question.cs" />
     <Compile Include="Database\Result.cs" />
     <Compile Include="Database\TestCase.cs" />
+    <Compile Include="frmAddQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddQuestion.Designer.cs">
+      <DependentUpon>frmAddQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddTestCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddTestCase.Designer.cs">
+      <DependentUpon>frmAddTestCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExaminationProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExaminationProcess.Designer.cs">
+      <DependentUpon>frmExaminationProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetUpGrading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetUpGrading.Designer.cs">
+      <DependentUpon>frmSetUpGrading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetUpTestCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetUpTestCase.Designer.cs">
+      <DependentUpon>frmSetUpTestCase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Initialize.cs" />
     <Compile Include="frmCandidateView.cs">
       <SubType>Form</SubType>
@@ -127,22 +163,29 @@
     <Compile Include="frmResultDetail.Designer.cs">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004131146036_database.cs" />
-    <Compile Include="Migrations\202004131146036_database.Designer.cs">
-      <DependentUpon>202004131146036_database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Comparator.cs" />
     <Compile Include="Utility\Compiler.cs" />
+    <Compile Include="Utility\CompilerResult.cs" />
     <Compile Include="Utility\Run.cs" />
     <Compile Include="Utility\RunResult.cs" />
+    <Compile Include="Utility\SettingGrading.cs" />
     <Compile Include="Utility\Utility.cs" />
+    <EmbeddedResource Include="frmAddQuestion.resx">
+      <DependentUpon>frmAddQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddTestCase.resx">
+      <DependentUpon>frmAddTestCase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCandidateView.resx">
       <DependentUpon>frmCandidateView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditText.resx">
       <DependentUpon>frmEditText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExaminationProcess.resx">
+      <DependentUpon>frmExaminationProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmExamView.resx">
       <DependentUpon>frmExamView.cs</DependentUpon>
@@ -165,8 +208,11 @@
     <EmbeddedResource Include="frmResultDetail.resx">
       <DependentUpon>frmResultDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004131146036_database.resx">
-      <DependentUpon>202004131146036_database.cs</DependentUpon>
+    <EmbeddedResource Include="frmSetUpGrading.resx">
+      <DependentUpon>frmSetUpGrading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetUpTestCase.resx">
+      <DependentUpon>frmSetUpTestCase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

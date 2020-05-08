@@ -8,51 +8,47 @@ namespace GradingProgram
 {
     public class BLExamDetail : BusinessLogic
     {
-        public static IEnumerable<CandidateDetail> GetExamDetail()
+        public static IEnumerable<ExamDetail> GetExamDetails()
         {
-            return db.CandidateDetails;
+            return db.ExamDetails;
         }
 
-        public static bool Add(ExamDetail examDetail)
+        public static IEnumerable<Question> GetQuestions(int examId)
         {
-            try
-            {
-                db.ExamDetails.Add(examDetail);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetExamDetails().Where(x => x.ExamID == examId).OrderBy(x => x.FileName).Select(x => BLQuestion.GetQuestion(x.QuestionID));
         }
 
-        public static bool Add(IEnumerable<ExamDetail> examDetails)
+        public static IEnumerable<TKey> GetExamDetails<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
         {
-            try
-            {
-                db.ExamDetails.AddRange(examDetails);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetExamDetails().Where(predicate).Select(keySelector);
         }
 
-        public static bool Delete(ExamDetail examDetail)
+        public static TKey GetExamDetail<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
         {
-            try
-            {
-                db.Entry(examDetail).State = System.Data.Entity.EntityState.Deleted;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetExamDetails().Where(predicate).Select(keySelector).SingleOrDefault();
+        }
+
+        public static TKey GetPropertyValue<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
+        {
+            return GetExamDetails().Where(predicate).Select(keySelector).SingleOrDefault();
+        }
+
+        public static void Add(ExamDetail examDetail)
+        {
+            db.ExamDetails.Add(examDetail);
+            db.SaveChanges();
+        }
+
+        public static void Add(IEnumerable<ExamDetail> examDetails)
+        {
+            db.ExamDetails.AddRange(examDetails);
+            db.SaveChanges();
+        }
+
+        public static void Delete(ExamDetail examDetail)
+        {
+            db.Entry(examDetail).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
         }
     }
 }

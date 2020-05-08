@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GradingProgram
+﻿namespace GradingProgram
 {
-    public enum RunResultEnum { Successful, BuildError, RunError, BuildTimeError, RunTimeError, MemoryLimit, CorrectAnswer, WrongAnswer }
+    public enum RunResultEnum { RunError, TimeLimit, MemoryLimit, CorrectAnswer, WrongAnswer }
 
     public class RunResult
     {
@@ -16,12 +10,10 @@ namespace GradingProgram
 
         public int RunTime { get; set; }
 
-        public float UsedMemory { get; set; }
+        public int UsedMemory { get; set; }
 
         public string Output { get; set; }
 
         public string Error { get; set; }
-
-        public string OutputFile { get; set; }
     }
 }

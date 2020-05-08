@@ -1,15 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace GradingProgram
 {
     public static class Initialize
     {
+        [DllImport("user32.dll")]
+        private static extern int ShowWindow(IntPtr hWnd, uint Msg);
+
+        private const uint SW_RESTORE = 0x09;
+
+        public static bool CheckOpened(Form form)
+        {
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == form.Text)
+                {
+                    ShowWindow(frm.Handle, SW_RESTORE);
+                    frm.Focus();
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static void SetUpForm(Form form)
         {
             foreach (var control in form.Controls) 
@@ -31,8 +49,9 @@ namespace GradingProgram
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToResizeRows = false;
-            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeColumns = true;
             dgv.RowHeadersVisible = false;
+            dgv.MultiSelect = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.ReadOnly = true;
         }
@@ -62,7 +81,6 @@ namespace GradingProgram
             btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btn.Cursor = Cursors.Hand;
-            //btn.Size = new Size(100,30);
 
             btn.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
 

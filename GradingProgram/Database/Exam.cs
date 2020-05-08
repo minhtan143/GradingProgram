@@ -12,7 +12,7 @@ namespace GradingProgram
 
         public string Name { get; set; }
 
-        public string CandidatesFolder { get; set; }
+        public string Folder { get; set; }
 
         public DateTime CreateDate { get; set; } = DateTime.Now;
 

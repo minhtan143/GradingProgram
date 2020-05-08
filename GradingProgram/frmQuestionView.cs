@@ -1,80 +1,197 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
 {
     public partial class frmQuestionView : Form
     {
-        private string questionId;
+        private int questionId;
+        private bool modify;
 
-        public string QuestionID { get => questionId; set => questionId = value; }
-
-        public frmQuestionView()
+        public frmQuestionView(int questionId)
         {
+            this.questionId = questionId;
             InitializeComponent();
-            btnEdit_Click(null, null);
             Initialize.SetUpForm(this);
+            Text = BLQuestion.GetQuestion(questionId).Name + " - Câu hỏi";
+            LoadData();
         }
 
-        public frmQuestionView(string questionId)
+        private void LoadData()
         {
-            InitializeComponent();
-            ExampleData();
-            QuestionID = questionId;
+            txtQuestionName.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Name);
+            txtContent.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Detail);
+            btnSave.Visible = false;
+            btnCancel.Visible = false;
+            modify = false;
+            TestCaseRefresh();
         }
 
-        private void ExampleData()
+        private void TestCaseRefresh()
         {
-            txtQuestionID.Text = "CAUHOI01";
-            txtContent.Text = "Tìm tổng a và b được nhập từ bàn phím. Xuất ra màn hình kết quả tìm được.";
-            dgvTestCase.Rows.Add(new object[] { "TEST01", "2 5", 7 });
-            dgvTestCase.Rows.Add(new object[] { "TEST02", "10 20", 30 });
-            dgvTestCase.Rows.Add(new object[] { "TEST03", "1 2", 3 });
-            dgvTestCase.Rows.Add(new object[] { "TEST04", "10 5", 15 });
-            dgvTestCase.Rows.Add(new object[] { "TEST05", "15 15", 30 });
+            dgvTestCases.DataSource = BusinessLogic.ToDataTable(BLTestCase.GetTestCases(x => x.QuestionID == questionId, x => new { x.ID, x.Name, x.Input, x.Output, x.TimeLimit, x.MemoryLimit, x.Mark }).OrderBy(x => x.Name));
+            dgvTestCases.Columns["ID"].Visible = false;
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void dgvTestCases_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnSave.Visible = true;
-            btnSetup.Visible = true;
-            txtContent.ReadOnly = false;
-            txtQuestionID.ReadOnly = false;
-            dgvTestCase.ReadOnly = false;
+            try
+            {
+                if (e.RowIndex >= 0 && dgvTestCases.Columns[e.ColumnIndex].Name != "Delete")
+                {
+                    DataGridViewRow row = dgvTestCases.Rows[e.RowIndex];
+                    DataGridViewColumn column = dgvTestCases.Columns[e.ColumnIndex];
 
-            btnEdit.Enabled = false;
+                    frmEditText frmEditText = new frmEditText(row.Cells[e.ColumnIndex].Value.ToString(), column.HeaderText);
+                    frmEditText.ShowDialog();
+
+                    if (frmEditText.Modify)
+                    {
+                        int testcaseId = int.Parse(row.Cells["ID"].Value.ToString());
+                        TestCase testCase = BLTestCase.GetTestCase(testcaseId);
+                        switch (column.Name)
+                        {
+                            case "TestCaseName": testCase.Name = frmEditText.Content; break;
+                            case "Input": testCase.Input = frmEditText.Content; break;
+                            case "Output": testCase.Output = frmEditText.Content; break;
+                            case "TimeLimit": testCase.TimeLimit = int.Parse(frmEditText.Content); break;
+                            case "MemoryLimit": testCase.MemoryLimit = int.Parse(frmEditText.Content); break;
+                            case "Mark": testCase.Mark = int.Parse(frmEditText.Content); break;
+                        }
+                        BLTestCase.AddOrUpdate(testCase);
+                        TestCaseRefresh();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSetup_Click(object sender, EventArgs e)
+        {
+            frmSetUpTestCase frmSetUpTestCase = new frmSetUpTestCase();
+            if (frmSetUpTestCase.ShowDialog() == DialogResult.OK)
+            {
+                var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                testCases.ForEach(x =>
+                {
+                    x.TimeLimit = (int)frmSetUpTestCase.nudTimeOut.Value;
+                    x.MemoryLimit = (int)frmSetUpTestCase.nudMemoryLimit.Value;
+                    x.Mark = (int)frmSetUpTestCase.nupMark.Value;
+                });
+                BLTestCase.AddOrUpdate(testCases);
+                TestCaseRefresh();
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            btnSave.Visible = false;
-            btnSetup.Visible = false;
-            txtContent.ReadOnly = true;
-            txtQuestionID.ReadOnly = true;
-            dgvTestCase.ReadOnly = true;
-
-            btnEdit.Enabled = true;
+            try
+            {
+                Question question = BLQuestion.GetQuestion(questionId);
+                if (question.Name != txtQuestionName.Text)
+                {
+                    if (BLQuestion.Exists(txtQuestionName.Text))
+                        throw new Exception("Tên câu hỏi đã tồn tại!");
+                    question.Name = txtQuestionName.Name;
+                }
+                question.Detail = txtContent.Text;
+                BLQuestion.Update(question);
+                btnSave.Visible = false;
+                btnCancel.Visible = false;
+                modify = false;
+                questionId = question.ID;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void dgvTestCase_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void txt_TextChanged(object sender, EventArgs e)
         {
-            if (!dgvTestCase.ReadOnly)
-                if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
+            modify = true;
+            btnSave.Visible = true;
+            btnCancel.Visible = true;
+        }
+
+        private void frmQuestionView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (modify)
+            {
+                DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    frmEditText frmEditText = new frmEditText(dgvTestCase.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
-                    frmEditText.ShowDialog();
-                    if (frmEditText.Modify)
+                    btnSave_Click(null, null);
+                    if (modify)
+                        e.Cancel = true;
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                    e.Cancel = true;
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAddTestCase frmAddTestCase = new frmAddTestCase(questionId);
+            frmAddTestCase.ShowDialog();
+            if (frmAddTestCase.TestCaseID != 0)
+            {
+                TestCaseRefresh();
+                foreach (DataGridViewRow row in dgvTestCases.Rows)
+                    if (row.Cells["ID"].Value.ToString() == frmAddTestCase.TestCaseID.ToString())
                     {
-                        //save
+                        row.Selected = true;
+                        break;
+                    }
+            }
+        }
+
+        private void dgvTestCases_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvTestCases.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                if (e.RowIndex < 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Xóa tất cả testcase?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                        BLTestCase.Delete(testCases);
+                        TestCaseRefresh();
                     }
                 }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa testcase này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        TestCase testCases = BLTestCase.GetTestCase(int.Parse(dgvTestCases.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
+                        BLTestCase.Delete(testCases);
+                        TestCaseRefresh();
+                        if (e.RowIndex > 0)
+                            dgvTestCases.Rows[e.RowIndex - 1].Selected = true;
+                    }
+                }
+            }
+        }
+
+        private void btnAddFromFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void dgvTestCases_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+
         }
     }
 }

@@ -43,29 +43,37 @@
             this.btnRegrade = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblExamID = new System.Windows.Forms.Label();
-            this.lblCandidateID = new System.Windows.Forms.Label();
+            this.lblExamName = new System.Windows.Forms.Label();
+            this.lblCandidateCode = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblSumMark = new System.Windows.Forms.Label();
             this.dgvQuestions = new System.Windows.Forms.DataGridView();
-            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuestionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblMark = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgvQuestionsDetail = new System.Windows.Forms.DataGridView();
-            this.Test = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Info = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvTestCases = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dgvTask = new System.Windows.Forms.DataGridView();
+            this.dgvTasks = new System.Windows.Forms.DataGridView();
             this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.Testcase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Input = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CandidateOutput = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Output = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RunTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Notification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestionsDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTestCases)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -75,11 +83,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(199, 14);
+            this.label1.Location = new System.Drawing.Point(182, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 15);
+            this.label1.Size = new System.Drawing.Size(70, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "MSSV:";
+            this.label1.Text = "Mã thí sinh:";
             // 
             // label2
             // 
@@ -88,7 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(363, 14);
+            this.label2.Location = new System.Drawing.Point(348, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 15);
             this.label2.TabIndex = 1;
@@ -101,11 +109,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(607, 14);
+            this.label3.Location = new System.Drawing.Point(625, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.Size = new System.Drawing.Size(76, 15);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Tổng điểm:";
+            this.label3.Text = "Điểm bài thi:";
             // 
             // btnRegrade
             // 
@@ -113,7 +121,7 @@
             this.btnRegrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegrade.Location = new System.Drawing.Point(0, 440);
             this.btnRegrade.Name = "btnRegrade";
-            this.btnRegrade.Size = new System.Drawing.Size(149, 39);
+            this.btnRegrade.Size = new System.Drawing.Size(167, 39);
             this.btnRegrade.TabIndex = 5;
             this.btnRegrade.Text = "Chấm lại";
             this.btnRegrade.UseVisualStyleBackColor = true;
@@ -125,7 +133,7 @@
             this.btnOpenFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenFolder.Location = new System.Drawing.Point(0, 479);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(149, 39);
+            this.btnOpenFolder.Size = new System.Drawing.Size(167, 39);
             this.btnOpenFolder.TabIndex = 6;
             this.btnOpenFolder.Text = "Mở thư mục bài làm";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -138,35 +146,35 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 14);
+            this.label4.Location = new System.Drawing.Point(12, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 15);
+            this.label4.Size = new System.Drawing.Size(37, 15);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Mã kì thi:";
+            this.label4.Text = "Kì thi:";
             // 
-            // lblExamID
+            // lblExamName
             // 
-            this.lblExamID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblExamName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblExamID.AutoSize = true;
-            this.lblExamID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExamID.Location = new System.Drawing.Point(88, 14);
-            this.lblExamID.Name = "lblExamID";
-            this.lblExamID.Size = new System.Drawing.Size(0, 15);
-            this.lblExamID.TabIndex = 9;
+            this.lblExamName.AutoSize = true;
+            this.lblExamName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExamName.Location = new System.Drawing.Point(55, 14);
+            this.lblExamName.Name = "lblExamName";
+            this.lblExamName.Size = new System.Drawing.Size(0, 15);
+            this.lblExamName.TabIndex = 9;
             // 
-            // lblCandidateID
+            // lblCandidateCode
             // 
-            this.lblCandidateID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblCandidateCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCandidateID.AutoSize = true;
-            this.lblCandidateID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCandidateID.Location = new System.Drawing.Point(249, 14);
-            this.lblCandidateID.Name = "lblCandidateID";
-            this.lblCandidateID.Size = new System.Drawing.Size(0, 15);
-            this.lblCandidateID.TabIndex = 10;
+            this.lblCandidateCode.AutoSize = true;
+            this.lblCandidateCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCandidateCode.Location = new System.Drawing.Point(258, 14);
+            this.lblCandidateCode.Name = "lblCandidateCode";
+            this.lblCandidateCode.Size = new System.Drawing.Size(0, 15);
+            this.lblCandidateCode.TabIndex = 10;
             // 
             // lblName
             // 
@@ -175,7 +183,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(430, 14);
+            this.lblName.Location = new System.Drawing.Point(415, 14);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(0, 15);
             this.lblName.TabIndex = 11;
@@ -187,7 +195,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSumMark.AutoSize = true;
             this.lblSumMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSumMark.Location = new System.Drawing.Point(682, 14);
+            this.lblSumMark.Location = new System.Drawing.Point(906, 14);
             this.lblSumMark.Name = "lblSumMark";
             this.lblSumMark.Size = new System.Drawing.Size(0, 15);
             this.lblSumMark.TabIndex = 12;
@@ -200,8 +208,8 @@
             this.dgvQuestions.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.dgvQuestions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvQuestions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             this.dgvQuestions.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvQuestions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -213,7 +221,8 @@
             this.dgvQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuestions.ColumnHeadersVisible = false;
             this.dgvQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.QuestionID});
+            this.FileName,
+            this.QuestionName});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -224,40 +233,78 @@
             this.dgvQuestions.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvQuestions.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvQuestions.Location = new System.Drawing.Point(0, 0);
+            this.dgvQuestions.MultiSelect = false;
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(149, 200);
+            this.dgvQuestions.Size = new System.Drawing.Size(167, 209);
             this.dgvQuestions.TabIndex = 13;
+            this.dgvQuestions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellClick);
             this.dgvQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellDoubleClick);
             // 
-            // QuestionID
+            // FileName
             // 
-            this.QuestionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QuestionID.HeaderText = "Mã câu hỏi";
-            this.QuestionID.Name = "QuestionID";
-            this.QuestionID.ReadOnly = true;
+            this.FileName.DataPropertyName = "FileName";
+            this.FileName.HeaderText = "Tên bài thi";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 5;
+            // 
+            // QuestionName
+            // 
+            this.QuestionName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QuestionName.DataPropertyName = "QuestionName";
+            this.QuestionName.HeaderText = "Tên câu hỏi";
+            this.QuestionName.Name = "QuestionName";
+            this.QuestionName.ReadOnly = true;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblMark);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lblSumMark);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.lblName);
-            this.panel1.Controls.Add(this.lblCandidateID);
-            this.panel1.Controls.Add(this.lblExamID);
+            this.panel1.Controls.Add(this.lblCandidateCode);
+            this.panel1.Controls.Add(this.lblExamName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 43);
             this.panel1.TabIndex = 15;
             // 
+            // lblMark
+            // 
+            this.lblMark.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMark.AutoSize = true;
+            this.lblMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMark.Location = new System.Drawing.Point(707, 14);
+            this.lblMark.Name = "lblMark";
+            this.lblMark.Size = new System.Drawing.Size(0, 15);
+            this.lblMark.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(831, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 15);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Tổng điểm:";
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvQuestionsDetail);
+            this.panel2.Controls.Add(this.dgvTestCases);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -266,28 +313,34 @@
             this.panel2.Size = new System.Drawing.Size(984, 518);
             this.panel2.TabIndex = 16;
             // 
-            // dgvQuestionsDetail
+            // dgvTestCases
             // 
-            this.dgvQuestionsDetail.AllowUserToAddRows = false;
-            this.dgvQuestionsDetail.AllowUserToDeleteRows = false;
-            this.dgvQuestionsDetail.AllowUserToResizeColumns = false;
-            this.dgvQuestionsDetail.AllowUserToResizeRows = false;
+            this.dgvTestCases.AllowUserToAddRows = false;
+            this.dgvTestCases.AllowUserToDeleteRows = false;
+            this.dgvTestCases.AllowUserToResizeColumns = false;
+            this.dgvTestCases.AllowUserToResizeRows = false;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvQuestionsDetail.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvQuestionsDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvTestCases.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvTestCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvTestCases.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQuestionsDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvQuestionsDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuestionsDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Test,
+            this.dgvTestCases.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvTestCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTestCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Testcase,
+            this.Input,
+            this.CandidateOutput,
+            this.Output,
+            this.RunTime,
+            this.TimeOut,
             this.Mark,
-            this.Info});
+            this.Notification});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -295,48 +348,29 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQuestionsDetail.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvQuestionsDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvQuestionsDetail.Location = new System.Drawing.Point(165, 0);
-            this.dgvQuestionsDetail.MultiSelect = false;
-            this.dgvQuestionsDetail.Name = "dgvQuestionsDetail";
-            this.dgvQuestionsDetail.ReadOnly = true;
-            this.dgvQuestionsDetail.RowHeadersVisible = false;
-            this.dgvQuestionsDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestionsDetail.Size = new System.Drawing.Size(819, 518);
-            this.dgvQuestionsDetail.TabIndex = 17;
-            // 
-            // Test
-            // 
-            this.Test.HeaderText = "Mã test";
-            this.Test.Name = "Test";
-            this.Test.ReadOnly = true;
-            // 
-            // Mark
-            // 
-            this.Mark.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Mark.HeaderText = "Điểm";
-            this.Mark.Name = "Mark";
-            this.Mark.ReadOnly = true;
-            // 
-            // Info
-            // 
-            this.Info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Info.HeaderText = "Thông tin";
-            this.Info.Name = "Info";
-            this.Info.ReadOnly = true;
+            this.dgvTestCases.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTestCases.Location = new System.Drawing.Point(177, 0);
+            this.dgvTestCases.MultiSelect = false;
+            this.dgvTestCases.Name = "dgvTestCases";
+            this.dgvTestCases.ReadOnly = true;
+            this.dgvTestCases.RowHeadersVisible = false;
+            this.dgvTestCases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTestCases.Size = new System.Drawing.Size(807, 518);
+            this.dgvTestCases.TabIndex = 17;
+            this.dgvTestCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTestCases_CellDoubleClick);
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(149, 0);
+            this.panel4.Location = new System.Drawing.Point(167, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(16, 518);
+            this.panel4.Size = new System.Drawing.Size(10, 518);
             this.panel4.TabIndex = 16;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.dgvTask);
+            this.panel3.Controls.Add(this.dgvTasks);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.dgvQuestions);
             this.panel3.Controls.Add(this.btnRegrade);
@@ -344,19 +378,19 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(149, 518);
+            this.panel3.Size = new System.Drawing.Size(167, 518);
             this.panel3.TabIndex = 15;
             // 
-            // dgvTask
+            // dgvTasks
             // 
-            this.dgvTask.AllowUserToAddRows = false;
-            this.dgvTask.AllowUserToDeleteRows = false;
-            this.dgvTask.AllowUserToResizeColumns = false;
-            this.dgvTask.AllowUserToResizeRows = false;
+            this.dgvTasks.AllowUserToAddRows = false;
+            this.dgvTasks.AllowUserToDeleteRows = false;
+            this.dgvTasks.AllowUserToResizeColumns = false;
+            this.dgvTasks.AllowUserToResizeRows = false;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvTask.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvTask.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvTask.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvTasks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvTasks.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvTasks.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -364,10 +398,10 @@
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTask.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTask.ColumnHeadersVisible = false;
-            this.dgvTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvTasks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTasks.ColumnHeadersVisible = false;
+            this.dgvTasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Task});
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
@@ -376,19 +410,21 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTask.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTask.Location = new System.Drawing.Point(0, 210);
-            this.dgvTask.Name = "dgvTask";
-            this.dgvTask.ReadOnly = true;
-            this.dgvTask.RowHeadersVisible = false;
-            this.dgvTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTask.Size = new System.Drawing.Size(149, 230);
-            this.dgvTask.TabIndex = 16;
+            this.dgvTasks.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvTasks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTasks.Location = new System.Drawing.Point(0, 219);
+            this.dgvTasks.Name = "dgvTasks";
+            this.dgvTasks.ReadOnly = true;
+            this.dgvTasks.RowHeadersVisible = false;
+            this.dgvTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTasks.Size = new System.Drawing.Size(167, 221);
+            this.dgvTasks.TabIndex = 16;
+            this.dgvTasks.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTasks_CellDoubleClick);
             // 
             // Task
             // 
             this.Task.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Task.DataPropertyName = "Task";
             this.Task.HeaderText = "Tên";
             this.Task.Name = "Task";
             this.Task.ReadOnly = true;
@@ -396,10 +432,74 @@
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 200);
+            this.panel5.Location = new System.Drawing.Point(0, 209);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(149, 10);
+            this.panel5.Size = new System.Drawing.Size(167, 10);
             this.panel5.TabIndex = 14;
+            // 
+            // Testcase
+            // 
+            this.Testcase.DataPropertyName = "TestCaseName";
+            this.Testcase.HeaderText = "Mã test";
+            this.Testcase.Name = "Testcase";
+            this.Testcase.ReadOnly = true;
+            this.Testcase.Width = 76;
+            // 
+            // Input
+            // 
+            this.Input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Input.DataPropertyName = "Input";
+            this.Input.HeaderText = "Đầu vào";
+            this.Input.Name = "Input";
+            this.Input.ReadOnly = true;
+            // 
+            // CandidateOutput
+            // 
+            this.CandidateOutput.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CandidateOutput.DataPropertyName = "CandidateOutput";
+            this.CandidateOutput.HeaderText = "Đầu ra thí sinh";
+            this.CandidateOutput.Name = "CandidateOutput";
+            this.CandidateOutput.ReadOnly = true;
+            // 
+            // Output
+            // 
+            this.Output.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Output.DataPropertyName = "Output";
+            this.Output.HeaderText = "Đầu ra";
+            this.Output.Name = "Output";
+            this.Output.ReadOnly = true;
+            // 
+            // RunTime
+            // 
+            this.RunTime.DataPropertyName = "RateTime";
+            this.RunTime.HeaderText = "Thời gian chạy/giới hạn (ms)";
+            this.RunTime.Name = "RunTime";
+            this.RunTime.ReadOnly = true;
+            this.RunTime.Width = 106;
+            // 
+            // TimeOut
+            // 
+            this.TimeOut.DataPropertyName = "RateMemory";
+            this.TimeOut.HeaderText = "Bộ nhớ sử dụng/giới hạn (MB)";
+            this.TimeOut.Name = "TimeOut";
+            this.TimeOut.ReadOnly = true;
+            this.TimeOut.Width = 107;
+            // 
+            // Mark
+            // 
+            this.Mark.DataPropertyName = "Mark";
+            this.Mark.HeaderText = "Điểm";
+            this.Mark.Name = "Mark";
+            this.Mark.ReadOnly = true;
+            this.Mark.Width = 64;
+            // 
+            // Notification
+            // 
+            this.Notification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Notification.DataPropertyName = "Notification";
+            this.Notification.HeaderText = "Thông tin";
+            this.Notification.Name = "Notification";
+            this.Notification.ReadOnly = true;
             // 
             // frmResultDetail
             // 
@@ -410,14 +510,17 @@
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmResultDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmResultDetail";
+            this.SizeChanged += new System.EventHandler(this.frmResultDetail_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmResultDetail_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestionsDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTestCases)).EndInit();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTask)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -430,22 +533,30 @@
         private System.Windows.Forms.Button btnRegrade;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblExamID;
-        private System.Windows.Forms.Label lblCandidateID;
+        private System.Windows.Forms.Label lblExamName;
+        private System.Windows.Forms.Label lblCandidateCode;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblSumMark;
         private System.Windows.Forms.DataGridView dgvQuestions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionID;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dgvQuestionsDetail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Test;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Info;
+        private System.Windows.Forms.DataGridView dgvTestCases;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dgvTask;
+        private System.Windows.Forms.DataGridView dgvTasks;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn Task;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Testcase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Input;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CandidateOutput;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Output;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RunTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeOut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Notification;
     }
 }

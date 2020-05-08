@@ -8,51 +8,37 @@ namespace GradingProgram
 {
     public class BLCandidateDetail : BusinessLogic
     {
-        public static IEnumerable<CandidateDetail> GetCandidateDetail()
+        public static IEnumerable<CandidateDetail> GetCandidateDetails()
         {
             return db.CandidateDetails;
         }
 
-        public static bool Add(CandidateDetail candidateDetail)
+        public static IEnumerable<Candidate> GetCandidates(int examId)
         {
-            try
-            {
-                db.CandidateDetails.Add(candidateDetail);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetCandidateDetails().Where(x => x.ExamID == examId).Select(x => BLCandidate.GetCandidate(x.CandidateID));
         }
 
-        public static bool Add(IEnumerable<CandidateDetail> candidateDetails)
+        public static IEnumerable<TKey> GetCandidateDetails<TKey>(Func<CandidateDetail, bool> predicate, Func<CandidateDetail, TKey> keySelector)
         {
-            try
-            {
-                db.CandidateDetails.AddRange(candidateDetails);
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return GetCandidateDetails().Where(predicate).Select(keySelector);
         }
 
-        public static bool Delete(CandidateDetail candidateDetail)
+        public static void Add(CandidateDetail candidateDetail)
         {
-            try
-            {
-                db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            db.CandidateDetails.Add(candidateDetail);
+            db.SaveChanges();
+        }
+
+        public static void Add(IEnumerable<CandidateDetail> candidateDetails)
+        {
+            db.CandidateDetails.AddRange(candidateDetails);
+            db.SaveChanges();
+        }
+
+        public static void Delete(CandidateDetail candidateDetail)
+        {
+            db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
         }
     }
 }

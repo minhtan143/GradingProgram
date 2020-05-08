@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace GradingProgram
 {
@@ -8,16 +9,19 @@ namespace GradingProgram
     {
         public static string pathLib = Path.Combine(Directory.GetCurrentDirectory(), "..\\..");
 
-        public static RunResult BuildCppFile(FileInfo cppFile, int timeOut)
+        public static CompilerResult FileCompiler(FileInfo[] files, int timeOut)
         {
-            Process process = new Process();
+            FileInfo file = files.Single(x => !x.Name.Contains(".exe"));
+
+            CompilerResult compilerResult = new CompilerResult();
+
+            compilerResult.OutputFile = new FileInfo(file.FullName.Substring(0, file.FullName.LastIndexOf('.')) + ".exe");
+            if (compilerResult.OutputFile.Exists)
+                File.Delete(compilerResult.OutputFile.FullName);
+
             ProcessStartInfo StartInfo = new ProcessStartInfo();
-            RunResult runResult = new RunResult();
-
-            runResult.OutputFile = cppFile.FullName.Substring(0, cppFile.FullName.LastIndexOf('.')) + ".exe";
-
             StartInfo.FileName = pathLib + @"\Utility\MinGW64\bin\g++.exe";
-            StartInfo.Arguments = cppFile.FullName + " -o " + runResult.OutputFile;
+            StartInfo.Arguments = file.FullName + " -o " + compilerResult.OutputFile;
             StartInfo.UseShellExecute = false;
             StartInfo.CreateNoWindow = true;
             StartInfo.ErrorDialog = false;
@@ -27,50 +31,46 @@ namespace GradingProgram
 
             try
             {
-                process = Process.Start(StartInfo);
-                if (process.WaitForExit(timeOut))
+                using (Process process = Process.Start(StartInfo))
                 {
-                    runResult.Result = RunResultEnum.Successful;
-                    runResult.RunTime = (process.ExitTime - process.StartTime).Milliseconds;
-                    runResult.ExitCode = process.ExitCode;
-                }
-                else
-                {
-                    if (!process.HasExited)
-                        process.Kill();
-                    else
-                        runResult.ExitCode = process.ExitCode;
-                    runResult.Result = RunResultEnum.BuildTimeError;
-                }
+                    long peakWorkingSet = 0;
 
-                if (process.StandardError != null)
-                    runResult.Error = process.StandardError.ReadToEnd();
+                    do
+                    {
+                        process.Refresh();
+                        peakWorkingSet = process.PeakWorkingSet64;
+
+                        if (process.TotalProcessorTime.TotalMilliseconds > timeOut)
+                        {
+                            compilerResult.Error = "Compiler time limit";
+                            process.Kill();
+                        }
+                    }
+                    while (!process.HasExited);
+
+                    compilerResult.ExitCode = process.ExitCode;
+                    compilerResult.CompilerTime = (int)process.TotalProcessorTime.TotalMilliseconds;
+                    compilerResult.UsedMemory = peakWorkingSet;
+
+                    if (!File.Exists(compilerResult.OutputFile.FullName))
+                        compilerResult.OutputFile = null;
+
+                    if (process.StandardError != null)
+                        compilerResult.Error = process.StandardError.ReadToEnd();
+                }
             }
             catch (Exception ex)
             {
-                runResult.Result = RunResultEnum.RunError;
-                runResult.Error = ex.Message;
+                compilerResult.Error = ex.Message;
             }
 
-            return runResult;
+            return compilerResult;
         }
 
-        public static RunResult BuildPythonFile()
+        private static CompilerResult JavaFileCompiler(FileInfo cppFile, int timeOut)
         {
-            RunResult runResult = new RunResult();
-            return runResult;
-        }
-
-        public static RunResult BuildJavaFile()
-        {
-            RunResult runResult = new RunResult();
-            return runResult;
-        }
-
-        public static RunResult BuildPascalFile()
-        {
-            RunResult runResult = new RunResult();
-            return runResult;
+            CompilerResult compilerResult = new CompilerResult();
+            return compilerResult;
         }
     }
 }
