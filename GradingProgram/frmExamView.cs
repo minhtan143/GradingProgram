@@ -22,8 +22,13 @@ namespace GradingProgram
         {
             txtExamName.Text = BLExam.GetExam(examId).Name;
             txtPathFolder.Text = BLExam.GetExam(examId).Folder;
+
             dgvSelected.DataSource = BusinessLogic.ToDataTable(BLExamDetail.GetQuestions(examId).Select(x => new { x.ID, x.Name }).OrderBy(x => x.Name));
             dgvSelected.Columns["ID"].Visible = false;
+
+            dgvQuestions.DataSource = BusinessLogic.ToDataTable(BLQuestion.GetQuestions().Select(x => new { x.ID, x.Name }).OrderBy(x => x.Name));
+            dgvQuestions.Columns["ID"].Visible = false;
+
             modify = false;
             btnCancel.Visible = false;
             btnSave.Visible = false;
@@ -31,16 +36,26 @@ namespace GradingProgram
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            /*ListViewItem item = lstViewQuestion.SelectedItems[0];
-            lstViewSelected.Items.Add(item);
-            lstViewQuestion.Items.Remove(item);*/
+            BLExamDetail.Add(new ExamDetail()
+            {
+                QuestionID = int.Parse(dgvQuestions.CurrentRow.Cells[0].Value.ToString()),
+                ExamID = this.examId,
+                FileName = "Bai" + (dgvSelected.Rows.Count+1).ToString()
+            });
+
+            LoadData();
         }
 
         private void btnSub_Click(object sender, EventArgs e)
         {
-            /*ListViewItem item = lstViewSelected.SelectedItems[0];
-            lstViewQuestion.Items.Add(item);
-            lstViewSelected.Items.Remove(item);*/
+            ExamDetail exD = new ExamDetail();
+            exD.QuestionID = int.Parse(dgvSelected.CurrentRow.Cells[0].Value.ToString());
+            exD.ExamID = this.examId;
+
+            
+            //BLExamDetail.Delete(exD);
+
+            LoadData();
         }
 
         private void dgvSelected_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

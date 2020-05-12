@@ -24,6 +24,7 @@ namespace GradingProgram
             txtContent.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Detail);
             btnSave.Visible = false;
             btnCancel.Visible = false;
+            btnOK.Visible = true;
             modify = false;
             TestCaseRefresh();
         }
@@ -101,6 +102,7 @@ namespace GradingProgram
                 question.Detail = txtContent.Text;
                 BLQuestion.Update(question);
                 btnSave.Visible = false;
+                btnOK.Visible = true;
                 btnCancel.Visible = false;
                 modify = false;
                 questionId = question.ID;
@@ -116,6 +118,7 @@ namespace GradingProgram
             modify = true;
             btnSave.Visible = true;
             btnCancel.Visible = true;
+            btnOK.Visible = false;
         }
 
         private void frmQuestionView_FormClosing(object sender, FormClosingEventArgs e)
@@ -192,6 +195,11 @@ namespace GradingProgram
         private void dgvTestCases_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
 
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

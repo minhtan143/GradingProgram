@@ -60,6 +60,9 @@ namespace GradingProgram
             //frmExamView frmExamView = new frmExamView(1);
 
             //frmExamView.ShowDialog();
+            frmAddExam frmAddExam = new frmAddExam();
+            if (frmAddExam.ShowDialog() == DialogResult.OK)
+                new frmExamView(frmAddExam.examID).Show();
         }
 
         private void manageCandidateTSMI_Click(object sender, EventArgs e)

@@ -49,7 +49,7 @@ namespace GradingProgram
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToResizeRows = false;
-            dgv.AllowUserToResizeColumns = true;
+            dgv.AllowUserToResizeColumns = false;
             dgv.RowHeadersVisible = false;
             dgv.MultiSelect = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

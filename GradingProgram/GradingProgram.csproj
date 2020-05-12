@@ -78,6 +78,12 @@
     <Compile Include="Database\Question.cs" />
     <Compile Include="Database\Result.cs" />
     <Compile Include="Database\TestCase.cs" />
+    <Compile Include="frmAddExam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddExam.Designer.cs">
+      <DependentUpon>frmAddExam.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     <Compile Include="Utility\RunResult.cs" />
     <Compile Include="Utility\SettingGrading.cs" />
     <Compile Include="Utility\Utility.cs" />
+    <EmbeddedResource Include="frmAddExam.resx">
+      <DependentUpon>frmAddExam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddQuestion.resx">
       <DependentUpon>frmAddQuestion.cs</DependentUpon>
     </EmbeddedResource>
