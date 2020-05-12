@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -22,16 +15,15 @@ namespace GradingProgram
             dgvSettingCompiler.ReadOnly = false;
             dgvSettingCompiler.AllowUserToAddRows = true;
             dgvSettingCompiler.SelectionMode = DataGridViewSelectionMode.CellSelect;
+
+            lblGuid.Text = "► Thêm tại dòng trống cuối cùng\n► Xóa: Nhấn Delete\n► Chuyển lên: Alt + ↑; Chuyển xuống: Alt + ↓\n► Đặt lại mặc định: Ctrl + R";
             LoadData();
         }
 
         private void LoadData()
         {
-            lblGuid.Text = "► Thêm tại dòng trống cuối cùng\n" +
-                           "► Xóa: Nhấn Delete\n" +
-                           "► Chuyển lên: Alt + ↑; Chuyển xuống: Alt + ↓";
-
             DataTable data = Utility.ReadFromSetting();
+            dgvSettingCompiler.Rows.Clear();
             foreach (DataRow row in data.Rows)
             {
                 dgvSettingCompiler.Rows.Add(row.ItemArray);
@@ -46,8 +38,8 @@ namespace GradingProgram
             data.Columns.Add("FileType");
             data.Columns.Add("Setting");
 
-            foreach (DataGridViewRow row in dgvSettingCompiler.Rows)
-                data.Rows.Add(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
+            for (int i = 0; i < dgvSettingCompiler.RowCount - 1; i++)
+                data.Rows.Add(dgvSettingCompiler.Rows[i].Cells[0].Value.ToString(), dgvSettingCompiler.Rows[i].Cells[1].Value.ToString());
 
             Utility.WriteToSetting(data);
             Close();
@@ -94,6 +86,15 @@ namespace GradingProgram
                 DialogResult dialogResult = MessageBox.Show("Xóa cài đặt này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                     dgvSettingCompiler.Rows.Remove(dgvSettingCompiler.CurrentRow);
+            }
+            else if (e.Control && e.KeyCode == Keys.R)
+            {
+                DialogResult dialogResult = MessageBox.Show("Khôi phục tất cả cài đặt bộ dịch về mặc định?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Utility.DefaultSettingCompiler();
+                    LoadData();
+                }
             }
         }
 

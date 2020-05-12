@@ -42,5 +42,10 @@ namespace GradingProgram
                 }
             }
         }
+
+        private void frmManageExam_Activated(object sender, System.EventArgs e)
+        {
+            LoadData();
+        }
     }
 }

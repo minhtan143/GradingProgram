@@ -13,6 +13,11 @@ namespace GradingProgram
             return db.CandidateDetails;
         }
 
+        public static IEnumerable<Exam> GetExams(int candidateId)
+        {
+            return GetCandidateDetails().Where(x => x.CandidateID == candidateId).Select(x => BLExam.GetExam(x.ExamID));
+        }
+
         public static IEnumerable<Candidate> GetCandidates(int examId)
         {
             return GetCandidateDetails().Where(x => x.ExamID == examId).Select(x => BLCandidate.GetCandidate(x.CandidateID));

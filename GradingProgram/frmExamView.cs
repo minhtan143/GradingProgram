@@ -15,6 +15,7 @@ namespace GradingProgram
             this.examId = examId;
             InitializeComponent();
             Initialize.SetUpForm(this);
+            Text = BLExam.GetExam(examId).Name + " - Kỳ thi";
             LoadData();
         }
 

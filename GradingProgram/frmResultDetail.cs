@@ -20,7 +20,7 @@ namespace GradingProgram
             this.candidateId = candidateId;
             pathDirectory = BLExam.GetExam(examId).Folder + "\\" + BLCandidate.GetCandidate(candidateId).Code;
             InitializeComponent();
-            Text = BLCandidate.GetCandidate(candidateId).Code + " - Thí sinh";
+            Text = BLCandidate.GetCandidate(candidateId).Code + " - Kết quả";
             Initialize.SetUpForm(this);
             LoadData();
         }
@@ -134,6 +134,11 @@ namespace GradingProgram
         {
             if (e.KeyCode == Keys.F5)
                 LoadData();
+        }
+
+        private void frmResultDetail_Activated(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

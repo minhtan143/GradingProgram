@@ -124,6 +124,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmManageExam";
             this.Text = "frmExamView";
+            this.Activated += new System.EventHandler(this.frmManageExam_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.dgvExams)).EndInit();
             this.ResumeLayout(false);
 

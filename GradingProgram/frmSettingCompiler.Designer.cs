@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSettingCompiler = new System.Windows.Forms.DataGridView();
             this.FileType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Setting = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,14 +48,14 @@
             this.dgvSettingCompiler.AllowUserToResizeColumns = false;
             this.dgvSettingCompiler.AllowUserToResizeRows = false;
             this.dgvSettingCompiler.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSettingCompiler.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSettingCompiler.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvSettingCompiler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSettingCompiler.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FileType,
@@ -66,7 +66,7 @@
             this.dgvSettingCompiler.Name = "dgvSettingCompiler";
             this.dgvSettingCompiler.RowHeadersVisible = false;
             this.dgvSettingCompiler.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dgvSettingCompiler.Size = new System.Drawing.Size(584, 243);
+            this.dgvSettingCompiler.Size = new System.Drawing.Size(584, 237);
             this.dgvSettingCompiler.TabIndex = 0;
             this.dgvSettingCompiler.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSettingCompiler_CellValueChanged);
             this.dgvSettingCompiler.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSettingCompiler_KeyDown);
@@ -122,18 +122,18 @@
             // 
             this.panel2.Controls.Add(this.lblGuid);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 243);
+            this.panel2.Location = new System.Drawing.Point(0, 237);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(584, 74);
+            this.panel2.Size = new System.Drawing.Size(584, 80);
             this.panel2.TabIndex = 3;
             // 
             // lblGuid
             // 
-            this.lblGuid.AutoSize = true;
+            this.lblGuid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblGuid.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGuid.Location = new System.Drawing.Point(4, 4);
+            this.lblGuid.Location = new System.Drawing.Point(0, 0);
             this.lblGuid.Name = "lblGuid";
-            this.lblGuid.Size = new System.Drawing.Size(46, 17);
+            this.lblGuid.Size = new System.Drawing.Size(584, 80);
             this.lblGuid.TabIndex = 0;
             this.lblGuid.Text = "label1";
             // 
@@ -153,7 +153,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSettingCompiler)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }

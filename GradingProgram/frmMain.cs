@@ -196,6 +196,7 @@ namespace GradingProgram
         {
             int examId = this.examId;
             LoadData();
+
             DataTable data = cbExamName.DataSource as DataTable;
             foreach (DataRow row in data.Rows)
             {
