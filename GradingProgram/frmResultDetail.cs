@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -54,7 +55,12 @@ namespace GradingProgram
 
         private void btnRegrade_Click(object sender, EventArgs e)
         {
-
+            List<string> fileNames = new List<string>();
+            foreach (DataGridViewRow row in dgvTasks.SelectedRows)
+                fileNames.Add(row.Cells["Task"].Value.ToString());
+            FileInfo[] files = new DirectoryInfo(pathDirectory).GetFiles().Where(x => fileNames.Contains(x.Name)).ToArray();
+            Utility.Grading(examId, candidateId, files, new Dictionary<string, Compare>(), 2000);
+            LoadData();
         }
 
         private void dgvQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

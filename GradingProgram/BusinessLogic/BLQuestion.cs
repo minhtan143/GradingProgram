@@ -20,7 +20,7 @@ namespace GradingProgram
 
         public static bool Exists(string questionName)
         {
-            return GetQuestions().Count(x => x.Name == questionName) > 0;
+            return GetQuestions().Any(x => x.Name == questionName);
         }
 
         public static IEnumerable<TKey> GetQuestions<TKey>(Func<Question, TKey> keySelector)

@@ -26,7 +26,7 @@ namespace GradingProgram
 
         public int? RunTime { get; set; } = 0;
 
-        public int? UsedMemory { get; set; } = 0;
+        public long? UsedMemory { get; set; } = 0;
 
         public int? Mark { get; set; } = 0;
 

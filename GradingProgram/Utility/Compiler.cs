@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,69 +8,96 @@ namespace GradingProgram
 {
     public class Compiler
     {
-        public static string pathLib = Path.Combine(Directory.GetCurrentDirectory(), "..\\..");
+        public static DataTable SettingCompiler { get; set; }
 
-        public static CompilerResult FileCompiler(FileInfo[] files, int timeOut)
+        public static CompilerResult FileCompiler(FileInfo[] files, string fileName, int timeLimit)
         {
-            FileInfo file = files.Single(x => !x.Name.Contains(".exe"));
-
             CompilerResult compilerResult = new CompilerResult();
+            if (files.Length == 0)
+                return compilerResult;
 
-            compilerResult.OutputFile = new FileInfo(file.FullName.Substring(0, file.FullName.LastIndexOf('.')) + ".exe");
-            if (compilerResult.OutputFile.Exists)
-                File.Delete(compilerResult.OutputFile.FullName);
-
-            ProcessStartInfo StartInfo = new ProcessStartInfo();
-            StartInfo.FileName = pathLib + @"\Utility\MinGW64\bin\g++.exe";
-            StartInfo.Arguments = file.FullName + " -o " + compilerResult.OutputFile;
-            StartInfo.UseShellExecute = false;
-            StartInfo.CreateNoWindow = true;
-            StartInfo.ErrorDialog = false;
-            StartInfo.RedirectStandardInput = false;
-            StartInfo.RedirectStandardError = true;
-            StartInfo.RedirectStandardOutput = false;
-
-            try
+            FileInfo file;
+            for (int i = 0; i < SettingCompiler.Rows.Count; i++)
             {
-                using (Process process = Process.Start(StartInfo))
+                file = files.SingleOrDefault(x => x.Name == fileName + SettingCompiler.Rows[i].ItemArray[0].ToString());
+
+                if (file != null)
                 {
-                    long peakWorkingSet = 0;
-
-                    do
+                    if (SettingCompiler.Rows[i].ItemArray[0].ToString() == ".exe" || SettingCompiler.Rows[i].ItemArray[0].ToString() == ".class")
                     {
-                        process.Refresh();
-                        peakWorkingSet = process.PeakWorkingSet64;
+                        compilerResult.OutputFile = file;
+                        return compilerResult;
+                    }
 
-                        if (process.TotalProcessorTime.TotalMilliseconds > timeOut)
+                    string commands = SettingCompiler.Rows[i].ItemArray[1].ToString();
+                    if (commands.Contains(';'))
+                        commands = commands.Substring(0, commands.IndexOf(';'));
+                    commands = commands.Replace("%PATH%", file.DirectoryName + @"\");
+                    commands = commands.Replace("%NAME%", fileName);
+                    commands = commands.Replace("%EXT%", SettingCompiler.Rows[i].ItemArray[0].ToString());
+
+                    string[] command = commands.Split('|');
+
+                    if (SettingCompiler.Rows[i].ItemArray[0].ToString() == ".java")
+                        compilerResult.OutputFile = new FileInfo(file.FullName.Substring(0, file.FullName.LastIndexOf('.')) + ".class");
+                    else compilerResult.OutputFile = new FileInfo(file.FullName.Substring(0, file.FullName.LastIndexOf('.')) + ".exe");
+                    if (compilerResult.OutputFile.Exists)
+                        File.Delete(compilerResult.OutputFile.FullName);
+
+                    ProcessStartInfo StartInfo = new ProcessStartInfo();
+                    if (command.Length > 2)
+                        StartInfo.WorkingDirectory = command[2];
+
+                    StartInfo.FileName = command[0].Trim();
+                    StartInfo.Arguments = command[1].Trim();
+                    StartInfo.UseShellExecute = false;
+                    StartInfo.CreateNoWindow = true;
+                    StartInfo.ErrorDialog = false;
+                    StartInfo.RedirectStandardInput = false;
+                    StartInfo.RedirectStandardError = true;
+                    StartInfo.RedirectStandardOutput = false;
+
+                    try
+                    {
+                        long peakWorkingSet = 0;
+                        double totalMilliseconds = 0;
+
+                        using (Process process = Process.Start(StartInfo))
                         {
-                            compilerResult.Error = "Compiler time limit";
-                            process.Kill();
+                            while (!process.HasExited)
+                            {
+                                try
+                                {
+                                    process.Refresh();
+                                    peakWorkingSet = process.PeakWorkingSet64;
+                                    totalMilliseconds = process.UserProcessorTime.TotalMilliseconds;
+                                    if (totalMilliseconds > timeLimit)
+                                    {
+                                        process.Kill();
+                                        new Exception("Compiler time limit");
+                                    }
+                                }
+                                catch { }
+                            }
+
+                            compilerResult.ExitCode = process.ExitCode;
+                            compilerResult.UsedMemory = peakWorkingSet < 1024 * 1024 ? 1 : peakWorkingSet / (1024 * 1024);
+                            compilerResult.CompilerTime = totalMilliseconds < 1 ? 1 : (int)totalMilliseconds;
+
+                            if (process.StandardError != null)
+                                compilerResult.Error = process.StandardError.ReadToEnd();
+
+                            compilerResult.OutputFile.Refresh();
                         }
                     }
-                    while (!process.HasExited);
-
-                    compilerResult.ExitCode = process.ExitCode;
-                    compilerResult.CompilerTime = (int)process.TotalProcessorTime.TotalMilliseconds;
-                    compilerResult.UsedMemory = peakWorkingSet;
-
-                    if (!File.Exists(compilerResult.OutputFile.FullName))
+                    catch (Exception ex)
+                    {
+                        compilerResult.Error = ex.Message;
                         compilerResult.OutputFile = null;
-
-                    if (process.StandardError != null)
-                        compilerResult.Error = process.StandardError.ReadToEnd();
+                    }
+                    break;
                 }
             }
-            catch (Exception ex)
-            {
-                compilerResult.Error = ex.Message;
-            }
-
-            return compilerResult;
-        }
-
-        private static CompilerResult JavaFileCompiler(FileInfo cppFile, int timeOut)
-        {
-            CompilerResult compilerResult = new CompilerResult();
             return compilerResult;
         }
     }

@@ -22,5 +22,19 @@ namespace GradingProgram.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SettingCompiler {
+            get {
+                return ((string)(this["SettingCompiler"]));
+            }
+            set {
+                this["SettingCompiler"] = value;
+            }
+        }
+
+        public string TableXml { get; internal set; }
     }
 }

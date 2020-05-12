@@ -17,7 +17,7 @@ namespace GradingProgram
 
         public static bool Exists(string candidateCode)
         {
-            return GetCandidates().Count(x => x.Code == candidateCode) > 0;
+            return GetCandidates().Any(x => x.Code == candidateCode);
         }
 
         public static Candidate GetCandidate(int candidateId)
@@ -49,8 +49,8 @@ namespace GradingProgram
 
             var questions = BLExamDetail.GetQuestions(examId).ToList();
             for (int i = 0; i < questions.Count(); i++)
-                res.Columns.Add(BLExamDetail.GetExamDetail(x => x.ExamID == examId && x.QuestionID == questions[i].ID, y => y.FileName));
-            res.Columns.Add("Tổng điểm");
+                res.Columns.Add(BLExamDetail.GetExamDetail(x => x.ExamID == examId && x.QuestionID == questions[i].ID, y => y.FileName), typeof(int));
+            res.Columns.Add("Tổng điểm", typeof(int));
 
             var candidates = BLCandidateDetail.GetCandidates(examId).ToList();
             for (int i = 0; i < candidates.Count(); i++)

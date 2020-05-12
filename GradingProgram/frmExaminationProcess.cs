@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
 {
     public partial class frmExaminationProcess : Form
     {
+        private string candidateName;
+        private string questionName;
+        private string testCaseName;
+
+        public string CandidateName { set { candidateName = value; RefreshTest(); } }
+
+        public string QuestionName { set { questionName = value; RefreshTest(); } }
+
+        public string TestCaseName { set { testCaseName = value; RefreshTest(); } }
+
         public frmExaminationProcess()
         {
             InitializeComponent();
@@ -21,6 +24,13 @@ namespace GradingProgram
         {
             rtbNotifications.SelectionStart = rtbNotifications.Text.Length;
             rtbNotifications.ScrollToCaret();
+            Refresh();
+        }
+
+        private void RefreshTest()
+        {
+            Text = "Đang chấm " + candidateName + " - " + questionName + " - " + testCaseName;
+            Refresh();
         }
     }
 }

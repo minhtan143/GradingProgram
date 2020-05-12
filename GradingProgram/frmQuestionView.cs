@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -181,7 +183,16 @@ namespace GradingProgram
 
         private void btnAddFromFile_Click(object sender, EventArgs e)
         {
-
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                List<TestCase> testCases = Utility.ScanTestCases(dialog.FileName);
+                testCases.ForEach(x => x.QuestionID = questionId);
+                BLTestCase.AddOrUpdate(testCases);
+                TestCaseRefresh();
+                Focus();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

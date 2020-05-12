@@ -5,7 +5,7 @@ namespace GradingProgram
 {
     public class Run
     {
-        public static RunResult RunExeFile(string exeFile, string input, int timeLimit, int memoryLimit)
+        public static RunResult RunExeFile(string exeFile, string input, int timeLimit, long memoryLimit)
         {
             ProcessStartInfo StartInfo = new ProcessStartInfo();
 
@@ -19,37 +19,43 @@ namespace GradingProgram
             StartInfo.RedirectStandardOutput = true;
 
             RunResult runResult = new RunResult();
+
             try
             {
+                long peakWorkingSet = 0;
+                double totalMilliseconds = 0;
                 memoryLimit = memoryLimit * 1024 * 1024;
+
                 using (Process process = Process.Start(StartInfo))
                 {
                     if (!String.IsNullOrEmpty(input))
-                        process.StandardInput.Write(input);
+                        process.StandardInput.WriteLine(input);
 
-                    long peakWorkingSet = 0;
-
-                    do
+                    while (!process.HasExited) 
                     {
-                        process.Refresh();
-                        peakWorkingSet = process.PeakWorkingSet64;
-                        if (peakWorkingSet > memoryLimit)
+                        try
                         {
-                            process.Kill();
-                            runResult.Result = RunResultEnum.MemoryLimit;
+                            process.Refresh();
+                            peakWorkingSet = process.PeakWorkingSet64;
+                            if (peakWorkingSet > memoryLimit)
+                            {
+                                process.Kill();
+                                runResult.Result = RunResultEnum.MemoryLimit;
+                                break;
+                            }
+                            totalMilliseconds = process.UserProcessorTime.TotalMilliseconds;
+                            if (totalMilliseconds > timeLimit)
+                            {
+                                process.Kill();
+                                runResult.Result = RunResultEnum.TimeLimit;
+                            }
                         }
-
-                        if (process.TotalProcessorTime.TotalMilliseconds > timeLimit)
-                        {
-                            process.Kill();
-                            runResult.Result = RunResultEnum.TimeLimit;
-                        }
+                        catch { }
                     }
-                    while (!process.HasExited);
 
                     runResult.ExitCode = process.ExitCode;
-                    runResult.RunTime = (int)process.TotalProcessorTime.TotalMilliseconds;
-                    runResult.UsedMemory = (int)(peakWorkingSet / (1024 * 1024));
+                    runResult.UsedMemory = peakWorkingSet < 1024 * 1024 ? 1 : peakWorkingSet / (1024 * 1024);
+                    runResult.RunTime = totalMilliseconds < 1 ? 1 : (int)totalMilliseconds;
 
                     if (process.StandardOutput != null)
                         runResult.Output = process.StandardOutput.ReadToEnd();

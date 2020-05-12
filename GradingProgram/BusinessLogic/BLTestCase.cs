@@ -26,7 +26,7 @@ namespace GradingProgram
 
         public static bool Exists(int questionId, string testName)
         {
-            return GetTestCases().Count(x => x.QuestionID == questionId && x.Name == testName) > 0;
+            return GetTestCases().Any(x => x.QuestionID == questionId && x.Name == testName);
         }
 
         public static IEnumerable<TKey> GetTestCases<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
