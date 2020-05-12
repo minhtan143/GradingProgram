@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,13 +17,17 @@ namespace GradingProgram
         public frmAddExam()
         {
             InitializeComponent();
+            Initialize.SetUpForm(this);
         }
 
         private void btnPath_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog pth = new FolderBrowserDialog();
-            pth.ShowDialog();
-            txtPath.Text = pth.SelectedPath.ToString();
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                txtPath.Text = dialog.FileName;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -47,7 +52,6 @@ namespace GradingProgram
                     BLExam.Add(exam);
                     examID = exam.ID;
                     Hide();
-
                 }
             }
             else MessageBox.Show("Không được để trống nội dung!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
