@@ -267,7 +267,6 @@
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "frmCandidateView";
-            this.ShowInTaskbar = false;
             this.Text = "frmCandidateView";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCandidateView_FormClosing);
             this.panel1.ResumeLayout(false);

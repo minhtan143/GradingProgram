@@ -15,7 +15,6 @@ namespace GradingProgram
         private void LoadData()
         {
             dgvQuestions.DataSource = BusinessLogic.ToDataTable(BusinessLogic.Search(BLQuestion.GetQuestions(x => new { x.ID, x.Name, x.Detail }), txtSearch.Text));
-            dgvQuestions.Columns["ID"].Visible = false;
             lblSum.Text = dgvQuestions.RowCount.ToString();
         }
 
@@ -27,7 +26,6 @@ namespace GradingProgram
                 frmQuestionView frmQuestionView = new frmQuestionView(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                 if (!Initialize.CheckOpened(frmQuestionView))
                     frmQuestionView.Show();
-                LoadData();
             }
         }
 

@@ -33,9 +33,10 @@ namespace GradingProgram
                 lblCandidateCode.Text = BLCandidate.GetCandidate(candidateId).Code;
                 lblName.Text = BLCandidate.GetCandidate(candidateId).Name;
                 lblSumMark.Text = BLResult.SumMark(candidateId, examId) + "/" + BLExam.SumMark(examId);
+
                 dgvQuestions.DataSource = BLExamDetail.GetExamDetails(x => x.ExamID == examId, y => new { y.FileName, y.QuestionID, QuestionName = BLQuestion.GetQuestion(y.QuestionID).Name }).OrderBy(x => x.FileName).ToList();
-                dgvQuestions.Columns["QuestionID"].Visible = false;
-                dgvQuestions_CellClick(null, new DataGridViewCellEventArgs(0, 0));
+                dgvQuestions_CellClick(null, new DataGridViewCellEventArgs(1, dgvQuestions.RowCount > 0 ? 0 : -1));
+
                 dgvTasks.DataSource = new DirectoryInfo(pathDirectory).GetFiles().Select(x => new { Task = x.Name }).ToList();
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace GradingProgram
             FileInfo[] files = new DirectoryInfo(pathDirectory).GetFiles().Where(x => fileNames.Contains(x.Name)).ToArray();
             Utility.Grading(examId, candidateId, files, new Dictionary<string, Compare>(), 2000);
             LoadData();
+            frmMain.dbChange = true;
         }
 
         private void dgvQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -99,22 +101,25 @@ namespace GradingProgram
 
         private void dgvQuestions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int questionId = int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["QuestionID"].Value.ToString());
-            var testcaseIds = BLTestCase.GetTestCases(x => x.QuestionID == questionId, y => y.ID);
-
-            dgvTestCases.DataSource = BLResult.GetResults(x => x.ExamID == examId && x.CandidateID == candidateId && testcaseIds.Contains(x.TestCaseID), y => new
+            if (e.RowIndex >= 0)
             {
-                TestCaseName = BLTestCase.GetTestCase(y.TestCaseID).Name,
-                Input = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Input),
-                CandidateOutput = y.Output,
-                Output = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Output),
-                RateTime = y.RunTime + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.TimeLimit),
-                RateMemory = y.UsedMemory + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.MemoryLimit),
-                y.Mark,
-                y.Notification
-            }).OrderBy(x => x.TestCaseName).ToList();
+                int questionId = int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["QuestionID"].Value.ToString());
+                var testcaseIds = BLTestCase.GetTestCases(x => x.QuestionID == questionId, y => y.ID);
 
-            lblMark.Text = BLResult.SumMark(candidateId, examId, questionId) + "/" + BLQuestion.SumMark(questionId);
+                dgvTestCases.DataSource = BLResult.GetResults(x => x.ExamID == examId && x.CandidateID == candidateId && testcaseIds.Contains(x.TestCaseID), y => new
+                {
+                    TestCaseName = BLTestCase.GetTestCase(y.TestCaseID).Name,
+                    Input = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Input),
+                    CandidateOutput = y.Output,
+                    Output = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Output),
+                    RateTime = y.RunTime + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.TimeLimit),
+                    RateMemory = y.UsedMemory + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.MemoryLimit),
+                    y.Mark,
+                    y.Notification
+                }).OrderBy(x => x.TestCaseName).ToList();
+
+                lblMark.Text = BLResult.SumMark(candidateId, examId, questionId) + "/" + BLQuestion.SumMark(questionId);
+            }
         }
 
         private void frmResultDetail_SizeChanged(object sender, EventArgs e)
@@ -134,11 +139,6 @@ namespace GradingProgram
         {
             if (e.KeyCode == Keys.F5)
                 LoadData();
-        }
-
-        private void frmResultDetail_Activated(object sender, EventArgs e)
-        {
-            LoadData();
         }
     }
 }

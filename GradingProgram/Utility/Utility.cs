@@ -19,13 +19,13 @@ namespace GradingProgram
                 TestCase testCase = new TestCase();
                 testCase.Name = dir.Name;
 
-                FileInfo[] fileInps = dir.GetFiles(dir.Name + ".inp");
-                if (fileInps.Length > 0)
+                FileInfo[] fileInps = dir.GetFiles("*.inp");
+                if (fileInps.Length == 1)
                     testCase.Input = fileInps.First().OpenText().ReadToEnd();
 
-                FileInfo[] fileOuts = dir.GetFiles(dir.Name + ".out");
-                if (fileOuts.Length > 0)
-                    testCase.Input = fileOuts.First().OpenText().ReadToEnd();
+                FileInfo[] fileOuts = dir.GetFiles("*.out");
+                if (fileOuts.Length == 1)
+                    testCase.Output = fileOuts.First().OpenText().ReadToEnd();
 
                 testCases.Add(testCase);
             }
@@ -57,12 +57,13 @@ namespace GradingProgram
             data.Columns.Add("FileType");
             data.Columns.Add("Setting");
 
-            data.Rows.Add(".cpp", @"Utility\MinGW64\bin\g++.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
-            data.Rows.Add(".pas", @"Utility\Pascal\fpc.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
-            data.Rows.Add(".c", @"Utility\MinGW64\bin\gcc.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
-            data.Rows.Add(".java", @"Utility\VC\bin\javac.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
-            data.Rows.Add(".py", @"Utility\venv\Scripts\python.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
-            data.Rows.Add(".pp", @"Utility\Pascal\fpc.exe | %PATH%%NAME%%EXT% -o %PATH%%NAME%.exe");
+            data.Rows.Add(".cpp", @"Utility\VC6\Bin\cl.exe %PATH%%NAME%%EXT% -Fo%PATH% -Fe%PATH% -IUtility\VC6\Include -link -LIBPATH:Utility\VC6\Lib");
+            data.Rows.Add(".cpp", @"Utility\MinGW64\bin\g++.exe -o %PATH%%NAME%.exe  %PATH%%NAME%%EXT%  -O2 -s -static -lm -x c++");
+            data.Rows.Add(".pas", @"Utility\Pascal\fpc.exe -o %PATH%%NAME%.exe -O2 -XS -Sg  %PATH%%NAME%%EXT%");
+            data.Rows.Add(".c", @"Utility\MinGW64\bin\gcc.exe -o %PATH%%NAME%.exe  %PATH%%NAME%%EXT%  -O2 -s -static -lm -x c");
+            data.Rows.Add(".java", @"Utility\VC\bin\javac.exe %PATH%%NAME%%EXT%");
+            data.Rows.Add(".pp", @"Utility\Pascal\fpc.exe  -o %PATH%%NAME%.exe -O2 -XS -Sg %PATH%%NAME%%EXT%");
+            data.Rows.Add(".py", ";Dịch mã nguồn Python");
             data.Rows.Add(".exe", ";Nếu không muốn dịch lại khi đã có file .exe, chuyển loại file này lên đầu");
             data.Rows.Add(".class", ";Nếu không muốn dịch lại khi đã có file .class, chuyển loại file này lên đầu");
 
@@ -91,7 +92,7 @@ namespace GradingProgram
         public static void Grading(int examId, Dictionary<string, Compare> settingGrading, int timeLimit)
         {
             Compiler.SettingCompiler = ReadFromSetting();
-            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId, y => y).ToList();
+            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId).ToList();
             DirectoryInfo dirExam = new DirectoryInfo(BLExam.GetExam(examId).Folder);
             DirectoryInfo[] dirCandidates = dirExam.GetDirectories();
 
@@ -117,6 +118,9 @@ namespace GradingProgram
                     BLCandidate.Add(candidate);
                 }
 
+                if (BLCandidateDetail.GetCandidateDetails(x => x.ExamID == examId && x.CandidateID == candidate.ID).Count() == 0)
+                    BLCandidateDetail.Add(new CandidateDetail() { ExamID = examId, CandidateID = candidate.ID });
+
                 foreach (ExamDetail question in questions)
                 {
                     fep.progressBar.PerformStep();
@@ -136,7 +140,7 @@ namespace GradingProgram
 
                         if (compilerResult.OutputFile != null && compilerResult.OutputFile.Exists)
                         {
-                            RunResult runResult = Run.RunExeFile(compilerResult.OutputFile.FullName, testCase.Input, testCase.TimeLimit.Value, testCase.MemoryLimit.Value);
+                            RunResult runResult = Run.RunExecutableFile(compilerResult.OutputFile.FullName, testCase.Input, testCase.TimeLimit.Value, testCase.MemoryLimit.Value);
 
                             result.RunTime = runResult.RunTime;
                             result.UsedMemory = runResult.UsedMemory;
@@ -184,7 +188,7 @@ namespace GradingProgram
         public static void Grading(int examId, int candidateId, FileInfo[] files, Dictionary<string, Compare> settingGrading, int timeLimit)
         {
             Compiler.SettingCompiler = ReadFromSetting();
-            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId, y => y).ToList();
+            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId).ToList();
             Exam exam = BLExam.GetExam(examId);
             Candidate candidate = BLCandidate.GetCandidate(candidateId);
 
@@ -200,12 +204,12 @@ namespace GradingProgram
 
             foreach (FileInfo file in files)
             {
-                ExamDetail question = questions.SingleOrDefault(x => x.FileName == file.Name.Remove(file.Name.LastIndexOf('.')));
-                fep.progressBar.PerformStep();
-                fep.QuestionName = question.FileName;
-
+                ExamDetail question = questions.SingleOrDefault(x => x.FileName.ToLower() == file.Name.Remove(file.Name.LastIndexOf('.')).ToLower());
                 if (question == null || !file.Exists)
                     continue;
+
+                fep.progressBar.PerformStep();
+                fep.QuestionName = question.FileName;
 
                 CompilerResult compilerResult = Compiler.FileCompiler(new FileInfo[] { file }, question.FileName, timeLimit);
                 List<TestCase> testCases = BLTestCase.GetTestCases(question.QuestionID).ToList();
@@ -221,7 +225,7 @@ namespace GradingProgram
 
                     if (compilerResult.OutputFile != null && compilerResult.OutputFile.Exists)
                     {
-                        RunResult runResult = Run.RunExeFile(compilerResult.OutputFile.FullName, testCase.Input, testCase.TimeLimit.Value, testCase.MemoryLimit.Value);
+                        RunResult runResult = Run.RunExecutableFile(compilerResult.OutputFile.FullName, testCase.Input, testCase.TimeLimit.Value, testCase.MemoryLimit.Value);
 
                         result.RunTime = runResult.RunTime;
                         result.UsedMemory = runResult.UsedMemory;
@@ -271,7 +275,7 @@ namespace GradingProgram
             if (compare != Compare.CCustom)
                 path = "Compare\\" + compare.ToString() + ".exe";
 
-            RunResult runResult = Run.RunExeFile(path, file1 + "\n" + file2, 1000, 100);
+            RunResult runResult = Run.RunFile(path, "", file1 + "\n" + file2, 1000, 100);
             if (runResult.Result == RunResultEnum.Successful)
                 return runResult.Output.Trim() == "1";
             return false;

@@ -11,6 +11,7 @@ namespace GradingProgram
     public partial class frmMain : Form
     {
         private int examId;
+        public static bool dbChange { get; set; } = false;
 
         public frmMain()
         {
@@ -22,10 +23,12 @@ namespace GradingProgram
         private void LoadData()
         {
             cbExamName.DisplayMember = "Name";
+            cbExamName.ValueMember = "ID";
+
             cbExamName.DataSource = BusinessLogic.ToDataTable(BLExam.GetExams(x => new { x.ID, x.Name }));
 
-            settingCompareTSMI.Enabled = cbExamName.Items.Count > 0 ? true : false;
-            gradingThisExamTSMI.Enabled = cbExamName.Items.Count > 0 ? true : false;
+            settingCompareTSMI.Enabled = cbExamName.Items.Count > 0;
+            gradingThisExamTSMI.Enabled = cbExamName.Items.Count > 0;
         }
 
         private void dgvResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -41,7 +44,6 @@ namespace GradingProgram
         private void createQuestionTSMI_Click(object sender, EventArgs e)
         {
             frmAddQuestion frmAddQuestion = new frmAddQuestion();
-            frmAddQuestion.TopMost = true;
             if (frmAddQuestion.ShowDialog() == DialogResult.OK)
                 new frmQuestionView(frmAddQuestion.QuestionID).Show();
         }
@@ -62,9 +64,6 @@ namespace GradingProgram
 
         private void createExamTSMI_Click(object sender, EventArgs e)
         {
-            //frmExamView frmExamView = new frmExamView(1);
-
-            //frmExamView.ShowDialog();
             frmAddExam frmAddExam = new frmAddExam();
             if (frmAddExam.ShowDialog() == DialogResult.OK)
                 new frmExamView(frmAddExam.examID).Show();
@@ -81,7 +80,7 @@ namespace GradingProgram
         {
             if (cbExamName.SelectedIndex >= 0)
             {
-                examId = int.Parse((cbExamName.DataSource as DataTable).Rows[cbExamName.SelectedIndex].ItemArray[0].ToString());
+                examId = int.Parse(cbExamName.SelectedValue.ToString());
                 lblExamName.Text = BLExam.GetExam(examId).Name;
                 lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString();
 
@@ -89,7 +88,7 @@ namespace GradingProgram
                     dgvResults.Columns.RemoveAt(3);
                 dgvResults.DataSource = BLCandidate.GetCandidateWithMark(examId);
 
-                btnExportExcel.Enabled = dgvResults.RowCount > 0 ? true : false;
+                btnExportExcel.Enabled = dgvResults.RowCount > 0;
                 Text = cbExamName.Text + " - Chấm thi tự động";
             }
         }
@@ -155,7 +154,8 @@ namespace GradingProgram
 
         private void refreshTSMI_Click(object sender, EventArgs e)
         {
-            LoadData();
+            dbChange = true;
+            frmMain_Activated(null, null);
         }
 
         private void setupGradingTSMI_Click(object sender, EventArgs e)
@@ -189,22 +189,18 @@ namespace GradingProgram
             }
 
             Utility.Grading(examId, settingGrading, 2000);
-            LoadData();
+            dbChange = true;
+            frmMain_Activated(null, null);
         }
 
         private void frmMain_Activated(object sender, EventArgs e)
         {
-            int examId = this.examId;
-            LoadData();
-
-            DataTable data = cbExamName.DataSource as DataTable;
-            foreach (DataRow row in data.Rows)
+            if (dbChange)
             {
-                if (row.ItemArray[0].ToString() == examId.ToString())
-                {
-                    cbExamName.SelectedIndex = data.Rows.IndexOf(row);
-                    break;
-                }
+                var index = cbExamName.SelectedValue;
+                LoadData();
+                cbExamName.SelectedValue = index;
+                dbChange = false;
             }
         }
 

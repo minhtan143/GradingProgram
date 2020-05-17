@@ -28,6 +28,11 @@ namespace GradingProgram
             return GetCandidateDetails().Where(predicate).Select(keySelector);
         }
 
+        public static IEnumerable<CandidateDetail> GetCandidateDetails(Func<CandidateDetail, bool> predicate)
+        {
+            return GetCandidateDetails().Where(predicate);
+        }
+
         public static void Add(CandidateDetail candidateDetail)
         {
             db.CandidateDetails.Add(candidateDetail);
@@ -43,6 +48,12 @@ namespace GradingProgram
         public static void Delete(CandidateDetail candidateDetail)
         {
             db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+        }
+
+        public static void Delete(IEnumerable<CandidateDetail> candidateDetails)
+        {
+            candidateDetails.ToList().ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
             db.SaveChanges();
         }
     }

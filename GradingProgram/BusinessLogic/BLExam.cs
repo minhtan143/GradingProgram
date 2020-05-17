@@ -18,7 +18,7 @@ namespace GradingProgram
 
         public static bool Exists(string examName)
         {
-            return GetExams().Any(x => x.Name == examName);
+            return GetExams().Any(x => x.Name.ToLower() == examName.ToLower());
         }
 
         public static IEnumerable<TKey> GetExams<TKey>(Func<Exam, TKey> keySelector)

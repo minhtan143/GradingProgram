@@ -26,8 +26,9 @@ namespace GradingProgram
             var data = BLExam.GetExams(x => new { x.ID, x.Name }).ToList();
             data.Add(new { ID = 0, Name = "All" });
 
-            cbExamName.DataSource = BusinessLogic.ToDataTable(data.OrderBy(x => x.ID));
             cbExamName.DisplayMember = "Name";
+            cbExamName.ValueMember = "ID";
+            cbExamName.DataSource = BusinessLogic.ToDataTable(data.OrderBy(x => x.ID));
             RefreshCandidates(examId);
         }
 
@@ -43,7 +44,8 @@ namespace GradingProgram
             if (e.RowIndex >= 0)
             {
                 frmCandidateView frmCandidateView = new frmCandidateView(int.Parse(dgvCandidates.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
-                frmCandidateView.Show();
+                if (!Initialize.CheckOpened(frmCandidateView))
+                    frmCandidateView.Show();
             }
         }
 
@@ -51,7 +53,7 @@ namespace GradingProgram
         {
             if (cbExamName.SelectedIndex >= 0)
             {
-                examId = int.Parse((cbExamName.DataSource as DataTable).Rows[cbExamName.SelectedIndex].ItemArray[0].ToString());
+                examId = int.Parse(cbExamName.SelectedValue.ToString());
                 RefreshCandidates(examId);
             }
         }
@@ -63,7 +65,7 @@ namespace GradingProgram
 
         private void frmManageCandidate_Activated(object sender, EventArgs e)
         {
-            LoadData();
+            RefreshCandidates(examId);
         }
     }
 }

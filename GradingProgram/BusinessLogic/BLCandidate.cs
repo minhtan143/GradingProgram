@@ -17,7 +17,7 @@ namespace GradingProgram
 
         public static bool Exists(string candidateCode)
         {
-            return GetCandidates().Any(x => x.Code == candidateCode);
+            return GetCandidates().Any(x => x.Code.ToLower() == candidateCode.ToLower());
         }
 
         public static Candidate GetCandidate(int candidateId)

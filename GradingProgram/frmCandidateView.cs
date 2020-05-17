@@ -27,12 +27,7 @@ namespace GradingProgram
             txtEmail.Text = candidate.Email;
             txtPhone.Text = candidate.Phone;
 
-            dgvExam.DataSource = BusinessLogic.ToDataTable(BLCandidateDetail.GetExams(candidateId).Select(x => new
-            {
-                x.ID,
-                x.Name,
-                Mark = BLResult.SumMark(candidateId, x.ID)
-            }));
+            dgvExam.DataSource = BusinessLogic.ToDataTable(BLCandidateDetail.GetExams(candidateId).Select(x => new { x.ID, x.Name, Mark = BLResult.SumMark(candidateId, x.ID) }));
 
             modify = false;
             btnCancel.Visible = false;
@@ -42,7 +37,8 @@ namespace GradingProgram
         private void dgvExam_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             frmResultDetail frmResultDetail = new frmResultDetail(int.Parse(dgvExam.Rows[e.RowIndex].Cells["ID"].Value.ToString()), candidateId);
-            frmResultDetail.Show();
+            if (!Initialize.CheckOpened(frmResultDetail))
+                frmResultDetail.Show();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GradingProgram
 {
     public class Run
     {
-        public static RunResult RunExeFile(string exeFile, string input, int timeLimit, long memoryLimit)
+        public static RunResult RunExecutableFile(string pathFile, string input, int timeLimit, long memoryLimit)
+        {
+            switch (pathFile.Substring(pathFile.LastIndexOf('.')).ToLower())
+            {
+                case ".exe": return RunFile(pathFile, "", input, timeLimit, memoryLimit);
+                case ".class": return RunFile(@"Utility\VC\bin\javac.exe", pathFile, input, timeLimit, memoryLimit);
+                case ".py": return RunFile(pathFile, "", input, timeLimit, memoryLimit);
+                default: return new RunResult() { Result = RunResultEnum.RunError, Error = "Malformed" };
+            }
+        }
+
+        public static RunResult RunFile(string fileName, string arguments, string input, int timeLimit, long memoryLimit)
         {
             ProcessStartInfo StartInfo = new ProcessStartInfo();
 
-            StartInfo.FileName = exeFile;
-            StartInfo.Arguments = "";
+            StartInfo.FileName = fileName;
+            StartInfo.Arguments = arguments;
             StartInfo.UseShellExecute = false;
             StartInfo.CreateNoWindow = true;
             StartInfo.ErrorDialog = false;
@@ -23,13 +35,21 @@ namespace GradingProgram
             try
             {
                 long peakWorkingSet = 0;
-                double totalMilliseconds = 0;
                 memoryLimit = memoryLimit * 1024 * 1024;
 
                 using (Process process = Process.Start(StartInfo))
                 {
                     if (!String.IsNullOrEmpty(input))
                         process.StandardInput.WriteLine(input);
+
+                    Task.Run(() => 
+                    {
+                        if (!process.WaitForExit(timeLimit))
+                        {
+                            process.Kill();
+                            runResult.Result = RunResultEnum.TimeLimit;
+                        }
+                    });
 
                     while (!process.HasExited) 
                     {
@@ -43,19 +63,13 @@ namespace GradingProgram
                                 runResult.Result = RunResultEnum.MemoryLimit;
                                 break;
                             }
-                            totalMilliseconds = process.UserProcessorTime.TotalMilliseconds;
-                            if (totalMilliseconds > timeLimit)
-                            {
-                                process.Kill();
-                                runResult.Result = RunResultEnum.TimeLimit;
-                            }
                         }
                         catch { }
                     }
 
                     runResult.ExitCode = process.ExitCode;
                     runResult.UsedMemory = peakWorkingSet < 1024 * 1024 ? 1 : peakWorkingSet / (1024 * 1024);
-                    runResult.RunTime = totalMilliseconds < 1 ? 1 : (int)totalMilliseconds;
+                    runResult.RunTime = (process.ExitTime - process.StartTime).TotalMilliseconds < 1 ? 1 : (int)(process.ExitTime - process.StartTime).TotalMilliseconds;
 
                     if (process.StandardOutput != null)
                         runResult.Output = process.StandardOutput.ReadToEnd();
@@ -69,12 +83,6 @@ namespace GradingProgram
                 runResult.Error = ex.Message;
             }
 
-            return runResult;
-        }
-
-        public static RunResult RunClassFile(string classFile, string input, int timeOut, int memoryLimit)
-        {
-            RunResult runResult = new RunResult();
             return runResult;
         }
     }

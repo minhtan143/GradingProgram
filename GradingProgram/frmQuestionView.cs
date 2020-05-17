@@ -24,17 +24,18 @@ namespace GradingProgram
         {
             txtQuestionName.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Name);
             txtContent.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Detail);
+
+            TestCaseRefresh();
+
             btnSave.Visible = false;
             btnCancel.Visible = false;
             btnOK.Visible = true;
             modify = false;
-            TestCaseRefresh();
         }
 
         private void TestCaseRefresh()
         {
             dgvTestCases.DataSource = BusinessLogic.ToDataTable(BLTestCase.GetTestCases(x => x.QuestionID == questionId, x => new { x.ID, x.Name, x.Input, x.Output, x.TimeLimit, x.MemoryLimit, x.Mark }).OrderBy(x => x.Name));
-            dgvTestCases.Columns["ID"].Visible = false;
         }
 
         private void dgvTestCases_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -95,19 +96,18 @@ namespace GradingProgram
             try
             {
                 Question question = BLQuestion.GetQuestion(questionId);
-                if (question.Name != txtQuestionName.Text)
+                if (question.Name != txtQuestionName.Text.Trim())
                 {
-                    if (BLQuestion.Exists(txtQuestionName.Text))
+                    if (BLQuestion.Exists(txtQuestionName.Text.Trim()))
                         throw new Exception("Tên câu hỏi đã tồn tại!");
-                    question.Name = txtQuestionName.Name;
+                    question.Name = txtQuestionName.Text.Trim();
                 }
-                question.Detail = txtContent.Text;
+                question.Detail = txtContent.Text.Trim();
                 BLQuestion.Update(question);
                 btnSave.Visible = false;
                 btnOK.Visible = true;
                 btnCancel.Visible = false;
                 modify = false;
-                questionId = question.ID;
             }
             catch (Exception ex)
             {
@@ -201,11 +201,6 @@ namespace GradingProgram
         private void btnCancel_Click(object sender, EventArgs e)
         {
             LoadData();
-        }
-
-        private void dgvTestCases_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-
         }
 
         private void btnOK_Click(object sender, EventArgs e)

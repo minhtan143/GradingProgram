@@ -16,7 +16,6 @@ namespace GradingProgram
         private void LoadData()
         {
             dgvExams.DataSource = BusinessLogic.ToDataTable(BLExam.GetExams(x => new { x.ID, x.Name, x.Folder, x.CreateDate }));
-            dgvExams.Columns["ID"].Visible = false;
         }
 
         private void dgvExams_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
