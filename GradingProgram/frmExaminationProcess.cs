@@ -9,6 +9,8 @@ namespace GradingProgram
         private string questionName;
         private string testCaseName;
 
+        public bool HasCanceled { get; set; }
+
         public string CandidateName { set { candidateName = value; RefreshTest(); } }
 
         public string QuestionName { set { questionName = value; RefreshTest(); } }
@@ -17,20 +19,39 @@ namespace GradingProgram
 
         public frmExaminationProcess()
         {
+            HasCanceled = false;
             InitializeComponent();
+            Show();
         }
 
         private void rtbNotifications_TextChanged(object sender, EventArgs e)
         {
             rtbNotifications.SelectionStart = rtbNotifications.Text.Length;
             rtbNotifications.ScrollToCaret();
-            Refresh();
         }
 
         private void RefreshTest()
         {
             Text = "Đang chấm " + candidateName + " - " + questionName + " - " + testCaseName;
-            Refresh();
+        }
+
+        private void frmExaminationProcess_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
+            {
+                DialogResult dialogResult = MessageBox.Show("Dừng chấm?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    HasCanceled = true;
+                }
+                else e.Cancel = true;
+            }
+        }
+
+        public new void Close()
+        {
+            FormClosing -= frmExaminationProcess_FormClosing;
+            base.Close();
         }
     }
 }

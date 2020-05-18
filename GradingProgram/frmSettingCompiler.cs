@@ -52,13 +52,16 @@ namespace GradingProgram
 
         private void frmSettingCompiler_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modify)
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
-                DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
-                    btnSave_Click(null, null);
-                else if (dialogResult == DialogResult.Cancel)
-                    e.Cancel = true;
+                if (modify)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                        btnSave_Click(null, null);
+                    else if (dialogResult == DialogResult.Cancel)
+                        e.Cancel = true;
+                }
             }
         }
 

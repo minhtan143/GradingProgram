@@ -35,8 +35,7 @@ namespace GradingProgram
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa kì thi này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Exam exam = BLExam.GetExam(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
-                    BLExam.Delete(exam);
+                    BLExam.Delete(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                     LoadData();
                 }
             }

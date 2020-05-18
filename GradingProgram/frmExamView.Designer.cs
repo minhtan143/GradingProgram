@@ -425,6 +425,7 @@
             this.dgvQuestionBank.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuestionBank.Size = new System.Drawing.Size(125, 349);
             this.dgvQuestionBank.TabIndex = 27;
+            this.dgvQuestionBank.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestionBank_CellDoubleClick);
             // 
             // QBID
             // 

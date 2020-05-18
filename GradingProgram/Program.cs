@@ -13,6 +13,7 @@ namespace GradingProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var a = BLCandidate.GetCandidate(70);
             Application.Run(new frmMain());
         }
     }

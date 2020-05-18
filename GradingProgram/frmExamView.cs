@@ -36,7 +36,9 @@ namespace GradingProgram
         private void RefreshQuestions()
         {
             dgvQuestions.DataSource = BusinessLogic.ToDataTable(BLExamDetail.GetExamDetails(x => x.ExamID == examId, y => new { ID = y.QuestionID, BLQuestion.GetQuestion(y.QuestionID).Name, y.FileName }));
-            dgvQuestionBank.DataSource = BusinessLogic.ToDataTable(BLQuestion.GetQuestions().Except(BLExamDetail.GetQuestions(examId)).Select(x => new { x.ID, x.Name }));
+
+            List<int> questionIds = BLExamDetail.GetExamDetails(x => x.ExamID == examId, y => y.QuestionID);
+            dgvQuestionBank.DataSource = BusinessLogic.ToDataTable(BLQuestion.GetQuestions(x => !questionIds.Contains(x.ID), y => new { y.ID, y.Name }));
             
             btnAdd.Enabled = dgvQuestionBank.RowCount > 0;
             btnDelete.Enabled = dgvQuestions.RowCount > 0;
@@ -80,17 +82,20 @@ namespace GradingProgram
 
         private void frmExamView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modify)
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
-                DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                if (modify)
                 {
-                    btnSave_Click(null, null);
-                    if (modify)
+                    DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        btnSave_Click(null, null);
+                        if (modify)
+                            e.Cancel = true;
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
                         e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.Cancel)
-                    e.Cancel = true;
             }
         }
 
@@ -150,22 +155,29 @@ namespace GradingProgram
 
         private void dgvQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvQuestions.Columns[e.ColumnIndex].Name == "FileName")
-            {
-                frmEditText frmEditText = new frmEditText(dgvQuestions.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), dgvQuestions.Columns[e.ColumnIndex].HeaderText);
-                frmEditText.ShowDialog();
-
-                if (frmEditText.Modify)
+            if (e.RowIndex >= 0)
+                if (dgvQuestions.Columns[e.ColumnIndex].Name == "QuestionName")
                 {
-                    ExamDetail examDetail = new ExamDetail();
-                    examDetail.ExamID = examId;
-                    examDetail.QuestionID = int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["QID"].Value.ToString());
-                    examDetail.FileName = String.IsNullOrEmpty(frmEditText.Content) ? BLQuestion.GetQuestion(examDetail.QuestionID).Name : frmEditText.Content;
-
-                    BLExamDetail.AddOrUpdate(examDetail);
-                    RefreshQuestions();
+                    frmQuestionView frmQuestionView = new frmQuestionView(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["QID"].Value.ToString()));
+                    if (!Initialize.CheckOpened(frmQuestionView))
+                        frmQuestionView.Show();
                 }
-            }
+                else
+                {
+                    frmEditText frmEditText = new frmEditText(dgvQuestions.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), dgvQuestions.Columns[e.ColumnIndex].HeaderText);
+                    frmEditText.ShowDialog();
+
+                    if (frmEditText.Modify)
+                    {
+                        ExamDetail examDetail = new ExamDetail();
+                        examDetail.ExamID = examId;
+                        examDetail.QuestionID = int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["QID"].Value.ToString());
+                        examDetail.FileName = String.IsNullOrEmpty(frmEditText.Content) ? BLQuestion.GetQuestion(examDetail.QuestionID).Name : frmEditText.Content;
+
+                        BLExamDetail.AddOrUpdate(examDetail);
+                        RefreshQuestions();
+                    }
+                }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -184,10 +196,17 @@ namespace GradingProgram
             DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa câu hỏi '" + dgvQuestions.CurrentRow.Cells["QuestionName"].Value + "' khỏi kỳ thi?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.Yes)
             {
-                ExamDetail examDetail = BLExamDetail.GetExamDetail(x => x.ExamID == examId && x.QuestionID == int.Parse(dgvQuestions.CurrentRow.Cells["QID"].Value.ToString()), y => y);
+                ExamDetail examDetail = BLExamDetail.GetExamDetail(x => x.ExamID == examId && x.QuestionID == int.Parse(dgvQuestions.CurrentRow.Cells["QID"].Value.ToString()));
                 BLExamDetail.Delete(examDetail);
                 RefreshQuestions();
             }
+        }
+
+        private void dgvQuestionBank_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            frmQuestionView frmQuestionView = new frmQuestionView(int.Parse(dgvQuestionBank.Rows[e.RowIndex].Cells["QBID"].Value.ToString()));
+            if (!Initialize.CheckOpened(frmQuestionView))
+                frmQuestionView.Show();
         }
     }
 }

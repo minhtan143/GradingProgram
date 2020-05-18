@@ -6,24 +6,36 @@ namespace GradingProgram
 {
     public class BLExam : BusinessLogic
     {
-        public static IEnumerable<Exam> GetExams()
+        public static List<Exam> GetExams()
         {
-            return db.Exams.Where(x => x.Status == true);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Exams.Where(x => x.Status == true).ToList();
+            }
         }
 
         public static Exam GetExam(int examId)
         {
-            return GetExams().SingleOrDefault(x => x.ID == examId);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Exams.Where(x => x.Status == true).SingleOrDefault(x => x.ID == examId);
+            }
         }
 
         public static bool Exists(string examName)
         {
-            return GetExams().Any(x => x.Name.ToLower() == examName.ToLower());
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Exams.Where(x => x.Status == true).Any(x => x.Name.ToLower() == examName.ToLower());
+            }
         }
 
-        public static IEnumerable<TKey> GetExams<TKey>(Func<Exam, TKey> keySelector)
+        public static List<TKey> GetExams<TKey>(Func<Exam, TKey> keySelector)
         {
-            return GetPropertyValues(GetExams(), keySelector);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Exams.Where(x => x.Status == true).Select(keySelector).ToList();
+            }
         }
 
         public static int SumMark(int examId)
@@ -31,27 +43,35 @@ namespace GradingProgram
             return BLExamDetail.GetQuestions(examId).Sum(x => BLQuestion.SumMark(x.ID));
         }
 
-        public static TKey GetPropertyValue<TKey>(Func<Exam, bool> predicate, Func<Exam, TKey> keySelector)
-        {
-            return GetExams().Where(predicate).Select(keySelector).SingleOrDefault();
-        }
-
         public static void Add(Exam exam)
         {
-            db.Exams.Add(exam);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Exams.Add(exam);
+                db.SaveChanges();
+            }
         }
 
         public static void Update(Exam exam)
         {
-            db.Entry(exam).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(exam).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
-        public static void Delete(Exam exam)
+        public static void Delete(int examId)
         {
-            exam.Status = false;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                Exam exam = db.Exams.SingleOrDefault(x => x.Status == true && x.ID == examId);
+                if (exam != null)
+                {
+                    exam.Status = false;
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

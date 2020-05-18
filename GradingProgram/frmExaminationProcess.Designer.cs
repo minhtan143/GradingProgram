@@ -107,6 +107,7 @@
             this.Name = "frmExaminationProcess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đang chấm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmExaminationProcess_FormClosing);
             this.ResumeLayout(false);
 
         }

@@ -10,34 +10,36 @@ namespace GradingProgram
 {
     public class BLCandidate : BusinessLogic
     {
-        public static IEnumerable<Candidate> GetCandidates()
+        public static List<Candidate> GetCandidates()
         {
-            return db.Candidates.Where(x => x.Status == true);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Candidates.Where(x => x.Status == true).ToList();
+            }
         }
 
         public static bool Exists(string candidateCode)
         {
-            return GetCandidates().Any(x => x.Code.ToLower() == candidateCode.ToLower());
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Candidates.Where(x => x.Status == true).Any(x => x.Code.ToLower() == candidateCode.ToLower());
+            }
         }
 
         public static Candidate GetCandidate(int candidateId)
         {
-            return GetCandidates().SingleOrDefault(x => x.ID == candidateId);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Candidates.Where(x => x.Status == true).SingleOrDefault(x => x.ID == candidateId);
+            }
         }
 
         public static Candidate GetCandidate(string candidateCode)
         {
-            return GetCandidates().SingleOrDefault(x => x.Code == candidateCode);
-        }
-
-        public static IEnumerable<TKey> GetCandidates<TKey>(Func<Candidate, TKey> keySelector)
-        {
-            return GetPropertyValues(GetCandidates(), keySelector);
-        }
-
-        public static TKey GetPropertyValue<TKey>(Func<Candidate, bool> predicate, Func<Candidate, TKey> keySelector)
-        {
-            return GetCandidates().Where(predicate).Select(keySelector).SingleOrDefault();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Candidates.Where(x => x.Status == true).SingleOrDefault(x => x.Code == candidateCode);
+            }
         }
 
         public static DataTable GetCandidateWithMark(int examId)
@@ -47,12 +49,12 @@ namespace GradingProgram
             res.Columns.Add("Code");
             res.Columns.Add("Name");
 
-            var questions = BLExamDetail.GetQuestions(examId).ToList();
+            List<Question> questions = BLExamDetail.GetQuestions(examId);
             for (int i = 0; i < questions.Count(); i++)
                 res.Columns.Add(BLExamDetail.GetExamDetail(x => x.ExamID == examId && x.QuestionID == questions[i].ID, y => y.FileName), typeof(int));
             res.Columns.Add("Tổng điểm", typeof(int));
 
-            var candidates = BLCandidateDetail.GetCandidates(examId).ToList();
+            List<Candidate> candidates = BLCandidateDetail.GetCandidates(examId);
             for (int i = 0; i < candidates.Count(); i++)
             {
                 List<string> vs = new List<string>();
@@ -69,26 +71,42 @@ namespace GradingProgram
 
         public static void Update(Candidate candidate)
         {
-            db.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
         }
 
         public static void Add(IEnumerable<Candidate> candidates)
         {
-            db.Candidates.AddRange(candidates);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Candidates.AddRange(candidates);
+                db.SaveChanges();
+            }
         }
 
         public static void Add(Candidate candidate)
         {
-            db.Candidates.Add(candidate);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Candidates.Add(candidate);
+                db.SaveChanges();
+            }
         }
 
-        public static void Delete(Candidate candidate)
+        public static void Delete(int candidateId)
         {
-            candidate.Status = false;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                Candidate candidate = db.Candidates.SingleOrDefault(x => x.Status == true && x.ID == candidateId);
+                if (candidate != null)
+                {
+                    candidate.Status = false;
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

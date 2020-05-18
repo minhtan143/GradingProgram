@@ -11,43 +11,20 @@ namespace GradingProgram
 {
     public class BusinessLogic
     {
-        protected static DatabaseContext db = new DatabaseContext();
-
-        protected static IEnumerable<TKey> GetPropertyValues<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector)
-        {
-            return items.Select(keySelector).Distinct();
-        }
-
-        public static IEnumerable<T> Search<T>(IEnumerable<T> items, string searchString)
+        public static List<T> Search<T>(List<T> items, string searchString)
         {
             if (String.IsNullOrEmpty(searchString))
                 return items;
-            List<string> searchStrings = searchString.Trim().ToLower().Split(' ').ToList();
-            List<T> result = new List<T>();
-            foreach (string str in searchStrings)
+            string[] searchStrings = searchString.Trim().ToLower().Split(' ');
+
+            return items.Where(x =>
             {
-                result.AddRange(items.Where(x =>
-                {
-                    foreach (var prop in x.GetType().GetProperties())
-                        if (prop.GetValue(x).ToString().ToLower().Contains(str))
+                foreach (string str in searchStrings)
+                    foreach (PropertyInfo prop in x.GetType().GetProperties())
+                        if (prop.GetValue(x) != null && prop.GetValue(x).ToString().ToLower().Contains(str))
                             return true;
-                    return false;
-                }).ToList());
-            }
-            return result.Distinct();
-        }
-
-        public static object CloneObject(object objSource)
-        {
-            Type typeSource = objSource.GetType();
-            object objTarget = Activator.CreateInstance(typeSource);
-
-            PropertyInfo[] propertyInfo = typeSource.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-            foreach (PropertyInfo property in propertyInfo)
-                if (property.CanWrite)
-                    property.SetValue(objTarget, property.GetValue(objSource, null), null);
-            return objTarget;
+                return false;
+            }).ToList();
         }
 
         public static DataTable ToDataTable<T>(IEnumerable<T> items)

@@ -62,7 +62,7 @@ namespace GradingProgram
             FileInfo[] files = new DirectoryInfo(pathDirectory).GetFiles().Where(x => fileNames.Contains(x.Name)).ToArray();
             Utility.Grading(examId, candidateId, files, new Dictionary<string, Compare>(), 2000);
             LoadData();
-            frmMain.dbChange = true;
+            frmMain.DbChange = true;
         }
 
         private void dgvQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -109,11 +109,11 @@ namespace GradingProgram
                 dgvTestCases.DataSource = BLResult.GetResults(x => x.ExamID == examId && x.CandidateID == candidateId && testcaseIds.Contains(x.TestCaseID), y => new
                 {
                     TestCaseName = BLTestCase.GetTestCase(y.TestCaseID).Name,
-                    Input = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Input),
+                    BLTestCase.GetTestCase(y.TestCaseID).Input,
                     CandidateOutput = y.Output,
-                    Output = BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.Output),
-                    RateTime = y.RunTime + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.TimeLimit),
-                    RateMemory = y.UsedMemory + "/" + BLTestCase.GetPropertyValue(a => a.ID == y.TestCaseID, b => b.MemoryLimit),
+                    BLTestCase.GetTestCase(y.TestCaseID).Output,
+                    RateTime = y.RunTime + "/" + BLTestCase.GetTestCase(y.TestCaseID).TimeLimit,
+                    RateMemory = y.UsedMemory + "/" + BLTestCase.GetTestCase(y.TestCaseID).MemoryLimit,
                     y.Mark,
                     y.Notification
                 }).OrderBy(x => x.TestCaseName).ToList();

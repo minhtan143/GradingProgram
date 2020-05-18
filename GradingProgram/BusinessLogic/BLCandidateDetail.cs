@@ -8,53 +8,76 @@ namespace GradingProgram
 {
     public class BLCandidateDetail : BusinessLogic
     {
-        public static IEnumerable<CandidateDetail> GetCandidateDetails()
+        public static List<CandidateDetail> GetCandidateDetails()
         {
-            return db.CandidateDetails;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.CandidateDetails.ToList();
+            }
         }
 
-        public static IEnumerable<Exam> GetExams(int candidateId)
+        public static List<Exam> GetExams(int candidateId)
         {
-            return GetCandidateDetails().Where(x => x.CandidateID == candidateId).Select(x => BLExam.GetExam(x.ExamID));
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                List<Exam> exams = new List<Exam>();
+                db.CandidateDetails.Where(x => x.CandidateID == candidateId).ToList().ForEach(x => exams.Add(BLExam.GetExam(x.ExamID)));
+                return exams;
+            }
         }
 
-        public static IEnumerable<Candidate> GetCandidates(int examId)
+        public static List<Candidate> GetCandidates(int examId)
         {
-            return GetCandidateDetails().Where(x => x.ExamID == examId).Select(x => BLCandidate.GetCandidate(x.CandidateID));
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                List<Candidate> candidates = new List<Candidate>();
+                db.CandidateDetails.Where(x => x.ExamID == examId).ToList().ForEach(x => candidates.Add(BLCandidate.GetCandidate(x.CandidateID)));
+                return candidates;
+            }
         }
 
-        public static IEnumerable<TKey> GetCandidateDetails<TKey>(Func<CandidateDetail, bool> predicate, Func<CandidateDetail, TKey> keySelector)
+        public static List<CandidateDetail> GetCandidateDetails(Func<CandidateDetail, bool> predicate)
         {
-            return GetCandidateDetails().Where(predicate).Select(keySelector);
-        }
-
-        public static IEnumerable<CandidateDetail> GetCandidateDetails(Func<CandidateDetail, bool> predicate)
-        {
-            return GetCandidateDetails().Where(predicate);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.CandidateDetails.Where(predicate).ToList();
+            }
         }
 
         public static void Add(CandidateDetail candidateDetail)
         {
-            db.CandidateDetails.Add(candidateDetail);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.CandidateDetails.Add(candidateDetail);
+                db.SaveChanges();
+            }
         }
 
-        public static void Add(IEnumerable<CandidateDetail> candidateDetails)
+        public static void Add(List<CandidateDetail> candidateDetails)
         {
-            db.CandidateDetails.AddRange(candidateDetails);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.CandidateDetails.AddRange(candidateDetails);
+                db.SaveChanges();
+            }
         }
 
         public static void Delete(CandidateDetail candidateDetail)
         {
-            db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(candidateDetail).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+            }
         }
 
-        public static void Delete(IEnumerable<CandidateDetail> candidateDetails)
+        public static void Delete(List<CandidateDetail> candidateDetails)
         {
-            candidateDetails.ToList().ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                candidateDetails.ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
+                db.SaveChanges();
+            }
         }
     }
 }

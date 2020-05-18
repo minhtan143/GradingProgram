@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homePageTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.guideTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.examTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.createExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.gradingTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.gradingThisExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.settingCompareTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.settingCompilerTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.examTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.createExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRusultTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.questionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.createQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CandidateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exitTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
@@ -69,8 +71,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homePageTSMI,
-            this.examTSMI,
             this.gradingTSMI,
+            this.examTSMI,
             this.questionTSMI,
             this.candidateTSMI,
             this.infomationTSMI});
@@ -84,7 +86,8 @@
             // 
             this.homePageTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.guideTSMI,
-            this.refreshTSMI});
+            this.refreshTSMI,
+            this.exitTSMI});
             this.homePageTSMI.Name = "homePageTSMI";
             this.homePageTSMI.Size = new System.Drawing.Size(71, 20);
             this.homePageTSMI.Text = "Trang chủ";
@@ -103,31 +106,6 @@
             this.refreshTSMI.Size = new System.Drawing.Size(180, 22);
             this.refreshTSMI.Text = "Cập nhật lại";
             this.refreshTSMI.Click += new System.EventHandler(this.refreshTSMI_Click);
-            // 
-            // examTSMI
-            // 
-            this.examTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createExamTSMI,
-            this.manageExamTSMI});
-            this.examTSMI.Name = "examTSMI";
-            this.examTSMI.Size = new System.Drawing.Size(48, 20);
-            this.examTSMI.Text = "Kỳ thi";
-            // 
-            // createExamTSMI
-            // 
-            this.createExamTSMI.Name = "createExamTSMI";
-            this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.createExamTSMI.Size = new System.Drawing.Size(192, 22);
-            this.createExamTSMI.Text = "Tạo kỳ thi mới";
-            this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
-            // 
-            // manageExamTSMI
-            // 
-            this.manageExamTSMI.Name = "manageExamTSMI";
-            this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.manageExamTSMI.Size = new System.Drawing.Size(192, 22);
-            this.manageExamTSMI.Text = "Quản lý kỳ thi";
-            this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
             // 
             // gradingTSMI
             // 
@@ -163,6 +141,40 @@
             this.settingCompilerTSMI.Size = new System.Drawing.Size(192, 22);
             this.settingCompilerTSMI.Text = "Cài đặt bộ dịch";
             this.settingCompilerTSMI.Click += new System.EventHandler(this.settingCompilerTSMI_Click);
+            // 
+            // examTSMI
+            // 
+            this.examTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createExamTSMI,
+            this.manageExamTSMI,
+            this.deleteRusultTSMI});
+            this.examTSMI.Name = "examTSMI";
+            this.examTSMI.Size = new System.Drawing.Size(48, 20);
+            this.examTSMI.Text = "Kỳ thi";
+            // 
+            // createExamTSMI
+            // 
+            this.createExamTSMI.Name = "createExamTSMI";
+            this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.createExamTSMI.Size = new System.Drawing.Size(270, 22);
+            this.createExamTSMI.Text = "Tạo kỳ thi mới";
+            this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
+            // 
+            // manageExamTSMI
+            // 
+            this.manageExamTSMI.Name = "manageExamTSMI";
+            this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.manageExamTSMI.Size = new System.Drawing.Size(270, 22);
+            this.manageExamTSMI.Text = "Quản lý kỳ thi";
+            this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
+            // 
+            // deleteRusultTSMI
+            // 
+            this.deleteRusultTSMI.Name = "deleteRusultTSMI";
+            this.deleteRusultTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.deleteRusultTSMI.Size = new System.Drawing.Size(270, 22);
+            this.deleteRusultTSMI.Text = "Xóa kết quả kỳ thì đang mở";
+            this.deleteRusultTSMI.Click += new System.EventHandler(this.deleteRusultTSMI_Click);
             // 
             // questionTSMI
             // 
@@ -305,32 +317,32 @@
             this.dgvResults.AllowUserToDeleteRows = false;
             this.dgvResults.AllowUserToResizeColumns = false;
             this.dgvResults.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResults.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvResults.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Code,
             this.CandidateName});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.GridColor = System.Drawing.Color.Gray;
             this.dgvResults.Location = new System.Drawing.Point(0, 67);
@@ -368,6 +380,14 @@
             this.CandidateName.Name = "CandidateName";
             this.CandidateName.ReadOnly = true;
             // 
+            // exitTSMI
+            // 
+            this.exitTSMI.Name = "exitTSMI";
+            this.exitTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitTSMI.Size = new System.Drawing.Size(180, 22);
+            this.exitTSMI.Text = "Thoát";
+            this.exitTSMI.Click += new System.EventHandler(this.exitTSMI_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,6 +402,7 @@
             this.Text = "Chấm thi tự động";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.frmMain_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -423,6 +444,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateName;
+        private System.Windows.Forms.ToolStripMenuItem deleteRusultTSMI;
+        private System.Windows.Forms.ToolStripMenuItem exitTSMI;
     }
 }
 

@@ -18,7 +18,7 @@ namespace GradingProgram
         public frmSettingGrading(int examId)
         {
             path = BLExam.GetExam(examId).Folder + "\\Setting.txt";
-            questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId).ToList();
+            questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId);
             InitializeComponent();
             gbSetting.Text = BLExam.GetExam(examId).Name;
             LoadData();

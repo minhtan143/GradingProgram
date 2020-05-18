@@ -12,7 +12,7 @@ namespace GradingProgram
             {
                 case ".exe": return RunFile(pathFile, "", input, timeLimit, memoryLimit);
                 case ".class": return RunFile(@"Utility\VC\bin\javac.exe", pathFile, input, timeLimit, memoryLimit);
-                case ".py": return RunFile(pathFile, "", input, timeLimit, memoryLimit);
+                case ".py": return RunFile(@"Utility\venv\Scripts", pathFile, input, timeLimit, memoryLimit);
                 default: return new RunResult() { Result = RunResultEnum.RunError, Error = "Malformed" };
             }
         }

@@ -79,7 +79,7 @@ namespace GradingProgram
             frmSettingTestCase frmSetUpTestCase = new frmSettingTestCase();
             if (frmSetUpTestCase.ShowDialog() == DialogResult.OK)
             {
-                var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                List<TestCase> testCases = BLTestCase.GetTestCases(questionId);
                 testCases.ForEach(x =>
                 {
                     x.TimeLimit = (int)frmSetUpTestCase.nudTimeOut.Value;
@@ -125,17 +125,20 @@ namespace GradingProgram
 
         private void frmQuestionView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modify)
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
-                DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                if (modify)
                 {
-                    btnSave_Click(null, null);
-                    if (modify)
+                    DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        btnSave_Click(null, null);
+                        if (modify)
+                            e.Cancel = true;
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
                         e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.Cancel)
-                    e.Cancel = true;
             }
         }
 
@@ -164,7 +167,7 @@ namespace GradingProgram
                     DialogResult dialogResult = MessageBox.Show("Xóa tất cả testcase?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                        List<TestCase> testCases = BLTestCase.GetTestCases(questionId);
                         BLTestCase.Delete(testCases);
                         TestCaseRefresh();
                     }

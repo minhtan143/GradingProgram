@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -42,8 +43,7 @@ namespace GradingProgram
                     "\nThông tin kết quả của các bài kiểm tra liên quan đến câu hỏi vẫn được giữ lại!", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Question question = BLQuestion.GetQuestion(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
-                    BLQuestion.Delete(question);
+                    BLQuestion.Delete(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                     LoadData();
                 }
             }

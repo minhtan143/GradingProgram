@@ -23,7 +23,7 @@ namespace GradingProgram
 
         private void LoadData()
         {
-            var data = BLExam.GetExams(x => new { x.ID, x.Name }).ToList();
+            var data = BLExam.GetExams(x => new { x.ID, x.Name });
             data.Add(new { ID = 0, Name = "All" });
 
             cbExamName.DisplayMember = "Name";
@@ -35,8 +35,8 @@ namespace GradingProgram
         private void RefreshCandidates(int examId)
         {
             if (examId == 0)
-                dgvCandidates.DataSource = BusinessLogic.Search(BLCandidate.GetCandidates().Select(x => new { x.ID, x.Code, x.Name, x.Phone, x.Email }), txtSearch.Text).ToList();
-            else dgvCandidates.DataSource = BusinessLogic.Search(BLCandidateDetail.GetCandidates(examId).Select(x => new { x.ID, x.Code, x.Name, x.Phone, x.Email }), txtSearch.Text).ToList();
+                dgvCandidates.DataSource = BusinessLogic.Search(BLCandidate.GetCandidates().Select(x => new { x.ID, x.Code, x.Name, x.Phone, x.Email }).ToList(), txtSearch.Text).ToList();
+            else dgvCandidates.DataSource = BusinessLogic.Search(BLCandidateDetail.GetCandidates(examId).Select(x => new { x.ID, x.Code, x.Name, x.Phone, x.Email }).ToList(), txtSearch.Text).ToList();
         }
 
         private void dgvCandidate_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

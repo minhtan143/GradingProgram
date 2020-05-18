@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 
 namespace GradingProgram
 {
@@ -11,6 +12,7 @@ namespace GradingProgram
 
     public class Utility
     {
+
         public static List<TestCase> ScanTestCases(string path)
         {
             List<TestCase> testCases = new List<TestCase>();
@@ -63,7 +65,7 @@ namespace GradingProgram
             data.Rows.Add(".c", @"Utility\MinGW64\bin\gcc.exe -o %PATH%%NAME%.exe  %PATH%%NAME%%EXT%  -O2 -s -static -lm -x c");
             data.Rows.Add(".java", @"Utility\VC\bin\javac.exe %PATH%%NAME%%EXT%");
             data.Rows.Add(".pp", @"Utility\Pascal\fpc.exe  -o %PATH%%NAME%.exe -O2 -XS -Sg %PATH%%NAME%%EXT%");
-            data.Rows.Add(".py", ";Dịch mã nguồn Python");
+            data.Rows.Add(".py", ";Chạy mã nguồn Python");
             data.Rows.Add(".exe", ";Nếu không muốn dịch lại khi đã có file .exe, chuyển loại file này lên đầu");
             data.Rows.Add(".class", ";Nếu không muốn dịch lại khi đã có file .class, chuyển loại file này lên đầu");
 
@@ -89,15 +91,12 @@ namespace GradingProgram
             }
         }
 
-        public static void Grading(int examId, Dictionary<string, Compare> settingGrading, int timeLimit)
+        public static void Grading(int examId, Dictionary<string, Compare> settingGrading, int timeLimit, frmExaminationProcess fep)
         {
             Compiler.SettingCompiler = ReadFromSetting();
-            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId).ToList();
+            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId);
             DirectoryInfo dirExam = new DirectoryInfo(BLExam.GetExam(examId).Folder);
             DirectoryInfo[] dirCandidates = dirExam.GetDirectories();
-
-            frmExaminationProcess fep = new frmExaminationProcess();
-            fep.Show();
 
             FileInfo file1 = new FileInfo(dirExam.FullName + "\\Output1.txt");
             FileInfo file2 = new FileInfo(dirExam.FullName + "\\Output2.txt");
@@ -127,7 +126,7 @@ namespace GradingProgram
                     fep.QuestionName = question.FileName;
 
                     CompilerResult compilerResult = Compiler.FileCompiler(dirCandidate.GetFiles(), question.FileName, timeLimit);
-                    List<TestCase> testCases = BLTestCase.GetTestCases(question.QuestionID).ToList();
+                    List<TestCase> testCases = BLTestCase.GetTestCases(question.QuestionID);
 
                     foreach (TestCase testCase in testCases)
                     {
@@ -177,6 +176,13 @@ namespace GradingProgram
 
                         fep.rtbNotifications.Text += dirCandidate.Name + " - " + question.FileName + " - " + testCase.Name + "\t:" + result.Notification + "\n";
                     }
+
+                    if (fep.HasCanceled)
+                    {
+                        file1.Delete();
+                        file2.Delete();
+                        return;
+                    }
                 }
             }
 
@@ -188,7 +194,7 @@ namespace GradingProgram
         public static void Grading(int examId, int candidateId, FileInfo[] files, Dictionary<string, Compare> settingGrading, int timeLimit)
         {
             Compiler.SettingCompiler = ReadFromSetting();
-            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId).ToList();
+            List<ExamDetail> questions = BLExamDetail.GetExamDetails(x => x.ExamID == examId);
             Exam exam = BLExam.GetExam(examId);
             Candidate candidate = BLCandidate.GetCandidate(candidateId);
 
@@ -212,7 +218,7 @@ namespace GradingProgram
                 fep.QuestionName = question.FileName;
 
                 CompilerResult compilerResult = Compiler.FileCompiler(new FileInfo[] { file }, question.FileName, timeLimit);
-                List<TestCase> testCases = BLTestCase.GetTestCases(question.QuestionID).ToList();
+                List<TestCase> testCases = BLTestCase.GetTestCases(question.QuestionID);
 
                 foreach (TestCase testCase in testCases)
                 {

@@ -11,10 +11,14 @@ namespace GradingProgram
     public partial class frmMain : Form
     {
         private int examId;
-        public static bool dbChange { get; set; } = false;
+        public static bool DbChange { get; set; }
+        public static bool IsGrading { get; set; }
 
         public frmMain()
         {
+            DbChange = false;
+            IsGrading = false;
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             Initialize.SetUpForm(this);
             LoadData();
@@ -154,7 +158,7 @@ namespace GradingProgram
 
         private void refreshTSMI_Click(object sender, EventArgs e)
         {
-            dbChange = true;
+            DbChange = true;
             frmMain_Activated(null, null);
         }
 
@@ -163,7 +167,7 @@ namespace GradingProgram
             new frmSettingGrading(examId).ShowDialog();
         }
 
-        private void gradingThisExamTSMI_Click(object sender, EventArgs e)
+        private async void gradingThisExamTSMI_Click(object sender, EventArgs e)
         {
             Dictionary<string, Compare> settingGrading = new Dictionary<string, Compare>();
             try
@@ -188,25 +192,53 @@ namespace GradingProgram
                     return;
             }
 
-            Utility.Grading(examId, settingGrading, 2000);
-            dbChange = true;
+            frmExaminationProcess fep = new frmExaminationProcess();
+            await Task.Run(() => Utility.Grading(examId, settingGrading, 2000, fep));
+            DbChange = true;
             frmMain_Activated(null, null);
         }
 
         private void frmMain_Activated(object sender, EventArgs e)
         {
-            if (dbChange)
+            if (DbChange)
             {
                 var index = cbExamName.SelectedValue;
                 LoadData();
                 cbExamName.SelectedValue = index;
-                dbChange = false;
+                DbChange = false;
             }
         }
 
         private void settingCompilerTSMI_Click(object sender, EventArgs e)
         {
             new frmSettingCompiler().ShowDialog();
+        }
+
+        private void deleteRusultTSMI_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Xác nhận xóa tất cả kết quả của kỳ thi hiện tại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                BLResult.Delete(BLResult.GetResults(x => x.ExamID == examId));
+                frmMain_Activated(null, null);
+            }
+        }
+
+        private void exitTSMI_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (IsGrading)
+            {
+                DialogResult dialogResult = MessageBox.Show("Có kỳ thi đang trong quá trình chấm. Vẫn thoát?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }
