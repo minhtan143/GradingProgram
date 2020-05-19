@@ -147,7 +147,7 @@
             this.btnRemoveQuestion.Name = "btnRemoveQuestion";
             this.btnRemoveQuestion.Size = new System.Drawing.Size(75, 35);
             this.btnRemoveQuestion.TabIndex = 13;
-            this.btnRemoveQuestion.Text = "X";
+            this.btnRemoveQuestion.Text = "<<";
             this.btnRemoveQuestion.UseVisualStyleBackColor = true;
             this.btnRemoveQuestion.Click += new System.EventHandler(this.btnSub_Click);
             // 
