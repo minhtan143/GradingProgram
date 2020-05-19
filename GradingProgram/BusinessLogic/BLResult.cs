@@ -9,55 +9,87 @@ namespace GradingProgram
 {
     public class BLResult : BusinessLogic
     {
-        public static IEnumerable<Result> GetResults()
+        public static List<Result> GetResults()
         {
-            return db.Results;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Results.ToList();
+            }
         }
 
-        public static IEnumerable<TKey> GetResults<TKey>(Func<Result, bool> predicate, Func<Result, TKey> keySelector)
+        public static List<TKey> GetResults<TKey>(Func<Result, bool> predicate, Func<Result, TKey> keySelector)
         {
-            return GetPropertyValues(GetResults().Where(predicate), keySelector);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Results.Where(predicate).Select(keySelector).ToList();
+            }
+        }
+
+        public static List<Result> GetResults(Func<Result, bool> predicate)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.Results.Where(predicate).ToList();
+            }
         }
 
         public static int SumMark(int candidateId, int examId)
         {
-            var sum = GetResults().Where(x => x.CandidateID == candidateId && x.ExamID == examId).Sum(x => x.Mark);
-            if (sum.HasValue)
-                return sum.Value;
-            return 0;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                int? sum = db.Results.Where(x => x.CandidateID == candidateId && x.ExamID == examId).Sum(x => x.Mark);
+                if (sum.HasValue)
+                    return sum.Value;
+                return 0;
+            }
         }
 
         public static int SumMark(int candidateId, int examId, int questionId)
         {
-            var testCaseIds = BLQuestion.GetTestCases(questionId).ToList();
-            var sum = GetResults().Where(x => x.CandidateID == candidateId && x.ExamID == examId && testCaseIds.Exists(y => y.ID == x.TestCaseID)).Sum(x => x.Mark);
-            if (sum.HasValue)
-                return sum.Value;
-            return 0;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                List<int> testCaseIds = BLTestCase.GetPropertyValues(x => x.QuestionID == questionId, y => y.ID);
+                int? sum = db.Results.Where(x => x.CandidateID == candidateId && x.ExamID == examId && testCaseIds.Contains(x.TestCaseID)).Sum(x => x.Mark);
+                if (sum.HasValue)
+                    return sum.Value;
+                return 0;
+            }
         }
 
         public static void AddOrUpdate(Result result)
         {
-            db.Results.AddOrUpdate(result);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Results.AddOrUpdate(result);
+                db.SaveChanges();
+            }
         }
 
-        public static void AddOrUpdate(IEnumerable<Result> results)
+        public static void AddOrUpdate(List<Result> results)
         {
-            db.Results.AddOrUpdate(results.ToArray());
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Results.AddOrUpdate(results.ToArray());
+                db.SaveChanges();
+            }
         }
 
         public static void Delete(Result result)
         {
-            db.Results.Remove(result);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(result).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+            }
         }
 
-        public static void Delete(IEnumerable<Result> results)
+        public static void Delete(List<Result> results)
         {
-            db.Results.RemoveRange(results);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                results.ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
+                db.SaveChanges();
+            }
         }
     }
 }

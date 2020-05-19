@@ -37,6 +37,7 @@
             this.lblSum = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvQuestions = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuestionsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -115,6 +116,7 @@
             this.dgvQuestions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.QuestionsName,
             this.Detail,
             this.Delete});
@@ -137,6 +139,14 @@
             this.dgvQuestions.TabIndex = 6;
             this.dgvQuestions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellClick);
             this.dgvQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellDoubleClick);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
             // QuestionsName
             // 
@@ -176,6 +186,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmManageQuestion";
             this.Text = "Quản lý câu hỏi";
+            this.Activated += new System.EventHandler(this.frmManageQuestion_Activated);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
@@ -191,6 +202,7 @@
         private System.Windows.Forms.Label lblSum;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvQuestions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuestionsName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Detail;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;

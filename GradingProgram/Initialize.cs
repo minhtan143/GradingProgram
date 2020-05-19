@@ -30,6 +30,8 @@ namespace GradingProgram
 
         public static void SetUpForm(Form form)
         {
+            form.Icon = Icon.FromHandle(Properties.Resources.icon.GetHicon());
+
             foreach (var control in form.Controls) 
             { 
                 if (control is Panel) 

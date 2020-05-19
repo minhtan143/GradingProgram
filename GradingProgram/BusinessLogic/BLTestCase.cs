@@ -9,63 +9,112 @@ namespace GradingProgram
 {
     public class BLTestCase : BusinessLogic
     {
-        public static IEnumerable<TestCase> GetTestCases()
+        public static List<TestCase> GetTestCases()
         {
-            return db.TestCases;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.ToList();
+            }
         }
 
         public static TestCase GetTestCase(int testcaseId)
         {
-            return GetTestCases().SingleOrDefault(x => x.ID == testcaseId);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.SingleOrDefault(x => x.ID == testcaseId);
+            }
         }
 
-        public static IEnumerable<TestCase> GetTestCases(int questionId)
+        public static List<TestCase> GetTestCases(int questionId)
         {
-            return GetTestCases().Where(x => x.QuestionID == questionId);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(x => x.QuestionID == questionId).ToList();
+            }
         }
 
         public static bool Exists(int questionId, string testName)
         {
-            return GetTestCases().Count(x => x.QuestionID == questionId && x.Name == testName) > 0;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Any(x => x.QuestionID == questionId && x.Name == testName);
+            }
         }
 
-        public static IEnumerable<TKey> GetTestCases<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
+        public static List<TKey> GetTestCases<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
         {
-            return GetTestCases().Where(predicate).Select(keySelector);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(predicate).Select(keySelector).ToList();
+            }
+        }
+
+        public static List<TestCase> GetTestCases(Func<TestCase, bool> predicate)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(predicate).ToList();
+            }
         }
 
         public static TKey GetPropertyValue<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
         {
-            return GetTestCases().Where(predicate).Select(keySelector).SingleOrDefault();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(predicate).Select(keySelector).SingleOrDefault();
+            }
+        }
+
+        public static List<TKey> GetPropertyValues<TKey>(Func<TestCase, bool> predicate, Func<TestCase, TKey> keySelector)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(predicate).Select(keySelector).ToList();
+            }
         }
 
         public static int SumMark(int questionId)
         {
-            return GetTestCases().Where(x => x.QuestionID == questionId).Sum(y => y.Mark).Value;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.TestCases.Where(x => x.QuestionID == questionId).Sum(y => y.Mark).Value;
+            }
         }
 
         public static void AddOrUpdate(TestCase testCase)
         {
-            db.TestCases.AddOrUpdate(testCase);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.TestCases.AddOrUpdate(testCase);
+                db.SaveChanges();
+            }
         }
 
-        public static void AddOrUpdate(IEnumerable<TestCase> testCases)
+        public static void AddOrUpdate(List<TestCase> testCases)
         {
-            db.TestCases.AddOrUpdate(testCases.ToArray());
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.TestCases.AddOrUpdate(testCases.ToArray());
+                db.SaveChanges();
+            }
         }
 
         public static void Delete(TestCase testCase)
         {
-            db.TestCases.Remove(testCase);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(testCase).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+            }
         }
 
-        public static void Delete(IEnumerable<TestCase> testCases)
+        public static void Delete(List<TestCase> testCases)
         {
-            db.TestCases.RemoveRange(testCases);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                testCases.ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
+                db.SaveChanges();
+            }
         }
     }
 }

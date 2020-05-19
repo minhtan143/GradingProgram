@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,47 +9,90 @@ namespace GradingProgram
 {
     public class BLExamDetail : BusinessLogic
     {
-        public static IEnumerable<ExamDetail> GetExamDetails()
+        public static List<ExamDetail> GetExamDetails()
         {
-            return db.ExamDetails;
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.ExamDetails.ToList();
+            }
         }
 
-        public static IEnumerable<Question> GetQuestions(int examId)
+        public static List<Question> GetQuestions(int examId)
         {
-            return GetExamDetails().Where(x => x.ExamID == examId).OrderBy(x => x.FileName).Select(x => BLQuestion.GetQuestion(x.QuestionID));
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                List<Question> questions = new List<Question>();
+                db.ExamDetails.Where(x => x.ExamID == examId).ToList().ForEach(x => questions.Add(BLQuestion.GetQuestion(x.QuestionID)));
+                return questions;
+            }
         }
 
-        public static IEnumerable<TKey> GetExamDetails<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
+        public static List<TKey> GetExamDetails<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
         {
-            return GetExamDetails().Where(predicate).Select(keySelector);
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.ExamDetails.Where(predicate).Select(keySelector).ToList();
+            }
+        }
+
+        public static List<ExamDetail> GetExamDetails(Func<ExamDetail, bool> predicate)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.ExamDetails.Where(predicate).ToList();
+            }
         }
 
         public static TKey GetExamDetail<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
         {
-            return GetExamDetails().Where(predicate).Select(keySelector).SingleOrDefault();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.ExamDetails.Where(predicate).Select(keySelector).SingleOrDefault();
+            }
         }
 
-        public static TKey GetPropertyValue<TKey>(Func<ExamDetail, bool> predicate, Func<ExamDetail, TKey> keySelector)
+        public static ExamDetail GetExamDetail(Func<ExamDetail, bool> predicate)
         {
-            return GetExamDetails().Where(predicate).Select(keySelector).SingleOrDefault();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                return db.ExamDetails.Where(predicate).SingleOrDefault();
+            }
         }
 
-        public static void Add(ExamDetail examDetail)
+        public static void AddOrUpdate(ExamDetail examDetail)
         {
-            db.ExamDetails.Add(examDetail);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.ExamDetails.AddOrUpdate(examDetail);
+                db.SaveChanges();
+            }
         }
 
-        public static void Add(IEnumerable<ExamDetail> examDetails)
+        public static void AddOrUpdate(List<ExamDetail> examDetails)
         {
-            db.ExamDetails.AddRange(examDetails);
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.ExamDetails.AddOrUpdate(examDetails.ToArray());
+                db.SaveChanges();
+            }
         }
 
         public static void Delete(ExamDetail examDetail)
         {
-            db.Entry(examDetail).State = System.Data.Entity.EntityState.Deleted;
-            db.SaveChanges();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Entry(examDetail).State = System.Data.Entity.EntityState.Deleted;
+                db.SaveChanges();
+            }
+        }
+
+        public static void Delete(List<ExamDetail> examDetails)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                examDetails.ForEach(x => db.Entry(x).State = System.Data.Entity.EntityState.Deleted);
+                db.SaveChanges();
+            }
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -16,6 +13,7 @@ namespace GradingProgram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var a = BLCandidate.GetCandidate(70);
             Application.Run(new frmMain());
         }
     }

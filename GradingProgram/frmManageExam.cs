@@ -16,7 +16,6 @@ namespace GradingProgram
         private void LoadData()
         {
             dgvExams.DataSource = BusinessLogic.ToDataTable(BLExam.GetExams(x => new { x.ID, x.Name, x.Folder, x.CreateDate }));
-            dgvExams.Columns["ID"].Visible = false;
         }
 
         private void dgvExams_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -36,11 +35,15 @@ namespace GradingProgram
                 DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa kì thi này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Exam exam = BLExam.GetExam(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
-                    BLExam.Delete(exam);
+                    BLExam.Delete(int.Parse(dgvExams.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                     LoadData();
                 }
             }
+        }
+
+        private void frmManageExam_Activated(object sender, System.EventArgs e)
+        {
+            LoadData();
         }
     }
 }

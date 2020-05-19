@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -22,17 +24,18 @@ namespace GradingProgram
         {
             txtQuestionName.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Name);
             txtContent.Text = BLQuestion.GetPropertyValue(x => x.ID == questionId, y => y.Detail);
+
+            TestCaseRefresh();
+
             btnSave.Visible = false;
             btnCancel.Visible = false;
             btnOK.Visible = true;
             modify = false;
-            TestCaseRefresh();
         }
 
         private void TestCaseRefresh()
         {
             dgvTestCases.DataSource = BusinessLogic.ToDataTable(BLTestCase.GetTestCases(x => x.QuestionID == questionId, x => new { x.ID, x.Name, x.Input, x.Output, x.TimeLimit, x.MemoryLimit, x.Mark }).OrderBy(x => x.Name));
-            dgvTestCases.Columns["ID"].Visible = false;
         }
 
         private void dgvTestCases_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -76,7 +79,7 @@ namespace GradingProgram
             frmSettingTestCase frmSetUpTestCase = new frmSettingTestCase();
             if (frmSetUpTestCase.ShowDialog() == DialogResult.OK)
             {
-                var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                List<TestCase> testCases = BLTestCase.GetTestCases(questionId);
                 testCases.ForEach(x =>
                 {
                     x.TimeLimit = (int)frmSetUpTestCase.nudTimeOut.Value;
@@ -93,19 +96,18 @@ namespace GradingProgram
             try
             {
                 Question question = BLQuestion.GetQuestion(questionId);
-                if (question.Name != txtQuestionName.Text)
+                if (question.Name != txtQuestionName.Text.Trim())
                 {
-                    if (BLQuestion.Exists(txtQuestionName.Text))
+                    if (BLQuestion.Exists(txtQuestionName.Text.Trim()))
                         throw new Exception("Tên câu hỏi đã tồn tại!");
-                    question.Name = txtQuestionName.Name;
+                    question.Name = txtQuestionName.Text.Trim();
                 }
-                question.Detail = txtContent.Text;
+                question.Detail = txtContent.Text.Trim();
                 BLQuestion.Update(question);
                 btnSave.Visible = false;
                 btnOK.Visible = true;
                 btnCancel.Visible = false;
                 modify = false;
-                questionId = question.ID;
             }
             catch (Exception ex)
             {
@@ -123,17 +125,20 @@ namespace GradingProgram
 
         private void frmQuestionView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modify)
+            if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
-                DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                if (modify)
                 {
-                    btnSave_Click(null, null);
-                    if (modify)
+                    DialogResult dialogResult = MessageBox.Show("Thay đổi của bạn chưa được lưu. Lưu lại?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        btnSave_Click(null, null);
+                        if (modify)
+                            e.Cancel = true;
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
                         e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.Cancel)
-                    e.Cancel = true;
             }
         }
 
@@ -162,7 +167,7 @@ namespace GradingProgram
                     DialogResult dialogResult = MessageBox.Show("Xóa tất cả testcase?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        var testCases = BLTestCase.GetTestCases(questionId).ToList();
+                        List<TestCase> testCases = BLTestCase.GetTestCases(questionId);
                         BLTestCase.Delete(testCases);
                         TestCaseRefresh();
                     }
@@ -184,17 +189,21 @@ namespace GradingProgram
 
         private void btnAddFromFile_Click(object sender, EventArgs e)
         {
-
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                List<TestCase> testCases = Utility.ScanTestCases(dialog.FileName);
+                testCases.ForEach(x => x.QuestionID = questionId);
+                BLTestCase.AddOrUpdate(testCases);
+                TestCaseRefresh();
+                Focus();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             LoadData();
-        }
-
-        private void dgvTestCases_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-
         }
 
         private void btnOK_Click(object sender, EventArgs e)

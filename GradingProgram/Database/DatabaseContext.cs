@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 
 namespace GradingProgram
 {
@@ -7,6 +8,11 @@ namespace GradingProgram
         public static string connectionString = "Data source=(local);initial catalog=GradingProgram;integrated security=True;MultipleActiveResultSets=True";
         
         public DatabaseContext() : base(connectionString) { }
+
+        private void OpenConnection()
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual DbSet<Candidate> Candidates { get; set; }
         public virtual DbSet<CandidateDetail> CandidateDetails { get; set; }

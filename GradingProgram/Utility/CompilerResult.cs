@@ -9,8 +9,6 @@ namespace GradingProgram
         public string Error { get; set; }
 
         public int CompilerTime { get; set; }
-        
-        public long UsedMemory { get; set; }
 
         public int ExitCode { get; set; }
     }

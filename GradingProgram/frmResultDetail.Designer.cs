@@ -48,18 +48,11 @@
             this.lblName = new System.Windows.Forms.Label();
             this.lblSumMark = new System.Windows.Forms.Label();
             this.dgvQuestions = new System.Windows.Forms.DataGridView();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuestionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMark = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvTestCases = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.dgvTasks = new System.Windows.Forms.DataGridView();
-            this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.Testcase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Input = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CandidateOutput = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +61,14 @@
             this.TimeOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Notification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvTasks = new System.Windows.Forms.DataGridView();
+            this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuestionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -221,6 +222,7 @@
             this.dgvQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuestions.ColumnHeadersVisible = false;
             this.dgvQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.QuestionID,
             this.FileName,
             this.QuestionName});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -242,22 +244,6 @@
             this.dgvQuestions.TabIndex = 13;
             this.dgvQuestions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellClick);
             this.dgvQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestions_CellDoubleClick);
-            // 
-            // FileName
-            // 
-            this.FileName.DataPropertyName = "FileName";
-            this.FileName.HeaderText = "Tên bài thi";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            this.FileName.Width = 5;
-            // 
-            // QuestionName
-            // 
-            this.QuestionName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.QuestionName.DataPropertyName = "QuestionName";
-            this.QuestionName.HeaderText = "Tên câu hỏi";
-            this.QuestionName.Name = "QuestionName";
-            this.QuestionName.ReadOnly = true;
             // 
             // panel1
             // 
@@ -360,6 +346,70 @@
             this.dgvTestCases.TabIndex = 17;
             this.dgvTestCases.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTestCases_CellDoubleClick);
             // 
+            // Testcase
+            // 
+            this.Testcase.DataPropertyName = "TestCaseName";
+            this.Testcase.HeaderText = "Mã test";
+            this.Testcase.Name = "Testcase";
+            this.Testcase.ReadOnly = true;
+            this.Testcase.Width = 70;
+            // 
+            // Input
+            // 
+            this.Input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Input.DataPropertyName = "Input";
+            this.Input.HeaderText = "Đầu vào";
+            this.Input.Name = "Input";
+            this.Input.ReadOnly = true;
+            // 
+            // CandidateOutput
+            // 
+            this.CandidateOutput.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CandidateOutput.DataPropertyName = "CandidateOutput";
+            this.CandidateOutput.HeaderText = "Đầu ra thí sinh";
+            this.CandidateOutput.Name = "CandidateOutput";
+            this.CandidateOutput.ReadOnly = true;
+            // 
+            // Output
+            // 
+            this.Output.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Output.DataPropertyName = "Output";
+            this.Output.HeaderText = "Đầu ra";
+            this.Output.Name = "Output";
+            this.Output.ReadOnly = true;
+            // 
+            // RunTime
+            // 
+            this.RunTime.DataPropertyName = "RateTime";
+            this.RunTime.HeaderText = "Thời gian chạy/giới hạn (ms)";
+            this.RunTime.Name = "RunTime";
+            this.RunTime.ReadOnly = true;
+            this.RunTime.Width = 159;
+            // 
+            // TimeOut
+            // 
+            this.TimeOut.DataPropertyName = "RateMemory";
+            this.TimeOut.HeaderText = "Bộ nhớ sử dụng/giới hạn (MB)";
+            this.TimeOut.Name = "TimeOut";
+            this.TimeOut.ReadOnly = true;
+            this.TimeOut.Width = 107;
+            // 
+            // Mark
+            // 
+            this.Mark.DataPropertyName = "Mark";
+            this.Mark.HeaderText = "Điểm";
+            this.Mark.Name = "Mark";
+            this.Mark.ReadOnly = true;
+            this.Mark.Width = 64;
+            // 
+            // Notification
+            // 
+            this.Notification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Notification.DataPropertyName = "Notification";
+            this.Notification.HeaderText = "Thông tin";
+            this.Notification.Name = "Notification";
+            this.Notification.ReadOnly = true;
+            // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -437,69 +487,30 @@
             this.panel5.Size = new System.Drawing.Size(167, 10);
             this.panel5.TabIndex = 14;
             // 
-            // Testcase
+            // QuestionID
             // 
-            this.Testcase.DataPropertyName = "TestCaseName";
-            this.Testcase.HeaderText = "Mã test";
-            this.Testcase.Name = "Testcase";
-            this.Testcase.ReadOnly = true;
-            this.Testcase.Width = 76;
+            this.QuestionID.DataPropertyName = "QuestionID";
+            this.QuestionID.HeaderText = "QuestionID";
+            this.QuestionID.Name = "QuestionID";
+            this.QuestionID.ReadOnly = true;
+            this.QuestionID.Visible = false;
+            this.QuestionID.Width = 5;
             // 
-            // Input
+            // FileName
             // 
-            this.Input.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Input.DataPropertyName = "Input";
-            this.Input.HeaderText = "Đầu vào";
-            this.Input.Name = "Input";
-            this.Input.ReadOnly = true;
+            this.FileName.DataPropertyName = "FileName";
+            this.FileName.HeaderText = "Tên bài thi";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 5;
             // 
-            // CandidateOutput
+            // QuestionName
             // 
-            this.CandidateOutput.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CandidateOutput.DataPropertyName = "CandidateOutput";
-            this.CandidateOutput.HeaderText = "Đầu ra thí sinh";
-            this.CandidateOutput.Name = "CandidateOutput";
-            this.CandidateOutput.ReadOnly = true;
-            // 
-            // Output
-            // 
-            this.Output.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Output.DataPropertyName = "Output";
-            this.Output.HeaderText = "Đầu ra";
-            this.Output.Name = "Output";
-            this.Output.ReadOnly = true;
-            // 
-            // RunTime
-            // 
-            this.RunTime.DataPropertyName = "RateTime";
-            this.RunTime.HeaderText = "Thời gian chạy/giới hạn (ms)";
-            this.RunTime.Name = "RunTime";
-            this.RunTime.ReadOnly = true;
-            this.RunTime.Width = 106;
-            // 
-            // TimeOut
-            // 
-            this.TimeOut.DataPropertyName = "RateMemory";
-            this.TimeOut.HeaderText = "Bộ nhớ sử dụng/giới hạn (MB)";
-            this.TimeOut.Name = "TimeOut";
-            this.TimeOut.ReadOnly = true;
-            this.TimeOut.Width = 107;
-            // 
-            // Mark
-            // 
-            this.Mark.DataPropertyName = "Mark";
-            this.Mark.HeaderText = "Điểm";
-            this.Mark.Name = "Mark";
-            this.Mark.ReadOnly = true;
-            this.Mark.Width = 64;
-            // 
-            // Notification
-            // 
-            this.Notification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Notification.DataPropertyName = "Notification";
-            this.Notification.HeaderText = "Thông tin";
-            this.Notification.Name = "Notification";
-            this.Notification.ReadOnly = true;
+            this.QuestionName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.QuestionName.DataPropertyName = "QuestionName";
+            this.QuestionName.HeaderText = "Tên câu hỏi";
+            this.QuestionName.Name = "QuestionName";
+            this.QuestionName.ReadOnly = true;
             // 
             // frmResultDetail
             // 
@@ -511,7 +522,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "frmResultDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmResultDetail";
+            this.Text = "Kết quả";
             this.SizeChanged += new System.EventHandler(this.frmResultDetail_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmResultDetail_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
@@ -548,8 +559,6 @@
         private System.Windows.Forms.Label lblMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn Task;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Testcase;
         private System.Windows.Forms.DataGridViewTextBoxColumn Input;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateOutput;
@@ -558,5 +567,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mark;
         private System.Windows.Forms.DataGridViewTextBoxColumn Notification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionName;
     }
 }

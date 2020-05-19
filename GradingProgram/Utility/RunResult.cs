@@ -1,6 +1,6 @@
 ﻿namespace GradingProgram
 {
-    public enum RunResultEnum { RunError, TimeLimit, MemoryLimit, CorrectAnswer, WrongAnswer }
+    public enum RunResultEnum { Successful, RunError, NotResponding, TimeLimit, MemoryLimit, CorrectAnswer, WrongAnswer }
 
     public class RunResult
     {
@@ -10,7 +10,7 @@
 
         public int RunTime { get; set; }
 
-        public int UsedMemory { get; set; }
+        public long UsedMemory { get; set; }
 
         public string Output { get; set; }
 

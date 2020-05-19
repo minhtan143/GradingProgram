@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace GradingProgram
@@ -15,7 +16,6 @@ namespace GradingProgram
         private void LoadData()
         {
             dgvQuestions.DataSource = BusinessLogic.ToDataTable(BusinessLogic.Search(BLQuestion.GetQuestions(x => new { x.ID, x.Name, x.Detail }), txtSearch.Text));
-            dgvQuestions.Columns["ID"].Visible = false;
             lblSum.Text = dgvQuestions.RowCount.ToString();
         }
 
@@ -27,7 +27,6 @@ namespace GradingProgram
                 frmQuestionView frmQuestionView = new frmQuestionView(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                 if (!Initialize.CheckOpened(frmQuestionView))
                     frmQuestionView.Show();
-                LoadData();
             }
         }
 
@@ -44,11 +43,15 @@ namespace GradingProgram
                     "\nThông tin kết quả của các bài kiểm tra liên quan đến câu hỏi vẫn được giữ lại!", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Question question = BLQuestion.GetQuestion(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
-                    BLQuestion.Delete(question);
+                    BLQuestion.Delete(int.Parse(dgvQuestions.Rows[e.RowIndex].Cells["ID"].Value.ToString()));
                     LoadData();
                 }
             }
+        }
+
+        private void frmManageQuestion_Activated(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

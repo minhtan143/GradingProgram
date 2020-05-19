@@ -32,21 +32,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.trangChủToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.homePageTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.guideTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.kỳThiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gradingTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.gradingThisExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingCompareTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingCompilerTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.examTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.createExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.chấmĐiểmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gradingThisExamTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.setupGradingTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.câuHỏiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRusultTSMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.questionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.createQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.thíSinhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.candidateTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCandidateTSMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.thôngTinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infomationTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +59,9 @@
             this.cbExamName = new System.Windows.Forms.ComboBox();
             this.dgvResults = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CandidateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exitTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
@@ -66,56 +70,93 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.trangChủToolStripMenuItem,
-            this.kỳThiToolStripMenuItem,
-            this.chấmĐiểmToolStripMenuItem,
-            this.câuHỏiToolStripMenuItem,
-            this.thíSinhToolStripMenuItem,
-            this.thôngTinToolStripMenuItem});
+            this.homePageTSMI,
+            this.gradingTSMI,
+            this.examTSMI,
+            this.questionTSMI,
+            this.candidateTSMI,
+            this.infomationTSMI});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // trangChủToolStripMenuItem
+            // homePageTSMI
             // 
-            this.trangChủToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.homePageTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.guideTSMI,
-            this.refreshTSMI});
-            this.trangChủToolStripMenuItem.Name = "trangChủToolStripMenuItem";
-            this.trangChủToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.trangChủToolStripMenuItem.Text = "Trang chủ";
+            this.refreshTSMI,
+            this.exitTSMI});
+            this.homePageTSMI.Name = "homePageTSMI";
+            this.homePageTSMI.Size = new System.Drawing.Size(71, 20);
+            this.homePageTSMI.Text = "Trang chủ";
             // 
             // guideTSMI
             // 
             this.guideTSMI.Name = "guideTSMI";
             this.guideTSMI.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.guideTSMI.Size = new System.Drawing.Size(156, 22);
+            this.guideTSMI.Size = new System.Drawing.Size(180, 22);
             this.guideTSMI.Text = "Hướng dẫn";
             // 
             // refreshTSMI
             // 
             this.refreshTSMI.Name = "refreshTSMI";
             this.refreshTSMI.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshTSMI.Size = new System.Drawing.Size(156, 22);
+            this.refreshTSMI.Size = new System.Drawing.Size(180, 22);
             this.refreshTSMI.Text = "Cập nhật lại";
             this.refreshTSMI.Click += new System.EventHandler(this.refreshTSMI_Click);
             // 
-            // kỳThiToolStripMenuItem
+            // gradingTSMI
             // 
-            this.kỳThiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gradingTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gradingThisExamTSMI,
+            this.settingCompareTSMI,
+            this.settingCompilerTSMI});
+            this.gradingTSMI.Name = "gradingTSMI";
+            this.gradingTSMI.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.gradingTSMI.Size = new System.Drawing.Size(81, 20);
+            this.gradingTSMI.Text = "Chấm điểm";
+            // 
+            // gradingThisExamTSMI
+            // 
+            this.gradingThisExamTSMI.Name = "gradingThisExamTSMI";
+            this.gradingThisExamTSMI.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.gradingThisExamTSMI.Size = new System.Drawing.Size(192, 22);
+            this.gradingThisExamTSMI.Text = "Chấm kì thi này";
+            this.gradingThisExamTSMI.Click += new System.EventHandler(this.gradingThisExamTSMI_Click);
+            // 
+            // settingCompareTSMI
+            // 
+            this.settingCompareTSMI.Name = "settingCompareTSMI";
+            this.settingCompareTSMI.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.settingCompareTSMI.Size = new System.Drawing.Size(192, 22);
+            this.settingCompareTSMI.Text = "Cài đặt chấm kì thi";
+            this.settingCompareTSMI.Click += new System.EventHandler(this.setupGradingTSMI_Click);
+            // 
+            // settingCompilerTSMI
+            // 
+            this.settingCompilerTSMI.Name = "settingCompilerTSMI";
+            this.settingCompilerTSMI.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.settingCompilerTSMI.Size = new System.Drawing.Size(192, 22);
+            this.settingCompilerTSMI.Text = "Cài đặt bộ dịch";
+            this.settingCompilerTSMI.Click += new System.EventHandler(this.settingCompilerTSMI_Click);
+            // 
+            // examTSMI
+            // 
+            this.examTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createExamTSMI,
-            this.manageExamTSMI});
-            this.kỳThiToolStripMenuItem.Name = "kỳThiToolStripMenuItem";
-            this.kỳThiToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.kỳThiToolStripMenuItem.Text = "Kỳ thi";
+            this.manageExamTSMI,
+            this.deleteRusultTSMI});
+            this.examTSMI.Name = "examTSMI";
+            this.examTSMI.Size = new System.Drawing.Size(48, 20);
+            this.examTSMI.Text = "Kỳ thi";
             // 
             // createExamTSMI
             // 
             this.createExamTSMI.Name = "createExamTSMI";
             this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.createExamTSMI.Size = new System.Drawing.Size(192, 22);
+            this.createExamTSMI.Size = new System.Drawing.Size(270, 22);
             this.createExamTSMI.Text = "Tạo kỳ thi mới";
             this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
             // 
@@ -123,43 +164,26 @@
             // 
             this.manageExamTSMI.Name = "manageExamTSMI";
             this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.manageExamTSMI.Size = new System.Drawing.Size(192, 22);
+            this.manageExamTSMI.Size = new System.Drawing.Size(270, 22);
             this.manageExamTSMI.Text = "Quản lý kỳ thi";
             this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
             // 
-            // chấmĐiểmToolStripMenuItem
+            // deleteRusultTSMI
             // 
-            this.chấmĐiểmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gradingThisExamTSMI,
-            this.setupGradingTSMI});
-            this.chấmĐiểmToolStripMenuItem.Name = "chấmĐiểmToolStripMenuItem";
-            this.chấmĐiểmToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.chấmĐiểmToolStripMenuItem.Text = "Chấm điểm";
+            this.deleteRusultTSMI.Name = "deleteRusultTSMI";
+            this.deleteRusultTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.deleteRusultTSMI.Size = new System.Drawing.Size(270, 22);
+            this.deleteRusultTSMI.Text = "Xóa kết quả kỳ thì đang mở";
+            this.deleteRusultTSMI.Click += new System.EventHandler(this.deleteRusultTSMI_Click);
             // 
-            // gradingThisExamTSMI
+            // questionTSMI
             // 
-            this.gradingThisExamTSMI.Name = "gradingThisExamTSMI";
-            this.gradingThisExamTSMI.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.gradingThisExamTSMI.Size = new System.Drawing.Size(180, 22);
-            this.gradingThisExamTSMI.Text = "Chấm kì thi này";
-            this.gradingThisExamTSMI.Click += new System.EventHandler(this.gradingThisExamTSMI_Click);
-            // 
-            // setupGradingTSMI
-            // 
-            this.setupGradingTSMI.Name = "setupGradingTSMI";
-            this.setupGradingTSMI.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.setupGradingTSMI.Size = new System.Drawing.Size(180, 22);
-            this.setupGradingTSMI.Text = "Cài đặt chấm";
-            this.setupGradingTSMI.Click += new System.EventHandler(this.setupGradingTSMI_Click);
-            // 
-            // câuHỏiToolStripMenuItem
-            // 
-            this.câuHỏiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.questionTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createQuestionTSMI,
             this.manageQuestionTSMI});
-            this.câuHỏiToolStripMenuItem.Name = "câuHỏiToolStripMenuItem";
-            this.câuHỏiToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.câuHỏiToolStripMenuItem.Text = "Câu hỏi";
+            this.questionTSMI.Name = "questionTSMI";
+            this.questionTSMI.Size = new System.Drawing.Size(60, 20);
+            this.questionTSMI.Text = "Câu hỏi";
             // 
             // createQuestionTSMI
             // 
@@ -178,13 +202,13 @@
             this.manageQuestionTSMI.Text = "Quản lí câu hỏi";
             this.manageQuestionTSMI.Click += new System.EventHandler(this.manageQuestionTSMI_Click);
             // 
-            // thíSinhToolStripMenuItem
+            // candidateTSMI
             // 
-            this.thíSinhToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.candidateTSMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageCandidateTSMI});
-            this.thíSinhToolStripMenuItem.Name = "thíSinhToolStripMenuItem";
-            this.thíSinhToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.thíSinhToolStripMenuItem.Text = "Thí sinh";
+            this.candidateTSMI.Name = "candidateTSMI";
+            this.candidateTSMI.Size = new System.Drawing.Size(60, 20);
+            this.candidateTSMI.Text = "Thí sinh";
             // 
             // manageCandidateTSMI
             // 
@@ -194,11 +218,11 @@
             this.manageCandidateTSMI.Text = "Quản lý thí sinh";
             this.manageCandidateTSMI.Click += new System.EventHandler(this.manageCandidateTSMI_Click);
             // 
-            // thôngTinToolStripMenuItem
+            // infomationTSMI
             // 
-            this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.thôngTinToolStripMenuItem.Text = "Thông tin";
+            this.infomationTSMI.Name = "infomationTSMI";
+            this.infomationTSMI.Size = new System.Drawing.Size(70, 20);
+            this.infomationTSMI.Text = "Thông tin";
             // 
             // panel1
             // 
@@ -220,6 +244,7 @@
             // btnExportExcel
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportExcel.Enabled = false;
             this.btnExportExcel.Location = new System.Drawing.Point(882, 7);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(90, 30);
@@ -308,6 +333,7 @@
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.Code,
             this.CandidateName});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
@@ -331,11 +357,20 @@
             // 
             // ID
             // 
-            this.ID.DataPropertyName = "Code";
-            this.ID.HeaderText = "Mã thí sinh";
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 110;
+            this.ID.Visible = false;
+            this.ID.Width = 32;
+            // 
+            // Code
+            // 
+            this.Code.DataPropertyName = "Code";
+            this.Code.HeaderText = "Mã thí sinh";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Width = 110;
             // 
             // CandidateName
             // 
@@ -344,6 +379,14 @@
             this.CandidateName.HeaderText = "Tên sinh viên";
             this.CandidateName.Name = "CandidateName";
             this.CandidateName.ReadOnly = true;
+            // 
+            // exitTSMI
+            // 
+            this.exitTSMI.Name = "exitTSMI";
+            this.exitTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitTSMI.Size = new System.Drawing.Size(180, 22);
+            this.exitTSMI.Text = "Thoát";
+            this.exitTSMI.Click += new System.EventHandler(this.exitTSMI_Click);
             // 
             // frmMain
             // 
@@ -358,6 +401,8 @@
             this.Name = "frmMain";
             this.Text = "Chấm thi tự động";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.frmMain_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -371,32 +416,36 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem trangChủToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kỳThiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem homePageTSMI;
+        private System.Windows.Forms.ToolStripMenuItem examTSMI;
         private System.Windows.Forms.ToolStripMenuItem createExamTSMI;
-        private System.Windows.Forms.ToolStripMenuItem câuHỏiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem questionTSMI;
         private System.Windows.Forms.ToolStripMenuItem createQuestionTSMI;
         private System.Windows.Forms.ToolStripMenuItem manageQuestionTSMI;
-        private System.Windows.Forms.ToolStripMenuItem thôngTinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infomationTSMI;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem manageExamTSMI;
         private System.Windows.Forms.ComboBox cbExamName;
-        private System.Windows.Forms.ToolStripMenuItem thíSinhToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem candidateTSMI;
         private System.Windows.Forms.ToolStripMenuItem manageCandidateTSMI;
         private System.Windows.Forms.Label lblExamName;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvResults;
-        private System.Windows.Forms.ToolStripMenuItem chấmĐiểmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gradingTSMI;
         private System.Windows.Forms.ToolStripMenuItem gradingThisExamTSMI;
-        private System.Windows.Forms.ToolStripMenuItem setupGradingTSMI;
+        private System.Windows.Forms.ToolStripMenuItem settingCompareTSMI;
         private System.Windows.Forms.Button btnExportExcel;
         private System.Windows.Forms.ToolStripMenuItem guideTSMI;
         private System.Windows.Forms.ToolStripMenuItem refreshTSMI;
+        private System.Windows.Forms.ToolStripMenuItem settingCompilerTSMI;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn CandidateName;
+        private System.Windows.Forms.ToolStripMenuItem deleteRusultTSMI;
+        private System.Windows.Forms.ToolStripMenuItem exitTSMI;
     }
 }
 
