@@ -12,7 +12,6 @@ namespace GradingProgram
 
     public class Utility
     {
-
         public static List<TestCase> ScanTestCases(string path)
         {
             List<TestCase> testCases = new List<TestCase>();
