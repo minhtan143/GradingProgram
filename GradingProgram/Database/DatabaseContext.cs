@@ -9,11 +9,6 @@ namespace GradingProgram
         
         public DatabaseContext() : base(connectionString) { }
 
-        private void OpenConnection()
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual DbSet<Candidate> Candidates { get; set; }
         public virtual DbSet<CandidateDetail> CandidateDetails { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
