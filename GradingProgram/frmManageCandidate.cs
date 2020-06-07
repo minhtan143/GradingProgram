@@ -62,10 +62,5 @@ namespace GradingProgram
         {
             RefreshCandidates(examId);
         }
-
-        private void frmManageCandidate_Activated(object sender, EventArgs e)
-        {
-            RefreshCandidates(examId);
-        }
     }
 }

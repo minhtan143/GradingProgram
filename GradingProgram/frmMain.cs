@@ -159,7 +159,6 @@ namespace GradingProgram
         private void refreshTSMI_Click(object sender, EventArgs e)
         {
             DbChange = true;
-            frmMain_Activated(null, null);
         }
 
         private void setupGradingTSMI_Click(object sender, EventArgs e)
@@ -195,18 +194,6 @@ namespace GradingProgram
             frmExaminationProcess fep = new frmExaminationProcess();
             await Task.Run(() => Utility.Grading(examId, settingGrading, 2000, fep));
             DbChange = true;
-            frmMain_Activated(null, null);
-        }
-
-        private void frmMain_Activated(object sender, EventArgs e)
-        {
-            if (DbChange)
-            {
-                var index = cbExamName.SelectedValue;
-                LoadData();
-                cbExamName.SelectedValue = index;
-                DbChange = false;
-            }
         }
 
         private void settingCompilerTSMI_Click(object sender, EventArgs e)
@@ -220,7 +207,6 @@ namespace GradingProgram
             if (dialogResult == DialogResult.Yes)
             {
                 BLResult.Delete(BLResult.GetResults(x => x.ExamID == examId));
-                frmMain_Activated(null, null);
             }
         }
 

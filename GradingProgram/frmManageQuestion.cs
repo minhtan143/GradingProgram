@@ -48,10 +48,5 @@ namespace GradingProgram
                 }
             }
         }
-
-        private void frmManageQuestion_Activated(object sender, EventArgs e)
-        {
-            LoadData();
-        }
     }
 }

@@ -39,12 +39,13 @@ namespace GradingProgram
         {
             if (e.CloseReason != CloseReason.ApplicationExitCall)
             {
+                e.Cancel = true;
                 DialogResult dialogResult = MessageBox.Show("Dừng chấm?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
                     HasCanceled = true;
+                    Hide();
                 }
-                else e.Cancel = true;
             }
         }
 

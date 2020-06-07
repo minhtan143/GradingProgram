@@ -191,7 +191,6 @@
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmManageCandidate";
             this.Text = "Quản lí thí sinh";
-            this.Activated += new System.EventHandler(this.frmManageCandidate_Activated);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCandidates)).EndInit();

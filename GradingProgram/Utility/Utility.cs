@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GradingProgram
 {
-    public enum Compare { CStringCase, CStringIgnoreCase, CNumber, CArrayNumber, CCustom };
+    public enum Compare { CStringCase, CStringIgnoreCase, CNumber, CArrayNumber, CCustom, CStringIgnoreNewLine };
 
     public class Utility
     {
@@ -180,6 +180,7 @@ namespace GradingProgram
                     {
                         file1.Delete();
                         file2.Delete();
+                        fep.Close();
                         return;
                     }
                 }

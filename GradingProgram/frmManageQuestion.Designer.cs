@@ -186,7 +186,6 @@
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "frmManageQuestion";
             this.Text = "Quản lý câu hỏi";
-            this.Activated += new System.EventHandler(this.frmManageQuestion_Activated);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();

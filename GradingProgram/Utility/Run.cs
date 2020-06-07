@@ -31,6 +31,7 @@ namespace GradingProgram
             StartInfo.RedirectStandardOutput = true;
 
             RunResult runResult = new RunResult();
+            runResult.Result = RunResultEnum.Successful;
 
             try
             {
@@ -71,10 +72,8 @@ namespace GradingProgram
                     runResult.UsedMemory = peakWorkingSet < 1024 * 1024 ? 1 : peakWorkingSet / (1024 * 1024);
                     runResult.RunTime = (process.ExitTime - process.StartTime).TotalMilliseconds < 1 ? 1 : (int)(process.ExitTime - process.StartTime).TotalMilliseconds;
 
-                    if (process.StandardOutput != null)
+                    if (runResult.Result == RunResultEnum.Successful && process.StandardOutput != null)
                         runResult.Output = process.StandardOutput.ReadToEnd();
-                    if (process.StandardError != null)
-                        runResult.Error = process.StandardError.ReadToEnd();
                 }
             }
             catch (Exception ex)
