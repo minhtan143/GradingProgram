@@ -30,10 +30,12 @@ namespace GradingProgram
 
         public static void SetUpForm(Form form)
         {
-            form.Icon = Icon.FromHandle(Properties.Resources.icon.GetHicon());
+            form.Icon = Properties.Resources.logoGG;
 
             foreach (var control in form.Controls) 
-            { 
+            {
+                if (control is TabControl)
+                    SetUpTab(control as TabControl);
                 if (control is Panel) 
                     SetUpPnl(control as Panel);
 
@@ -43,6 +45,23 @@ namespace GradingProgram
                 if (control is DataGridView)
                     SetUpDgv(control as DataGridView);
             }
+        }
+
+        public static void SetUpTab(TabControl tab)
+        {
+            
+            foreach (TabPage tp in tab.TabPages)
+                foreach (var control in tp.Controls)
+                {
+                    if (control is Panel)
+                        SetUpPnl(control as Panel);
+
+                    if (control is Button)
+                        SetUpBtn(control as Button);
+
+                    if (control is DataGridView)
+                        SetUpDgv(control as DataGridView);
+                }
         }
 
         public static void SetUpDgv(DataGridView dgv)

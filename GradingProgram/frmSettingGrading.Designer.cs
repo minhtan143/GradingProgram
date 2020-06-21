@@ -77,6 +77,7 @@
             this.Name = "frmSettingGrading";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cài đặt kì thi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSettingGrading_FormClosing);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
