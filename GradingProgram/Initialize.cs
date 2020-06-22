@@ -32,6 +32,7 @@ namespace GradingProgram
         {
             form.Icon = Properties.Resources.logoGG;
 
+
             foreach (var control in form.Controls) 
             {
                 if (control is TabControl)
@@ -58,7 +59,6 @@ namespace GradingProgram
 
                     if (control is Button)
                         SetUpBtn(control as Button);
-
                     if (control is DataGridView)
                         SetUpDgv(control as DataGridView);
                 }
@@ -84,6 +84,8 @@ namespace GradingProgram
 
             foreach (var control in pnl.Controls)
             {
+                if (control is Panel)
+                    SetUpPnl(control as Panel);
                 if (control is Label)
                     (control as Label).BackColor = Color.Transparent;
                 if (control is Button)

@@ -87,7 +87,7 @@ namespace GradingProgram
             {
                 examId = int.Parse(cbExamName.SelectedValue.ToString());
                 lblExamName.Text = BLExam.GetExam(examId).Name;
-                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString();
+                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString("dd/MM/yyyy");
 
                 while (dgvResults.ColumnCount > 3)
                     dgvResults.Columns.RemoveAt(3);
@@ -247,6 +247,13 @@ namespace GradingProgram
                     if (frmSettingCompiler.ShowDialog() == DialogResult.Yes)
                         tabMain.SelectedTab = tabGrading;
 
+        }
+
+        private void btnAddNewQuestion_Click(object sender, EventArgs e)
+        {
+            frmAddQuestion frmAddQuestion = new frmAddQuestion();
+            if (frmAddQuestion.ShowDialog() == DialogResult.OK)
+                new frmQuestionView(frmAddQuestion.QuestionID).ShowDialog();
         }
     }
 }
