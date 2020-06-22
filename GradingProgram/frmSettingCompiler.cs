@@ -6,7 +6,6 @@ namespace GradingProgram
 {
     public partial class frmSettingCompiler : Form
     {
-        int index;
         private bool modify;
 
         public frmSettingCompiler()
@@ -17,7 +16,7 @@ namespace GradingProgram
             dgvSettingCompiler.AllowUserToAddRows = true;
             dgvSettingCompiler.SelectionMode = DataGridViewSelectionMode.CellSelect;
 
-            //lblGuid.Text = "► Thêm tại dòng trống cuối cùng\n► Xóa: Nhấn Delete\n► Chuyển lên: Alt + ↑; Chuyển xuống: Alt + ↓\n► Đặt lại mặc định: Ctrl + R";
+            lblGuid.Text = "► Thêm tại dòng trống cuối cùng\n► Xóa: Nhấn Delete\n► Chuyển lên: Alt + ↑; Chuyển xuống: Alt + ↓\n► Đặt lại mặc định: Ctrl + R";
             LoadData();
         }
 
@@ -43,7 +42,6 @@ namespace GradingProgram
                 data.Rows.Add(dgvSettingCompiler.Rows[i].Cells[0].Value.ToString(), dgvSettingCompiler.Rows[i].Cells[1].Value.ToString());
 
             Utility.WriteToSetting(data);
-            this.DialogResult = DialogResult.Yes;
             Close();
         }
 
@@ -106,57 +104,6 @@ namespace GradingProgram
         private void dgvSettingCompiler_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             modify = true;
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void bnNew_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMoveUp_Click(object sender, EventArgs e)
-        {
-            index = dgvSettingCompiler.CurrentRow.Index;
-            if (index > 0)
-            {
-                DataGridViewRow temp = dgvSettingCompiler.Rows[index];
-                dgvSettingCompiler.Rows.Remove(temp);
-                dgvSettingCompiler.Rows.Insert(index - 1, temp);
-                dgvSettingCompiler.Rows[index-1].Cells[dgvSettingCompiler.CurrentCell.ColumnIndex].Selected = true;
-            }
-        }
-
-        private void btnMoveDown_Click(object sender, EventArgs e)
-        {
-            index = dgvSettingCompiler.CurrentRow.Index;
-            if (index < dgvSettingCompiler.RowCount - 2)
-            {
-                DataGridViewRow temp = dgvSettingCompiler.Rows[index];
-                dgvSettingCompiler.Rows.Remove(temp);
-                dgvSettingCompiler.Rows.Insert(index + 1, temp);
-                dgvSettingCompiler.Rows[index + 1].Cells[dgvSettingCompiler.CurrentCell.ColumnIndex].Selected = true;
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("Xóa cài đặt này?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-                dgvSettingCompiler.Rows.Remove(dgvSettingCompiler.CurrentRow);
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("Khôi phục tất cả cài đặt bộ dịch về mặc định?", "Thông báo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-            {
-                Utility.DefaultSettingCompiler();
-                LoadData();
-            }
         }
     }
 }

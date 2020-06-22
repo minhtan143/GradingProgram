@@ -20,7 +20,6 @@ namespace GradingProgram
             IsGrading = false;
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
-
             Initialize.SetUpForm(this);
             LoadData();
         }
@@ -87,7 +86,7 @@ namespace GradingProgram
             {
                 examId = int.Parse(cbExamName.SelectedValue.ToString());
                 lblExamName.Text = BLExam.GetExam(examId).Name;
-                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString("dd/MM/yyyy");
+                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString();
 
                 while (dgvResults.ColumnCount > 3)
                     dgvResults.Columns.RemoveAt(3);
@@ -159,7 +158,7 @@ namespace GradingProgram
 
         private void refreshTSMI_Click(object sender, EventArgs e)
         {
-            DbChange = true;
+            LoadData();
         }
 
         private void setupGradingTSMI_Click(object sender, EventArgs e)
@@ -226,34 +225,6 @@ namespace GradingProgram
                     e.Cancel = true;
                 }
             }
-        }
-
-        private void tabSetting_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void tabQuestion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmSettingCompiler frmSettingCompiler = new frmSettingCompiler();
-            frmSettingGrading frmSettingGrading = new frmSettingGrading(1);     // current exam id
-            if (tabMain.SelectedTab.Name == tabSetting.Name)
-                if (frmSettingGrading.ShowDialog() == DialogResult.OK)
-                    if (frmSettingCompiler.ShowDialog() == DialogResult.Yes)
-                        tabMain.SelectedTab = tabGrading;
-
-        }
-
-        private void btnAddNewQuestion_Click(object sender, EventArgs e)
-        {
-            frmAddQuestion frmAddQuestion = new frmAddQuestion();
-            if (frmAddQuestion.ShowDialog() == DialogResult.OK)
-                new frmQuestionView(frmAddQuestion.QuestionID).ShowDialog();
         }
     }
 }

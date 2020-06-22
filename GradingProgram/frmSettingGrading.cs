@@ -63,7 +63,7 @@ namespace GradingProgram
             }
 
             Utility.WriteToBinaryFile(path, setting);
-            
+
             Close();
         }
 
@@ -86,11 +86,6 @@ namespace GradingProgram
 
             control.Controls.Add(label);
             control.Controls.Add(comboBox);
-        }
-
-        private void frmSettingGrading_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
         }
     }
 }
