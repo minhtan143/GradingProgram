@@ -5,7 +5,7 @@ namespace GradingProgram
 {
     public class DatabaseContext : DbContext
     {
-        public static string connectionString = "Data source=(local);initial catalog=GradingProgram;integrated security=True;MultipleActiveResultSets=True";
+        public static string connectionString = @"Data source=(localdb)\MSSQLLocalDB;initial catalog=GradingProgram;integrated security=True;MultipleActiveResultSets=True";
         
         public DatabaseContext() : base(connectionString) { }
 

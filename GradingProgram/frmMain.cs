@@ -20,7 +20,6 @@ namespace GradingProgram
             IsGrading = false;
             CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
-
             Initialize.SetUpForm(this);
             LoadData();
         }
@@ -159,7 +158,7 @@ namespace GradingProgram
 
         private void refreshTSMI_Click(object sender, EventArgs e)
         {
-            DbChange = true;
+            LoadData();
         }
 
         private void setupGradingTSMI_Click(object sender, EventArgs e)
@@ -194,7 +193,7 @@ namespace GradingProgram
 
             frmExaminationProcess fep = new frmExaminationProcess();
             await Task.Run(() => Utility.Grading(examId, settingGrading, 2000, fep));
-            DbChange = true;
+            LoadData();
         }
 
         private void settingCompilerTSMI_Click(object sender, EventArgs e)
@@ -226,27 +225,6 @@ namespace GradingProgram
                     e.Cancel = true;
                 }
             }
-        }
-
-        private void tabSetting_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void tabQuestion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frmSettingCompiler frmSettingCompiler = new frmSettingCompiler();
-            frmSettingGrading frmSettingGrading = new frmSettingGrading(1);     // current exam id
-            if (tabMain.SelectedTab.Name == tabSetting.Name)
-                if (frmSettingGrading.ShowDialog() == DialogResult.OK)
-                    if (frmSettingCompiler.ShowDialog() == DialogResult.Yes)
-                        tabMain.SelectedTab = tabGrading;
-
         }
     }
 }
