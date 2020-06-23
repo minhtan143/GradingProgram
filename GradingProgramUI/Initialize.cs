@@ -31,37 +31,41 @@ namespace GradingProgram
         public static void SetUpForm(Form form)
         {
             form.Icon = Properties.Resources.logoGG;
+            foreach (Control control in form.Controls)
+                CheckControlToSetUp(control);
+        }
 
-            foreach (var control in form.Controls) 
-            {
+        public static void CheckControlToSetUp(Control control)
+        {
+                if (control is GroupBox)
+                    SetUpGrBox(control as GroupBox);
                 if (control is TabControl)
                     SetUpTab(control as TabControl);
-                if (control is Panel) 
+                if (control is Panel)
                     SetUpPnl(control as Panel);
-
-                if (control is Button) 
+                if (control is Button)
                     SetUpBtn(control as Button);
-
                 if (control is DataGridView)
                     SetUpDgv(control as DataGridView);
-            }
+                if (control is Label)
+                    (control as Label).BackColor = Color.Transparent;
+        }
+
+        private static void SetUpGrBox(GroupBox groupBox)
+        {
+            groupBox.BackgroundImage = Properties.Resources.bgrPnl;
+            groupBox.BackgroundImageLayout = ImageLayout.Stretch;
+
+            foreach (Control control in groupBox.Controls)
+                CheckControlToSetUp(control);
+
         }
 
         public static void SetUpTab(TabControl tab)
         {
-            
             foreach (TabPage tp in tab.TabPages)
-                foreach (var control in tp.Controls)
-                {
-                    if (control is Panel)
-                        SetUpPnl(control as Panel);
-
-                    if (control is Button)
-                        SetUpBtn(control as Button);
-
-                    if (control is DataGridView)
-                        SetUpDgv(control as DataGridView);
-                }
+                foreach (Control control in tp.Controls)
+                    CheckControlToSetUp(control);
         }
 
         public static void SetUpDgv(DataGridView dgv)
@@ -82,13 +86,8 @@ namespace GradingProgram
             pnl.BackgroundImage = Properties.Resources.bgrPnl;
             pnl.BackgroundImageLayout = ImageLayout.Stretch;
 
-            foreach (var control in pnl.Controls)
-            {
-                if (control is Label)
-                    (control as Label).BackColor = Color.Transparent;
-                if (control is Button)
-                    SetUpBtn(control as Button);
-            }
+            foreach (Control control in pnl.Controls)
+                CheckControlToSetUp(control);
         }
 
         public static void SetUpBtn(Button btn)
@@ -104,7 +103,6 @@ namespace GradingProgram
             btn.Cursor = Cursors.Hand;
 
             btn.Font = new Font("Arial", 9F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
-
 
             btn.MouseDown += new MouseEventHandler(MouseDown);
             btn.MouseUp += new MouseEventHandler(MouseUp);

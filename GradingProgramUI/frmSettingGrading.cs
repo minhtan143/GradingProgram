@@ -28,10 +28,10 @@ namespace GradingProgram
         {
             for (int i = 0; i < questions.Count; i++)
             {
-                ViewSetting(questions[i].FileName, new Point(60, 30 + i * 30), gbSetting);
+                ViewSetting(questions[i].FileName, new Point(30, 40 + i * 40), gbSetting);
             }
-            Height = (questions.Count + 3) * 30 + panel1.Height;
-
+            Height = (questions.Count + 3) * 40 + panel1.Height;
+            Initialize.SetUpForm(this);
             if (File.Exists(path))
             {
                 try
@@ -63,7 +63,7 @@ namespace GradingProgram
             }
 
             Utility.WriteToBinaryFile(path, setting);
-
+            this.DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -77,9 +77,9 @@ namespace GradingProgram
 
             ComboBox comboBox = new ComboBox();
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(location.X + 100, location.Y);
+            comboBox.Location = new Point(location.X + 70, location.Y);
             comboBox.Name = "cb" + name;
-            comboBox.Size = new Size(190, 25);
+            comboBox.Size = new Size(220, 25);
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.Items.AddRange(Enum.GetNames(typeof(Compare)));
             comboBox.SelectedItem = Compare.CStringCase.ToString();

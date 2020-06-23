@@ -87,7 +87,7 @@ namespace GradingProgram
             {
                 examId = int.Parse(cbExamName.SelectedValue.ToString());
                 lblExamName.Text = BLExam.GetExam(examId).Name;
-                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString();
+                lblDate.Text = BLExam.GetExam(examId).CreateDate.ToString("dd/MM/yyyy");
 
                 while (dgvResults.ColumnCount > 3)
                     dgvResults.Columns.RemoveAt(3);
@@ -230,7 +230,7 @@ namespace GradingProgram
 
         private void tabSetting_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tabQuestion_Click(object sender, EventArgs e)
@@ -243,10 +243,23 @@ namespace GradingProgram
             frmSettingCompiler frmSettingCompiler = new frmSettingCompiler();
             frmSettingGrading frmSettingGrading = new frmSettingGrading(1);     // current exam id
             if (tabMain.SelectedTab.Name == tabSetting.Name)
-                if (frmSettingGrading.ShowDialog() == DialogResult.OK)
-                    if (frmSettingCompiler.ShowDialog() == DialogResult.Yes)
-                        tabMain.SelectedTab = tabGrading;
+            {
+                if (frmSettingGrading.ShowDialog() != DialogResult.OK)
+                    MessageBox.Show("Bộ so sánh sẽ được cấu hình theo cấu hình gần nhất!", "Cài đặt bộ dịch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (frmSettingCompiler.ShowDialog() != DialogResult.Yes)
+                {
+                    MessageBox.Show("Bộ dịch sẽ được cấu hình theo mặc định!", "Cài đặt bộ dịch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Utility.DefaultSettingCompiler();
+                }
+                tabMain.SelectedTab = tabGrading;
+            }
+        }
 
+        private void btnAddNewQuestion_Click(object sender, EventArgs e)
+        {
+            frmAddQuestion frmAddQuestion = new frmAddQuestion();
+            if (frmAddQuestion.ShowDialog() == DialogResult.OK)
+                new frmQuestionView(frmAddQuestion.QuestionID).Show();
         }
     }
 }

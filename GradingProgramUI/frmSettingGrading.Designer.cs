@@ -37,10 +37,10 @@
             // gbSetting
             // 
             this.gbSetting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSetting.Location = new System.Drawing.Point(0, 0);
             this.gbSetting.Name = "gbSetting";
-            this.gbSetting.Size = new System.Drawing.Size(384, 248);
+            this.gbSetting.Size = new System.Drawing.Size(344, 103);
             this.gbSetting.TabIndex = 3;
             this.gbSetting.TabStop = false;
             this.gbSetting.Text = "Bài thi";
@@ -48,9 +48,9 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(286, 8);
+            this.btnSave.Location = new System.Drawing.Point(221, 6);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(86, 32);
+            this.btnSave.Size = new System.Drawing.Size(100, 30);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@
             // 
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 248);
+            this.panel1.Location = new System.Drawing.Point(0, 103);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 50);
+            this.panel1.Size = new System.Drawing.Size(344, 44);
             this.panel1.TabIndex = 5;
             // 
             // frmSettingGrading
@@ -70,7 +70,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(384, 298);
+            this.ClientSize = new System.Drawing.Size(344, 147);
+            this.ControlBox = false;
             this.Controls.Add(this.gbSetting);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

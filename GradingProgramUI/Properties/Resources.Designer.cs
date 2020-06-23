@@ -101,12 +101,12 @@ namespace GradingProgram.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Bitmap icon {
+        internal static System.Drawing.Icon logoGG {
             get {
-                object obj = ResourceManager.GetObject("icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("logoGG", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }
