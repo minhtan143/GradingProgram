@@ -41,9 +41,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.homePageTSMI = new System.Windows.Forms.ToolStripMenuItem();
             this.guideTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,13 +181,15 @@
             this.panel12 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.dgvChooseStudent = new System.Windows.Forms.DataGridView();
-            this.clnStudent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.dgvChooseQuestion = new System.Windows.Forms.DataGridView();
-            this.clnQuestion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabHelp = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.dgvChooseQuestion = new System.Windows.Forms.DataGridView();
+            this.clnQuestion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dgvChooseStudent = new System.Windows.Forms.DataGridView();
+            this.clnStudent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabExam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
@@ -223,9 +225,9 @@
             this.panel15.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChooseStudent)).BeginInit();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChooseQuestion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChooseStudent)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -271,6 +273,7 @@
             this.refreshTSMI.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshTSMI.Size = new System.Drawing.Size(177, 24);
             this.refreshTSMI.Text = "Cập nhật lại";
+            this.refreshTSMI.Click += new System.EventHandler(this.refreshTSMI_Click);
             // 
             // exitTSMI
             // 
@@ -278,6 +281,7 @@
             this.exitTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitTSMI.Size = new System.Drawing.Size(177, 24);
             this.exitTSMI.Text = "Thoát";
+            this.exitTSMI.Click += new System.EventHandler(this.exitTSMI_Click);
             // 
             // gradingTSMI
             // 
@@ -297,6 +301,7 @@
             this.gradingThisExamTSMI.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.gradingThisExamTSMI.Size = new System.Drawing.Size(221, 24);
             this.gradingThisExamTSMI.Text = "Chấm kì thi này";
+            this.gradingThisExamTSMI.Click += new System.EventHandler(this.gradingThisExamTSMI_Click);
             // 
             // settingCompareTSMI
             // 
@@ -304,6 +309,7 @@
             this.settingCompareTSMI.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.settingCompareTSMI.Size = new System.Drawing.Size(221, 24);
             this.settingCompareTSMI.Text = "Cài đặt chấm kì thi";
+            this.settingCompareTSMI.Click += new System.EventHandler(this.setupGradingTSMI_Click);
             // 
             // settingCompilerTSMI
             // 
@@ -311,6 +317,7 @@
             this.settingCompilerTSMI.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.settingCompilerTSMI.Size = new System.Drawing.Size(221, 24);
             this.settingCompilerTSMI.Text = "Cài đặt bộ dịch";
+            this.settingCompilerTSMI.Click += new System.EventHandler(this.settingCompilerTSMI_Click);
             // 
             // examTSMI
             // 
@@ -329,6 +336,7 @@
             this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.createExamTSMI.Size = new System.Drawing.Size(315, 24);
             this.createExamTSMI.Text = "Tạo kỳ thi mới";
+            this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
             // 
             // manageExamTSMI
             // 
@@ -336,6 +344,7 @@
             this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.manageExamTSMI.Size = new System.Drawing.Size(315, 24);
             this.manageExamTSMI.Text = "Quản lý kỳ thi";
+            this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
             // 
             // deleteRusultTSMI
             // 
@@ -343,6 +352,7 @@
             this.deleteRusultTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.deleteRusultTSMI.Size = new System.Drawing.Size(315, 24);
             this.deleteRusultTSMI.Text = "Xóa kết quả kỳ thì đang mở";
+            this.deleteRusultTSMI.Click += new System.EventHandler(this.deleteRusultTSMI_Click);
             // 
             // questionTSMI
             // 
@@ -361,6 +371,7 @@
             | System.Windows.Forms.Keys.N)));
             this.createQuestionTSMI.Size = new System.Drawing.Size(244, 24);
             this.createQuestionTSMI.Text = "Tạo câu hỏi";
+            this.createQuestionTSMI.Click += new System.EventHandler(this.createQuestionTSMI_Click);
             // 
             // manageQuestionTSMI
             // 
@@ -368,6 +379,7 @@
             this.manageQuestionTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.manageQuestionTSMI.Size = new System.Drawing.Size(244, 24);
             this.manageQuestionTSMI.Text = "Quản lí câu hỏi";
+            this.manageQuestionTSMI.Click += new System.EventHandler(this.manageQuestionTSMI_Click);
             // 
             // candidateTSMI
             // 
@@ -384,6 +396,7 @@
             this.manageCandidateTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.manageCandidateTSMI.Size = new System.Drawing.Size(228, 24);
             this.manageCandidateTSMI.Text = "Quản lý thí sinh";
+            this.manageCandidateTSMI.Click += new System.EventHandler(this.manageCandidateTSMI_Click);
             // 
             // infomationTSMI
             // 
@@ -492,6 +505,7 @@
             this.btnAddNewQuestion.TabIndex = 16;
             this.btnAddNewQuestion.Text = "+";
             this.btnAddNewQuestion.UseVisualStyleBackColor = true;
+            this.btnAddNewQuestion.Click += new System.EventHandler(this.btnAddNewQuestion_Click);
             // 
             // btnDelete
             // 
@@ -587,7 +601,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(-4, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 17);
+            this.label4.Size = new System.Drawing.Size(165, 19);
             this.label4.TabIndex = 14;
             this.label4.Text = "Ngân hàng câu hỏi";
             // 
@@ -597,7 +611,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(474, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(146, 17);
+            this.label5.Size = new System.Drawing.Size(174, 19);
             this.label5.TabIndex = 13;
             this.label5.Text = "Câu hỏi trong kì thi";
             // 
@@ -667,7 +681,7 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "Mã số thí sinh";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 96;
+            this.dataGridViewTextBoxColumn2.Width = 105;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -705,10 +719,10 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.label8.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             this.label8.Location = new System.Drawing.Point(5, 9);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 17);
+            this.label8.Size = new System.Drawing.Size(92, 19);
             this.label8.TabIndex = 0;
             this.label8.Text = "Tên kì thi:";
             // 
@@ -736,7 +750,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(10, 41);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 17);
+            this.label6.Size = new System.Drawing.Size(75, 19);
             this.label6.TabIndex = 13;
             this.label6.Text = "Thí sinh";
             // 
@@ -876,7 +890,7 @@
             this.tabResult.Controls.Add(this.tabControl1);
             this.tabResult.Controls.Add(this.dgvResults);
             this.tabResult.Controls.Add(this.panel1);
-            this.tabResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.tabResult.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             this.tabResult.ImageIndex = 4;
             this.tabResult.Location = new System.Drawing.Point(4, 48);
             this.tabResult.Margin = new System.Windows.Forms.Padding(0);
@@ -908,7 +922,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(788, 288);
+            this.tabPage1.Size = new System.Drawing.Size(788, 286);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Điểm - mssv";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -937,7 +951,7 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(782, 28);
+            this.dataGridView3.Size = new System.Drawing.Size(782, 26);
             this.dataGridView3.TabIndex = 13;
             // 
             // dataGridViewTextBoxColumn9
@@ -1016,7 +1030,7 @@
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1030,7 +1044,7 @@
             this.clnMark});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1089,7 +1103,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(788, 288);
+            this.tabPage2.Size = new System.Drawing.Size(788, 286);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Code - mssv";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1102,7 +1116,7 @@
             this.btnSaveCode.FlatAppearance.BorderSize = 0;
             this.btnSaveCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCode.ForeColor = System.Drawing.Color.White;
-            this.btnSaveCode.Location = new System.Drawing.Point(682, 252);
+            this.btnSaveCode.Location = new System.Drawing.Point(682, 250);
             this.btnSaveCode.Name = "btnSaveCode";
             this.btnSaveCode.Size = new System.Drawing.Size(100, 30);
             this.btnSaveCode.TabIndex = 3;
@@ -1114,7 +1128,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(228, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(557, 282);
+            this.richTextBox1.Size = new System.Drawing.Size(557, 280);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -1123,7 +1137,7 @@
             this.panel20.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel20.Location = new System.Drawing.Point(208, 3);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(20, 282);
+            this.panel20.Size = new System.Drawing.Size(20, 280);
             this.panel20.TabIndex = 1;
             // 
             // treeView1
@@ -1131,7 +1145,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(205, 282);
+            this.treeView1.Size = new System.Drawing.Size(205, 280);
             this.treeView1.TabIndex = 0;
             // 
             // dgvResults
@@ -1147,7 +1161,7 @@
             this.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvResults.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1159,7 +1173,7 @@
             this.Code});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.MenuHighlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1175,6 +1189,7 @@
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResults.Size = new System.Drawing.Size(172, 331);
             this.dgvResults.TabIndex = 11;
+            this.dgvResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellDoubleClick);
             // 
             // ID
             // 
@@ -1220,6 +1235,7 @@
             this.btnExportExcel.TabIndex = 9;
             this.btnExportExcel.Text = "Xuất file Excel";
             this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
             // label1
             // 
@@ -1246,7 +1262,7 @@
             this.lblDate.AutoSize = true;
             this.lblDate.Location = new System.Drawing.Point(598, 15);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(0, 17);
+            this.lblDate.Size = new System.Drawing.Size(0, 19);
             this.lblDate.TabIndex = 8;
             // 
             // label3
@@ -1265,7 +1281,7 @@
             this.lblExamName.AutoSize = true;
             this.lblExamName.Location = new System.Drawing.Point(381, 15);
             this.lblExamName.Name = "lblExamName";
-            this.lblExamName.Size = new System.Drawing.Size(0, 17);
+            this.lblExamName.Size = new System.Drawing.Size(0, 19);
             this.lblExamName.TabIndex = 6;
             // 
             // cbExamName
@@ -1277,6 +1293,7 @@
             this.cbExamName.Name = "cbExamName";
             this.cbExamName.Size = new System.Drawing.Size(173, 23);
             this.cbExamName.TabIndex = 5;
+            this.cbExamName.SelectedValueChanged += new System.EventHandler(this.cbExamName_SelectedValueChanged);
             // 
             // tabMain
             // 
@@ -1289,7 +1306,7 @@
             this.tabMain.Controls.Add(this.tabHelp);
             this.tabMain.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabMain.Font = new System.Drawing.Font("UTM Banque", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.ImageList = this.imageList1;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
             this.tabMain.Multiline = true;
@@ -1299,6 +1316,7 @@
             this.tabMain.Size = new System.Drawing.Size(984, 434);
             this.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabMain.TabIndex = 11;
+            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabQuestion
             // 
@@ -1317,6 +1335,7 @@
             this.tabQuestion.Size = new System.Drawing.Size(976, 382);
             this.tabQuestion.TabIndex = 2;
             this.tabQuestion.Text = "Câu hỏi";
+            this.tabQuestion.Click += new System.EventHandler(this.tabQuestion_Click);
             // 
             // dgvTestCases
             // 
@@ -1358,7 +1377,7 @@
             this.TestCaseName.DataPropertyName = "Name";
             this.TestCaseName.HeaderText = "Tên test";
             this.TestCaseName.Name = "TestCaseName";
-            this.TestCaseName.Width = 61;
+            this.TestCaseName.Width = 99;
             // 
             // Input
             // 
@@ -1379,21 +1398,21 @@
             this.TimeLimit.DataPropertyName = "TimeLimit";
             this.TimeLimit.HeaderText = "Giới hạn thời gian (ms)";
             this.TimeLimit.Name = "TimeLimit";
-            this.TimeLimit.Width = 152;
+            this.TimeLimit.Width = 167;
             // 
             // MemoryLimit
             // 
             this.MemoryLimit.DataPropertyName = "MemoryLimit";
             this.MemoryLimit.HeaderText = "Giới hạn bộ nhớ (MB)";
             this.MemoryLimit.Name = "MemoryLimit";
-            this.MemoryLimit.Width = 141;
+            this.MemoryLimit.Width = 152;
             // 
             // Mark
             // 
             this.Mark.DataPropertyName = "Mark";
             this.Mark.HeaderText = "Điểm";
             this.Mark.Name = "Mark";
-            this.Mark.Width = 69;
+            this.Mark.Width = 74;
             // 
             // dataGridViewButtonColumn3
             // 
@@ -1543,7 +1562,6 @@
             this.btnCreateQuestion.TabIndex = 11;
             this.btnCreateQuestion.Text = "Tạo câu hỏi";
             this.btnCreateQuestion.UseVisualStyleBackColor = true;
-            this.btnCreateQuestion.Click += new System.EventHandler(this.btnCreateQuestion_Click);
             // 
             // label9
             // 
@@ -1596,6 +1614,7 @@
             this.tabSetting.Size = new System.Drawing.Size(976, 382);
             this.tabSetting.TabIndex = 3;
             this.tabSetting.Text = "Cài đặt chấm";
+            this.tabSetting.Click += new System.EventHandler(this.tabSetting_Click);
             // 
             // tabGrading
             // 
@@ -1611,7 +1630,7 @@
             this.tabGrading.Padding = new System.Windows.Forms.Padding(2);
             this.tabGrading.Size = new System.Drawing.Size(976, 382);
             this.tabGrading.TabIndex = 4;
-            this.tabGrading.Text = "Chấm kì thi này";
+            this.tabGrading.Text = "Chấm kì thi";
             // 
             // panel10
             // 
@@ -1654,7 +1673,7 @@
             // btnGrade
             // 
             this.btnGrade.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGrade.Font = new System.Drawing.Font("UTM Banque", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGrade.Location = new System.Drawing.Point(0, 0);
             this.btnGrade.Name = "btnGrade";
             this.btnGrade.Size = new System.Drawing.Size(451, 0);
@@ -1739,75 +1758,22 @@
             // panel13
             // 
             this.panel13.Controls.Add(this.dgvChooseStudent);
+            this.panel13.Controls.Add(this.dgvChooseQuestion);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(0, 0);
+            this.panel13.Location = new System.Drawing.Point(0, 54);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(208, 84);
+            this.panel13.Size = new System.Drawing.Size(208, 320);
             this.panel13.TabIndex = 2;
-            // 
-            // dgvChooseStudent
-            // 
-            this.dgvChooseStudent.AllowUserToAddRows = false;
-            this.dgvChooseStudent.AllowUserToDeleteRows = false;
-            this.dgvChooseStudent.AllowUserToResizeColumns = false;
-            this.dgvChooseStudent.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvChooseStudent.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvChooseStudent.BackgroundColor = System.Drawing.Color.Lavender;
-            this.dgvChooseStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChooseStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clnStudent});
-            this.dgvChooseStudent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvChooseStudent.Location = new System.Drawing.Point(0, 0);
-            this.dgvChooseStudent.MultiSelect = false;
-            this.dgvChooseStudent.Name = "dgvChooseStudent";
-            this.dgvChooseStudent.ReadOnly = true;
-            this.dgvChooseStudent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChooseStudent.Size = new System.Drawing.Size(208, 84);
-            this.dgvChooseStudent.TabIndex = 10;
-            // 
-            // clnStudent
-            // 
-            this.clnStudent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clnStudent.HeaderText = "Chọn đối tượng";
-            this.clnStudent.Name = "clnStudent";
-            this.clnStudent.ReadOnly = true;
             // 
             // panel14
             // 
-            this.panel14.Controls.Add(this.dgvChooseQuestion);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel14.Location = new System.Drawing.Point(0, 84);
+            this.panel14.Controls.Add(this.label7);
+            this.panel14.Controls.Add(this.comboBox1);
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel14.Location = new System.Drawing.Point(0, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(208, 290);
+            this.panel14.Size = new System.Drawing.Size(208, 54);
             this.panel14.TabIndex = 2;
-            // 
-            // dgvChooseQuestion
-            // 
-            this.dgvChooseQuestion.AllowUserToAddRows = false;
-            this.dgvChooseQuestion.AllowUserToDeleteRows = false;
-            this.dgvChooseQuestion.AllowUserToResizeColumns = false;
-            this.dgvChooseQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dgvChooseQuestion.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvChooseQuestion.BackgroundColor = System.Drawing.Color.Lavender;
-            this.dgvChooseQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChooseQuestion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clnQuestion});
-            this.dgvChooseQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvChooseQuestion.Location = new System.Drawing.Point(0, 0);
-            this.dgvChooseQuestion.Name = "dgvChooseQuestion";
-            this.dgvChooseQuestion.ReadOnly = true;
-            this.dgvChooseQuestion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChooseQuestion.Size = new System.Drawing.Size(208, 290);
-            this.dgvChooseQuestion.TabIndex = 9;
-            // 
-            // clnQuestion
-            // 
-            this.clnQuestion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clnQuestion.HeaderText = "Chọn câu chấm";
-            this.clnQuestion.Name = "clnQuestion";
-            this.clnQuestion.ReadOnly = true;
             // 
             // tabHelp
             // 
@@ -1835,6 +1801,79 @@
             this.imageList1.Images.SetKeyName(6, "icoSetup.ico");
             this.imageList1.Images.SetKeyName(7, "icoStudent.ico");
             // 
+            // dgvChooseQuestion
+            // 
+            this.dgvChooseQuestion.AllowUserToAddRows = false;
+            this.dgvChooseQuestion.AllowUserToDeleteRows = false;
+            this.dgvChooseQuestion.AllowUserToResizeColumns = false;
+            this.dgvChooseQuestion.AllowUserToResizeRows = false;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvChooseQuestion.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvChooseQuestion.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvChooseQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChooseQuestion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnQuestion});
+            this.dgvChooseQuestion.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvChooseQuestion.Location = new System.Drawing.Point(0, 0);
+            this.dgvChooseQuestion.Name = "dgvChooseQuestion";
+            this.dgvChooseQuestion.ReadOnly = true;
+            this.dgvChooseQuestion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChooseQuestion.Size = new System.Drawing.Size(208, 202);
+            this.dgvChooseQuestion.TabIndex = 11;
+            // 
+            // clnQuestion
+            // 
+            this.clnQuestion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clnQuestion.HeaderText = "Chọn câu chấm";
+            this.clnQuestion.Name = "clnQuestion";
+            this.clnQuestion.ReadOnly = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(4, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(198, 26);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(4, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(98, 15);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Chọn kì thi chấm";
+            // 
+            // dgvChooseStudent
+            // 
+            this.dgvChooseStudent.AllowUserToAddRows = false;
+            this.dgvChooseStudent.AllowUserToDeleteRows = false;
+            this.dgvChooseStudent.AllowUserToResizeColumns = false;
+            this.dgvChooseStudent.AllowUserToResizeRows = false;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvChooseStudent.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvChooseStudent.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvChooseStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChooseStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnStudent});
+            this.dgvChooseStudent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvChooseStudent.Location = new System.Drawing.Point(0, 202);
+            this.dgvChooseStudent.MultiSelect = false;
+            this.dgvChooseStudent.Name = "dgvChooseStudent";
+            this.dgvChooseStudent.ReadOnly = true;
+            this.dgvChooseStudent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChooseStudent.Size = new System.Drawing.Size(208, 118);
+            this.dgvChooseStudent.TabIndex = 12;
+            // 
+            // clnStudent
+            // 
+            this.clnStudent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clnStudent.HeaderText = "Chọn đối tượng";
+            this.clnStudent.Name = "clnStudent";
+            this.clnStudent.ReadOnly = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1847,6 +1886,7 @@
             this.Name = "frmMain";
             this.Text = "Chấm thi tự động";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabExam.ResumeLayout(false);
@@ -1889,9 +1929,10 @@
             this.panel15.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChooseStudent)).EndInit();
             this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChooseQuestion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChooseStudent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1963,11 +2004,7 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.DataGridView dgvChooseStudent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnStudent;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.DataGridView dgvChooseQuestion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnQuestion;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel17;
@@ -2043,6 +2080,12 @@
         private System.Windows.Forms.TextBox txtSearchExam;
         private System.Windows.Forms.Button btnAddNewQuestion;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.DataGridView dgvChooseQuestion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnQuestion;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridView dgvChooseStudent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnStudent;
     }
 }
 
