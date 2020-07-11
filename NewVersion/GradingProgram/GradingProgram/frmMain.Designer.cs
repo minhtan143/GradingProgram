@@ -273,7 +273,6 @@
             this.refreshTSMI.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshTSMI.Size = new System.Drawing.Size(177, 24);
             this.refreshTSMI.Text = "Cập nhật lại";
-            this.refreshTSMI.Click += new System.EventHandler(this.refreshTSMI_Click);
             // 
             // exitTSMI
             // 
@@ -281,7 +280,6 @@
             this.exitTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitTSMI.Size = new System.Drawing.Size(177, 24);
             this.exitTSMI.Text = "Thoát";
-            this.exitTSMI.Click += new System.EventHandler(this.exitTSMI_Click);
             // 
             // gradingTSMI
             // 
@@ -301,7 +299,6 @@
             this.gradingThisExamTSMI.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.gradingThisExamTSMI.Size = new System.Drawing.Size(221, 24);
             this.gradingThisExamTSMI.Text = "Chấm kì thi này";
-            this.gradingThisExamTSMI.Click += new System.EventHandler(this.gradingThisExamTSMI_Click);
             // 
             // settingCompareTSMI
             // 
@@ -309,7 +306,6 @@
             this.settingCompareTSMI.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.settingCompareTSMI.Size = new System.Drawing.Size(221, 24);
             this.settingCompareTSMI.Text = "Cài đặt chấm kì thi";
-            this.settingCompareTSMI.Click += new System.EventHandler(this.setupGradingTSMI_Click);
             // 
             // settingCompilerTSMI
             // 
@@ -317,7 +313,6 @@
             this.settingCompilerTSMI.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.settingCompilerTSMI.Size = new System.Drawing.Size(221, 24);
             this.settingCompilerTSMI.Text = "Cài đặt bộ dịch";
-            this.settingCompilerTSMI.Click += new System.EventHandler(this.settingCompilerTSMI_Click);
             // 
             // examTSMI
             // 
@@ -336,7 +331,6 @@
             this.createExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.createExamTSMI.Size = new System.Drawing.Size(315, 24);
             this.createExamTSMI.Text = "Tạo kỳ thi mới";
-            this.createExamTSMI.Click += new System.EventHandler(this.createExamTSMI_Click);
             // 
             // manageExamTSMI
             // 
@@ -344,7 +338,6 @@
             this.manageExamTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.manageExamTSMI.Size = new System.Drawing.Size(315, 24);
             this.manageExamTSMI.Text = "Quản lý kỳ thi";
-            this.manageExamTSMI.Click += new System.EventHandler(this.manageExamTSMI_Click);
             // 
             // deleteRusultTSMI
             // 
@@ -352,7 +345,6 @@
             this.deleteRusultTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.deleteRusultTSMI.Size = new System.Drawing.Size(315, 24);
             this.deleteRusultTSMI.Text = "Xóa kết quả kỳ thì đang mở";
-            this.deleteRusultTSMI.Click += new System.EventHandler(this.deleteRusultTSMI_Click);
             // 
             // questionTSMI
             // 
@@ -371,7 +363,6 @@
             | System.Windows.Forms.Keys.N)));
             this.createQuestionTSMI.Size = new System.Drawing.Size(244, 24);
             this.createQuestionTSMI.Text = "Tạo câu hỏi";
-            this.createQuestionTSMI.Click += new System.EventHandler(this.createQuestionTSMI_Click);
             // 
             // manageQuestionTSMI
             // 
@@ -379,7 +370,6 @@
             this.manageQuestionTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.manageQuestionTSMI.Size = new System.Drawing.Size(244, 24);
             this.manageQuestionTSMI.Text = "Quản lí câu hỏi";
-            this.manageQuestionTSMI.Click += new System.EventHandler(this.manageQuestionTSMI_Click);
             // 
             // candidateTSMI
             // 
@@ -396,7 +386,6 @@
             this.manageCandidateTSMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
             this.manageCandidateTSMI.Size = new System.Drawing.Size(228, 24);
             this.manageCandidateTSMI.Text = "Quản lý thí sinh";
-            this.manageCandidateTSMI.Click += new System.EventHandler(this.manageCandidateTSMI_Click);
             // 
             // infomationTSMI
             // 
@@ -505,7 +494,6 @@
             this.btnAddNewQuestion.TabIndex = 16;
             this.btnAddNewQuestion.Text = "+";
             this.btnAddNewQuestion.UseVisualStyleBackColor = true;
-            this.btnAddNewQuestion.Click += new System.EventHandler(this.btnAddNewQuestion_Click);
             // 
             // btnDelete
             // 
@@ -1189,7 +1177,6 @@
             this.dgvResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResults.Size = new System.Drawing.Size(172, 331);
             this.dgvResults.TabIndex = 11;
-            this.dgvResults.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellDoubleClick);
             // 
             // ID
             // 
@@ -1235,7 +1222,6 @@
             this.btnExportExcel.TabIndex = 9;
             this.btnExportExcel.Text = "Xuất file Excel";
             this.btnExportExcel.UseVisualStyleBackColor = true;
-            this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
             // label1
             // 
@@ -1293,7 +1279,6 @@
             this.cbExamName.Name = "cbExamName";
             this.cbExamName.Size = new System.Drawing.Size(173, 23);
             this.cbExamName.TabIndex = 5;
-            this.cbExamName.SelectedValueChanged += new System.EventHandler(this.cbExamName_SelectedValueChanged);
             // 
             // tabMain
             // 
@@ -1316,7 +1301,6 @@
             this.tabMain.Size = new System.Drawing.Size(984, 434);
             this.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabMain.TabIndex = 11;
-            this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
             // tabQuestion
             // 
@@ -1335,7 +1319,6 @@
             this.tabQuestion.Size = new System.Drawing.Size(976, 382);
             this.tabQuestion.TabIndex = 2;
             this.tabQuestion.Text = "Câu hỏi";
-            this.tabQuestion.Click += new System.EventHandler(this.tabQuestion_Click);
             // 
             // dgvTestCases
             // 
@@ -1614,7 +1597,6 @@
             this.tabSetting.Size = new System.Drawing.Size(976, 382);
             this.tabSetting.TabIndex = 3;
             this.tabSetting.Text = "Cài đặt chấm";
-            this.tabSetting.Click += new System.EventHandler(this.tabSetting_Click);
             // 
             // tabGrading
             // 
@@ -1886,7 +1868,6 @@
             this.Name = "frmMain";
             this.Text = "Chấm thi tự động";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabExam.ResumeLayout(false);
